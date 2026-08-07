@@ -785,7 +785,7 @@ export default function App() {
 
           </main>
 
-          {/* Footer Section (تم تعديل العنوان إلى الرياض) */}
+          {/* Footer Section (العنوان الرياض ورقم الهاتف المخصص للأفراح) */}
           <footer className="bg-[#080706] border-t border-[#D4AF37]/30 pt-16 pb-8 px-4 sm:px-8 mt-20">
             <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-4 gap-10 pb-12 border-b border-[#D4AF37]/20 text-right">
               
@@ -826,7 +826,7 @@ export default function App() {
                   </div>
                   <div className="flex items-center gap-2.5">
                     <Phone className="w-4 h-4 text-[#D4AF37] shrink-0" />
-                    <span dir="ltr">+966 55 123 4567</span>
+                    <span dir="ltr">+966 50 123 4567</span>
                   </div>
                   <div className="flex items-center gap-2.5">
                     <Mail className="w-4 h-4 text-[#D4AF37] shrink-0" />
