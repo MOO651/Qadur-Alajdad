@@ -212,7 +212,7 @@ export default function App() {
   // حالات تسجيل دخول الأدمن
   const [isAdminLoggedIn, setIsAdminLoggedIn] = useState(false);
   const [adminPasswordInput, setAdminPasswordInput] = useState('');
-  const ADMIN_SECRET_CODE = "1234"; // تقدر تغير الرقم السري هنا لأي كلمة سر تبيها
+  const ADMIN_SECRET_CODE = "1234"; // تقدر تغيّر الرقم السري هنا لأي كلمة سر تبيها
 
   // حقول نموذج إضافة صنف للأدمن
   const [selectedCategoryIndex, setSelectedCategoryIndex] = useState(0);
@@ -284,7 +284,7 @@ export default function App() {
             </div>
           </div>
 
-          {/* التنقل لشاشات الديسك톱 */}
+          {/* التنقل لشاشات الديسكتوب */}
           <nav className="hidden lg:flex items-center gap-8 text-xs font-sans font-medium tracking-[0.2em] text-gray-200">
             <button onClick={() => setCurrentPage('home')} className={`transition-colors ${currentPage === 'home' ? 'text-[#D4AF37] font-bold' : 'hover:text-[#D4AF37]'}`}>الرئيسية</button>
             <button onClick={() => setCurrentPage('daily')} className={`transition-colors flex items-center gap-1.5 ${currentPage === 'daily' ? 'text-[#D4AF37] font-bold' : 'hover:text-[#D4AF37]'}`}>
@@ -465,16 +465,15 @@ export default function App() {
           </div>
         )}
 
-        {/* صفحة الأدمن مع حماية بكلمة مرور */}
+        {/* صفحة الأدمن المحمية */}
         {currentPage === 'admin' && (
           <div className="max-w-md mx-auto px-4 sm:px-6 py-20 space-y-8 animate-fadeIn">
             {!isAdminLoggedIn ? (
-              /* نموذج تسجيل الدخول */
               <form onSubmit={handleAdminLogin} className="bg-[#181513] border border-[#D4AF37]/40 rounded-3xl p-8 space-y-6 shadow-2xl text-center">
                 <Lock className="w-12 h-12 text-[#D4AF37] mx-auto" />
                 <div className="space-y-2">
                   <h2 className="text-2xl font-bold text-[#FFFDF9]">دخول لوحة التحكم</h2>
-                  <p className="text-gray-400 text-xs font-sans">هذه الصفحة خاصة بإدارة المطعم فقط</p>
+                  <p className="text-gray-400 text-xs font-sans">هذه الصفحة خاصة بإدارة مطعم قدور الأجداد فقط</p>
                 </div>
                 
                 <div className="space-y-2 text-right">
@@ -496,7 +495,6 @@ export default function App() {
                 </button>
               </form>
             ) : (
-              /* لوحة التحكم الفعلية بعد إدخال الكود الصحيح */
               <div className="bg-[#181513] border border-[#D4AF37]/30 rounded-3xl p-6 sm:p-8 space-y-6 shadow-2xl">
                 <div className="flex justify-between items-center border-b border-[#D4AF37]/20 pb-4">
                   <div className="flex items-center gap-2">
@@ -639,7 +637,7 @@ export default function App() {
                   <input type="text" placeholder="مثال: غداء عمل، عشاء عائلي، ذبيحة مناسبة" className="w-full bg-black/40 border border-[#D4AF37]/30 rounded-xl px-4 py-3 text-white text-xs focus:outline-none focus:border-[#D4AF37]" />
                 </div>
               </div>
-              <button onClick={() => alert('تم استلام طلب حجزك بنجاح! نتشرف بزيارتك.')} className="w-full bg-gradient-to-r from-['#D4AF37'] to-[#AA7C11] bg-gradient-to-r from-[#D4AF37] to-[#AA7C11] text-black py-4 rounded-xl font-sans font-bold text-xs sm:text-sm tracking-widest shadow-xl">
+              <button onClick={() => alert('تم استلام طلب حجزك بنجاح! نتشرف بزيارتك.')} className="w-full bg-gradient-to-r from-[#D4AF37] to-[#AA7C11] text-black py-4 rounded-xl font-sans font-bold text-xs sm:text-sm tracking-widest shadow-xl">
                 تأكيد الحجز الآن
               </button>
             </div>
