@@ -1,0 +1,37 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    background-color: #050505;
+    color: #f3e5ab;
+  }
+  
+  /* تخصيص السكرول بار ليطابق الهوية الملكية الذهبية */
+  ::-webkit-scrollbar {
+    width: 8px;
+  }
+  ::-webkit-scrollbar-track {
+    background: #050505;
+  }
+  ::-webkit-scrollbar-thumb {
+    background: #d4af37;
+    border-radius: 4px;
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    background: #aa8c2c;
+  }
+}
+
+/* تأثير الإضاءة الفاخرة للبطاقات والأزرار */
+.royal-glow {
+  box-shadow: 0 0 25px rgba(212, 175, 55, 0.25);
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.royal-glow:hover {
+  box-shadow: 0 0 40px rgba(212, 175, 55, 0.5);
+  transform: translateY(-3px);
+}
