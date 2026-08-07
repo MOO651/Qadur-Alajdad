@@ -630,7 +630,7 @@ export default function App() {
                       <p className="text-gray-300 text-xs sm:text-sm font-sans italic leading-relaxed">
                         "أخذنا منيو الأفراح لمناسبة زواج، صراحة الوليمة كانت تبيض الوجه والذبائح مستوية على أصولها والأرز مفلفل وطعم ولا أروع. شكراً قدور الأجداد."
                       </p>
-                      <span className="text-[#D4AF37] text-xs font-sans font-bold block">- أبو تراب الحائلي</span>
+                      <span className="text-[#D4AF37] text-xs font-sans font-bold block">- أبو تراب الرياضي</span>
                     </div>
 
                     <div className="bg-[#181513] border border-[#D4AF37]/30 rounded-3xl p-6 sm:p-8 text-right space-y-4">
@@ -640,7 +640,7 @@ export default function App() {
                       <p className="text-gray-300 text-xs sm:text-sm font-sans italic leading-relaxed">
                         "الجريش والمرقوق عندهم يذكرونك بأكل الوالدة ربي يحفظها. المنيو اليومي ثابت عندي للغداء بشكل دائم. أنصح بالتعامل معهم بقوة."
                       </p>
-                      <span className="text-[#D4AF37] text-xs font-sans font-bold block">- م. خالد الشمري</span>
+                      <span className="text-[#D4AF37] text-xs font-sans font-bold block">- م. خالد الدوسري</span>
                     </div>
                   </div>
                 </section>
@@ -785,7 +785,7 @@ export default function App() {
 
           </main>
 
-          {/* Footer Section (تم تعديل العنوان ورقم الهاتف هنا) */}
+          {/* Footer Section (تم تعديل العنوان إلى الرياض) */}
           <footer className="bg-[#080706] border-t border-[#D4AF37]/30 pt-16 pb-8 px-4 sm:px-8 mt-20">
             <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-4 gap-10 pb-12 border-b border-[#D4AF37]/20 text-right">
               
@@ -822,7 +822,7 @@ export default function App() {
                 <div className="space-y-3 text-xs font-sans text-gray-300">
                   <div className="flex items-start gap-2.5">
                     <MapPin className="w-4 h-4 text-[#D4AF37] shrink-0 mt-0.5" />
-                    <span>المملكة العربية السعودية - حائل - حي الوسيطاء</span>
+                    <span>المملكة العربية السعودية - الرياض</span>
                   </div>
                   <div className="flex items-center gap-2.5">
                     <Phone className="w-4 h-4 text-[#D4AF37] shrink-0" />
