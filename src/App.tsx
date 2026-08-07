@@ -115,89 +115,89 @@ const initialDailyMenuSections = [
   }
 ];
 
-const weddingMenuSections = [
+const initialWeddingMenuSections = [
   {
-    category: "الذبائح والذبائح المحشية",
+    category: "[أفراح] الذبائح والذبائح المحشية",
     image: "/stuffed-lamb.jpg",
     description: "أجود أنواع الذبائح البلدية المحضرة لأفخم المناسبات",
     items: [
-      { name: "الذبائح الشعبية", details: "شعبي، غوزي، مندي، عييلة، كابلي، زييان، بخاري، سليق، ومثلوثة." },
-      { name: "الذبائح المحشية", details: "خروف مع المحاشي، محشي ورق عنب، محشي مكرونة، محشي بالفريك، محشي مسقعة، محشي كبيبة، ومحشي فقع." }
+      { name: "الذبائح الشعبية", price: "حسب الطلب", details: "شعبي، غوزي، مندي، عييلة، كابلي، زييان، بخاري، سليق، ومثلوثة." },
+      { name: "الذبائح المحشية", price: "حسب الطلب", details: "خروف مع المحاشي، محشي ورق عنب، محشي مكرونة، محشي بالفريك، محشي مسقعة، محشي كبيبة، ومحشي فقع." }
     ]
   },
   {
-    category: "الأرزاز (الأرز الفاخر)",
+    category: "[أفراح] الأرزاز (الأرز الفاخر)",
     image: "/banquet.jpg",
     description: "تخضيرة أرز ملكية مفلفلة بأرقى البهارات",
     items: [
-      { name: "تشكيلة الأرز", details: "المعمر، الصيادية، المشخول، الحساوي، المندي، الكليبي، الزييان، وبخاري." }
+      { name: "تشكيلة الأرز", price: "حسب الطلب", details: "المعمر، الصيادية، المشخول، الحساوي، المندي، الكليبي، الزييان، وبخاري." }
     ]
   },
   {
-    category: "الشعبيات الأصيلة",
+    category: "[أفراح] الشعبيات الأصيلة",
     image: "/png.jpeg",
     description: "طعم الأصالة العريقة المطهوة بالسمن البري",
     items: [
-      { name: "الأطباق الشعبية", details: "المرقوق، الجريش (حائل، قصيمي، نجدي)، هريس حساوي، سليق مكاوي، مفلق حساوي، وقرصان." }
+      { name: "الأطباق الشعبية", price: "حسب الطلب", details: "المرقوق، الجريش (حائل، قصيمي، نجدي)، هريس حساوي، سليق مكاوي، مفلق حساوي، وقرصان." }
     ]
   },
   {
-    category: "الإدامات والأصناف الرئيسية",
+    category: "[أفراح] الإدامات والأصناف الرئيسية",
     image: "/png (2).jpeg",
     description: "نكهات أهل أول المميزة",
     items: [
-      { name: "الأصناف المتفرقة", details: "قرع بلدي أهل أول، بامية أهل المدينة، مسقعة حجازية، كبسة، شعبي مكسرات، ريزتو، ومكرونة (مشروم، بشاميل، مرقوق، بيستو)." }
+      { name: "الأصناف المتفرقة", price: "حسب الطلب", details: "قرع بلدي أهل أول، بامية أهل المدينة، مسقعة حجازية، كبسة، شعبي مكسرات، ريزتو، ومكرونة (مشروم، بشاميل، مرقوق، بيستو)." }
     ]
   },
   {
-    category: "الأطباق الجانبية والمقبلات السخنة",
+    category: "[أفراح] الأطباق الجانبية والمقبلات السخنة",
     image: "/appetizers.jpg",
     description: "أصناف متكاملة لتشريف ضيوفك",
     items: [
-      { name: "الجانبيات", details: "لفائف الباذنجان، دجاج بالكريمة، صينية بطاطس بالأجبان، مراصيع منصلة، شيش برك، وداوود باشا." }
+      { name: "الجانبيات", price: "حسب الطلب", details: "لفائف الباذنجان، دجاج بالكريمة، صينية بطاطس بالأجبان، مراصيع منصلة، شيش برك، وداوود باشا." }
     ]
   },
   {
-    category: "المحاشي والفتات الملكية",
+    category: "[أفراح] المحاشي والفتات الملكية",
     image: "/stuffed-lamb.jpg",
     description: "تشكيلة غنية ومميزة للمناسبات",
     items: [
-      { name: "المحاشي", details: "محشي مشكلة، كوسة ورق عنب، كبيبة حائل، وملفوف." },
-      { name: "الفتات", details: "فته ورق عنب، فته كبة، فته كوارع، وفته شاورما." }
+      { name: "المحاشي", price: "حسب الطلب", details: "محشي مشكلة، كوسة ورق عنب، كبيبة حائل، وملفوف." },
+      { name: "الفتات", price: "حسب الطلب", details: "فته ورق عنب، فته كبة، فته كوارع، وفته شاورما." }
     ]
   },
   {
-    category: "الشوربات والمقبلات والسلطات",
+    category: "[أفراح] الشوربات والمقبلات والسلطات",
     image: "/appetizers.jpg",
     description: "مقبلات طازجة ومنعشة تفتح النفس",
     items: [
-      { name: "الشوربات", details: "كويكر، كوارع، عدس، وجريش." },
-      { name: "المقبلات الباردة", details: "متبل سعودي، لبنة شمندر، متبل خضار، ورق عنب، حمص، وكبة." },
-      { name: "السلطات المتنوعة", details: "جرجير بالقرع، رقائق الكوسة، بروكلي، جرجير أقط، جرجير شمندر، تبولة سعودية، متبل شمندر، سلطة فلافل، فتوش، تبولة باللبنة، تبولة، البحر الأحمر، يامية الذفة، رجله، حمام البر، الكينواه، سيزر، وزهرة." }
+      { name: "الشوربات", price: "حسب الطلب", details: "كويكر، كوارع، عدس، وجريش." },
+      { name: "المقبلات الباردة", price: "حسب الطلب", details: "متبل سعودي، لبنة شمندر، متبل خضار، ورق عنب، حمص، وكبة." },
+      { name: "السلطات المتنوعة", price: "حسب الطلب", details: "جرجير بالقرع، رقائق الكوسة، بروكلي، جرجير أقط، جرجير شمندر، تبولة سعودية، متبل شمندر، سلطة فلافل، فتوش، تبولة باللبنة، تبولة، البحر الأحمر، يامية الذفة، رجله، حمام البر، الكينواه، سيزر، وزهرة." }
     ]
   },
   {
-    category: "المعجنات والمخبوزات",
+    category: "[أفراح] المعجنات والمخبوزات",
     image: "/banquet.jpg",
     description: "مخبوزات طازجة وساخنة يومياً",
     items: [
-      { name: "المعجنات", details: "يغمش حجازي، عيش أبو اللحم، فرمزة حجازية، خلية نحل، سمبوسة، فطور، منتو، ومطبق (مالح - حلو)." }
+      { name: "المعجنات", price: "حسب الطلب", details: "يغمش حجازي، عيش أبو اللحم، فرمزة حجازية، خلية نحل، سمبوسة، فطور، منتو، ومطبق (مالح - حلو)." }
     ]
   },
   {
-    category: "الحلويات والمقشوش",
+    category: "[أفراح] الحلويات والمقشوش",
     image: "/appetizers.jpg",
     description: "مسك الختام لأفخم الولائم",
     items: [
-      { name: "حلويات المناسبات", details: "مقشوش، حنيني، عريكة، حسية، كيكة، ساقو، أم علي زعفران، شعبرية الأولين، كريمة، قلاوة تمر، ميني سمبوسة، بسبوسة مكة، كنافة قشطة، باناكوتا، كنافة تمر، طرمية، ومراصيع." }
+      { name: "حلويات المناسبات", price: "حسب الطلب", details: "مقشوش، حنيني، عريكة، حسية، كيكة، ساقو، أم علي زعفران، شعبرية الأولين، كريمة، قلاوة تمر، ميني سمبوسة، بسبوسة مكة، كنافة قشطة، باناكوتا، كنافة تمر، طرمية، ومراصيع." }
     ]
   },
   {
-    category: "المشروبات المنعشة",
+    category: "[أفراح] المشروبات المنعشة",
     image: "/png (3).jpeg",
     description: "تشكيلة من العصائر الطبيعية والمياه",
     items: [
-      { name: "المشروبات", details: "ليمون حبق، برتقال، أناناس، مياه برين، مياه نوفا، مياه غازية، وتشكيلة من المشروبات الباردة." }
+      { name: "المشروبات", price: "حسب الطلب", details: "ليمون حبق، برتقال، أناناس، مياه برين، مياه نوفا، مياه غازية، وتشكيلة من المشروبات الباردة." }
     ]
   }
 ];
@@ -208,14 +208,17 @@ export default function App() {
   const [cartItems, setCartItems] = useState<{name: string, price: string}[]>([]);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [dailyMenu, setDailyMenu] = useState(initialDailyMenuSections);
+  const [weddingMenu, setWeddingMenu] = useState(initialWeddingMenuSections);
 
   const [isAdminLoggedIn, setIsAdminLoggedIn] = useState(false);
   const [adminPasswordInput, setAdminPasswordInput] = useState('');
   const ADMIN_SECRET_CODE = "1234";
 
+  const [menuType, setMenuType] = useState<'daily' | 'wedding'>('daily');
   const [selectedCategoryIndex, setSelectedCategoryIndex] = useState(0);
   const [newItemName, setNewItemName] = useState('');
   const [newItemPrice, setNewItemPrice] = useState('');
+  const [newItemDetails, setNewItemDetails] = useState('');
   const [newItemImage, setNewItemImage] = useState('/png.jpeg');
 
   useEffect(() => {
@@ -265,7 +268,6 @@ export default function App() {
     }
   };
 
-  // دالة لاختيار أو رفع صورة من جهاز اللابتوب أو الموبايل
   const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (e.target.files && e.target.files[0]) {
       const file = e.target.files[0];
@@ -276,23 +278,38 @@ export default function App() {
 
   const handleAddNewItem = (e: React.FormEvent) => {
     e.preventDefault();
-    if (!newItemName || !newItemPrice) {
-      alert('الرجاء إدخال اسم الطبق والسعر!');
+    if (!newItemName) {
+      alert('الرجاء إدخال اسم الطبق أو الصنف!');
       return;
     }
 
-    const updatedMenu = [...dailyMenu];
-    updatedMenu[selectedCategoryIndex].items.push({
-      name: newItemName,
-      price: newItemPrice,
-      image: newItemImage
-    });
+    if (menuType === 'daily') {
+      if (!newItemPrice) {
+        alert('الرجاء إدخال السعر!');
+        return;
+      }
+      const updatedMenu = [...dailyMenu];
+      updatedMenu[selectedCategoryIndex].items.push({
+        name: newItemName,
+        price: newItemPrice,
+        image: newItemImage
+      });
+      setDailyMenu(updatedMenu);
+    } else {
+      const updatedWedding = [...weddingMenu];
+      updatedWedding[selectedCategoryIndex].items.push({
+        name: newItemName,
+        price: newItemPrice || "حسب الطلب",
+        details: newItemDetails || "مخصص للمناسبات والأفراح"
+      });
+      setWeddingMenu(updatedWedding);
+    }
 
-    setDailyMenu(updatedMenu);
     setNewItemName('');
     setNewItemPrice('');
+    setNewItemDetails('');
     setNewItemImage('/png.jpeg');
-    alert('تم إضافة الطبق مع الصورة بنجاح إلى المنيو اليومي!');
+    alert('تم إضافة الصنف بنجاح إلى المنيو المختار!');
   };
 
   const isExplicitAdminRoute = routePath.includes('/admin') || routePath === '/admin';
@@ -355,67 +372,99 @@ export default function App() {
 
               <form onSubmit={handleAddNewItem} className="space-y-4">
                 <div className="space-y-1.5 text-right">
-                  <label className="text-xs font-sans text-gray-300 block">اختر القسم في المنيو</label>
+                  <label className="text-xs font-sans text-gray-300 block">اختر نوع القائمة</label>
+                  <div className="grid grid-cols-2 gap-2">
+                    <button
+                      type="button"
+                      onClick={() => { setMenuType('daily'); setSelectedCategoryIndex(0); }}
+                      className={`py-2.5 rounded-xl text-xs font-sans font-bold transition-all border ${menuType === 'daily' ? 'bg-[#D4AF37] text-black border-[#D4AF37]' : 'bg-black/40 text-gray-300 border-[#D4AF37]/30'}`}
+                    >
+                      المنيو اليومي
+                    </button>
+                    <button
+                      type="button"
+                      onClick={() => { setMenuType('wedding'); setSelectedCategoryIndex(0); }}
+                      className={`py-2.5 rounded-xl text-xs font-sans font-bold transition-all border ${menuType === 'wedding' ? 'bg-[#D4AF37] text-black border-[#D4AF37]' : 'bg-black/40 text-gray-300 border-[#D4AF37]/30'}`}
+                    >
+                      منيو الأفراح
+                    </button>
+                  </div>
+                </div>
+
+                <div className="space-y-1.5 text-right">
+                  <label className="text-xs font-sans text-gray-300 block">اختر القسم</label>
                   <select 
                     value={selectedCategoryIndex} 
                     onChange={(e) => setSelectedCategoryIndex(Number(e.target.value))}
                     className="w-full bg-[#181513] border border-[#D4AF37]/30 rounded-xl px-4 py-3 text-[#D4AF37] font-bold text-xs focus:outline-none focus:border-[#D4AF37]"
                   >
-                    {dailyMenu.map((sec, idx) => (
-                      <option key={idx} value={idx} className="bg-[#181513] text-[#D4AF37] py-2">
-                        {sec.category}
-                      </option>
-                    ))}
+                    {menuType === 'daily' ? (
+                      dailyMenu.map((sec, idx) => (
+                        <option key={idx} value={idx} className="bg-[#181513] text-[#D4AF37] py-2">
+                          {sec.category}
+                        </option>
+                      ))
+                    ) : (
+                      weddingMenu.map((sec, idx) => (
+                        <option key={idx} value={idx} className="bg-[#181513] text-[#D4AF37] py-2">
+                          {sec.category}
+                        </option>
+                      ))
+                    )}
                   </select>
                 </div>
 
                 <div className="space-y-1.5 text-right">
-                  <label className="text-xs font-sans text-gray-300 block">اسم الطبق الجديد</label>
+                  <label className="text-xs font-sans text-gray-300 block">اسم الصنف أو الطبق الجديد</label>
                   <input 
                     type="text" 
                     value={newItemName}
                     onChange={(e) => setNewItemName(e.target.value)}
-                    placeholder="مثال: كبسة دجاج خاصة" 
+                    placeholder="مثال: ذبيحة مندي / كبسة خاصة" 
                     className="w-full bg-black/50 border border-[#D4AF37]/30 rounded-xl px-4 py-3 text-white text-xs focus:outline-none focus:border-[#D4AF37]" 
                   />
                 </div>
 
-                <div className="space-y-1.5 text-right">
-                  <label className="text-xs font-sans text-gray-300 block">السعر (مع العملة)</label>
-                  <input 
-                    type="text" 
-                    value={newItemPrice}
-                    onChange={(e) => setNewItemPrice(e.target.value)}
-                    placeholder="مثال: 35 ريال" 
-                    className="w-full bg-black/50 border border-[#D4AF37]/30 rounded-xl px-4 py-3 text-white text-xs focus:outline-none focus:border-[#D4AF37]" 
-                  />
-                </div>
-
-                <div className="space-y-1.5 text-right">
-                  <label className="text-xs font-sans text-gray-300 block">اختر صورة الطبق من الاستوديو أو الملفات</label>
-                  <label className="flex items-center justify-center gap-2 w-full bg-black/50 border border-dashed border-[#D4AF37]/50 rounded-xl px-4 py-3 text-[#D4AF37] text-xs cursor-pointer hover:bg-[#D4AF37]/10 transition-all">
-                    <Upload className="w-4 h-4" />
-                    <span>{newItemImage.startsWith('blob:') ? 'تم اختيار الصورة بنجاح (اضغط لتغييرها)' : 'اختر صورة من الجهاز'}</span>
-                    <input 
-                      type="file" 
-                      accept="image/*"
-                      onChange={handleImageChange}
-                      className="hidden" 
-                    />
-                  </label>
-                  {newItemImage && (
-                    <div className="mt-2 flex items-center gap-2">
-                      <img src={newItemImage} alt="معاينة" className="w-10 h-10 rounded-lg object-cover border border-[#D4AF37]/40" />
-                      <span className="text-[10px] text-gray-400 font-sans">معاينة الصورة المختارة</span>
+                {menuType === 'daily' ? (
+                  <>
+                    <div className="space-y-1.5 text-right">
+                      <label className="text-xs font-sans text-gray-300 block">السعر (مع العملة)</label>
+                      <input 
+                        type="text" 
+                        value={newItemPrice}
+                        onChange={(e) => setNewItemPrice(e.target.value)}
+                        placeholder="مثال: 35 ريال" 
+                        className="w-full bg-black/50 border border-[#D4AF37]/30 rounded-xl px-4 py-3 text-white text-xs focus:outline-none focus:border-[#D4AF37]" 
+                      />
                     </div>
-                  )}
-                </div>
+
+                    <div className="space-y-1.5 text-right">
+                      <label className="text-xs font-sans text-gray-300 block">اختر صورة الطبق من الجهاز</label>
+                      <label className="flex items-center justify-center gap-2 w-full bg-black/50 border border-dashed border-[#D4AF37]/50 rounded-xl px-4 py-3 text-[#D4AF37] text-xs cursor-pointer hover:bg-[#D4AF37]/10 transition-all">
+                        <Upload className="w-4 h-4" />
+                        <span>{newItemImage.startsWith('blob:') ? 'تم اختيار الصورة بنجاح' : 'اختر صورة من الاستوديو'}</span>
+                        <input type="file" accept="image/*" onChange={handleImageChange} className="hidden" />
+                      </label>
+                    </div>
+                  </>
+                ) : (
+                  <div className="space-y-1.5 text-right">
+                    <label className="text-xs font-sans text-gray-300 block">تفاصيل الصنف / المكونات</label>
+                    <input 
+                      type="text" 
+                      value={newItemDetails}
+                      onChange={(e) => setNewItemDetails(e.target.value)}
+                      placeholder="مثال: يقدم مع السمن البري والمكسرات" 
+                      className="w-full bg-black/50 border border-[#D4AF37]/30 rounded-xl px-4 py-3 text-white text-xs focus:outline-none focus:border-[#D4AF37]" 
+                    />
+                  </div>
+                )}
 
                 <button 
                   type="submit" 
                   className="w-full bg-gradient-to-r from-[#D4AF37] to-[#AA7C11] text-black py-3.5 rounded-xl font-sans font-bold text-xs tracking-widest shadow-xl hover:opacity-90 transition-all mt-4"
                 >
-                  إضافة الطبق وصورته للمنيو فوراً
+                  إضافة الصنف للمنيو فوراً
                 </button>
               </form>
             </div>
@@ -579,7 +628,7 @@ export default function App() {
                 </div>
 
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-                  {weddingMenuSections.map((section, idx) => (
+                  {weddingMenu.map((section, idx) => (
                     <div key={idx} className="bg-gradient-to-b from-[#181513] via-[#12100E] to-[#0A0908] border border-[#D4AF37]/40 rounded-[2rem] sm:rounded-[2.5rem] p-5 sm:p-6 space-y-6 shadow-2xl">
                       <div className="h-44 sm:h-52 bg-cover bg-center rounded-2xl overflow-hidden relative">
                         <div className="absolute inset-0 bg-cover bg-center" style={{ backgroundImage: `url('${section.image}')` }}></div>
@@ -597,7 +646,7 @@ export default function App() {
                               <p className="text-gray-300 text-xs font-sans font-light leading-relaxed">{item.details}</p>
                             </div>
                             <button 
-                              onClick={() => addToCart(item.name, "حسب الطلب")}
+                              onClick={() => addToCart(item.name, item.price)}
                               className="bg-[#D4AF37]/20 hover:bg-[#D4AF37] text-[#D4AF37] hover:text-black px-3 py-2 rounded-xl text-xs font-sans font-bold transition-all border border-[#D4AF37]/40 whitespace-nowrap self-end sm:self-center"
                             >
                               طلب استفسار
