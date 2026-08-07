@@ -427,7 +427,7 @@ export default function App() {
 
                 <button 
                   type="submit" 
-                  className="w-full bg-gradient-to-r from-[#D4AF37] to-[#AA7C11] text-black py-3.5 rounded-xl font-sans font-bold text-xs tracking-widest shadow-xl hover:opacity-90 transition-all mt-4"
+                  className="w-full bg-gradient-to-r from-[#D4AF37] to-[#AA7C11] text-black py-3.5 rounded-xl font-sans font-bold text-xs tracking-widest shadow-xl hover:opacity-90 transition-all"
                 >
                   إضافة الصنف للمنيو فوراً
                 </button>
@@ -785,7 +785,7 @@ export default function App() {
 
           </main>
 
-          {/* Footer Section (العنوان الرياض ورقم الهاتف المخصص للأفراح) */}
+          {/* Footer Section (العنوان ورقم التواصل المُصحح) */}
           <footer className="bg-[#080706] border-t border-[#D4AF37]/30 pt-16 pb-8 px-4 sm:px-8 mt-20">
             <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-4 gap-10 pb-12 border-b border-[#D4AF37]/20 text-right">
               
@@ -822,11 +822,11 @@ export default function App() {
                 <div className="space-y-3 text-xs font-sans text-gray-300">
                   <div className="flex items-start gap-2.5">
                     <MapPin className="w-4 h-4 text-[#D4AF37] shrink-0 mt-0.5" />
-                    <span>المملكة العربية السعودية - الرياض</span>
+                    <span>الرياض، حي المونسية، طريق الثمامة، مجمع كريزي بلازا</span>
                   </div>
                   <div className="flex items-center gap-2.5">
                     <Phone className="w-4 h-4 text-[#D4AF37] shrink-0" />
-                    <span dir="ltr">+966 50 123 4567</span>
+                    <span dir="ltr">+966 53 319 0197</span>
                   </div>
                   <div className="flex items-center gap-2.5">
                     <Mail className="w-4 h-4 text-[#D4AF37] shrink-0" />
