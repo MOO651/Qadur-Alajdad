@@ -12,105 +12,105 @@ const initialDailyMenuSections = [
     category: "الشوربات",
     image: "/appetizers.jpg",
     items: [
-      { name: "عدس", price: "17 ريال" },
-      { name: "حب", price: "19 ريال" },
-      { name: "مقادم", price: "26 ريال" }
+      { name: "عدس", price: "17 ريال", image: "/appetizers.jpg" },
+      { name: "حب", price: "19 ريال", image: "/appetizers.jpg" },
+      { name: "مقادم", price: "26 ريال", image: "/appetizers.jpg" }
     ]
   },
   {
     category: "السلاطات والمقبلات الباردة",
     image: "/appetizers.jpg",
     items: [
-      { name: "سلطة البر", price: "14 ريال" },
-      { name: "فتوش", price: "16 ريال" },
-      { name: "تبولة", price: "14 ريال" },
-      { name: "جرجير شمندر", price: "13 ريال" },
-      { name: "بامية رمان", price: "18 ريال" },
-      { name: "سلطة لبن", price: "12 ريال" },
-      { name: "سلطة أقط", price: "18 ريال" },
-      { name: "حمص", price: "13 ريال" },
-      { name: "متبل", price: "13 ريال" },
-      { name: "كبيبة حائل", price: "23 ريال" }
+      { name: "سلطة البر", price: "14 ريال", image: "/appetizers.jpg" },
+      { name: "فتوش", price: "16 ريال", image: "/appetizers.jpg" },
+      { name: "تبولة", price: "14 ريال", image: "/appetizers.jpg" },
+      { name: "جرجير شمندر", price: "13 ريال", image: "/appetizers.jpg" },
+      { name: "بامية رمان", price: "18 ريال", image: "/appetizers.jpg" },
+      { name: "سلطة لبن", price: "12 ريال", image: "/appetizers.jpg" },
+      { name: "سلطة أقط", price: "18 ريال", image: "/appetizers.jpg" },
+      { name: "حمص", price: "13 ريال", image: "/appetizers.jpg" },
+      { name: "متبل", price: "13 ريال", image: "/appetizers.jpg" },
+      { name: "كبيبة حائل", price: "23 ريال", image: "/appetizers.jpg" }
     ]
   },
   {
     category: "المقبلات الحارة والمعجنات",
     image: "/appetizers.jpg",
     items: [
-      { name: "سمبوسة لحم", price: "12 ريال" },
-      { name: "سمبوسة دجاج", price: "12 ريال" },
-      { name: "سمبوسة جبن", price: "9 ريال" },
-      { name: "عيش أبو اللحم", price: "14 ريال" },
-      { name: "فرموزة", price: "14 ريال" },
-      { name: "بف حجازي", price: "12 ريال" },
-      { name: "مطبق مالح", price: "12 ريال" },
-      { name: "بطاطا حارة", price: "12 ريال" },
-      { name: "بطاطس مقلى", price: "8 ريال" }
+      { name: "سمبوسة لحم", price: "12 ريال", image: "/appetizers.jpg" },
+      { name: "سمبوسة دجاج", price: "12 ريال", image: "/appetizers.jpg" },
+      { name: "سمبوسة جبن", price: "9 ريال", image: "/appetizers.jpg" },
+      { name: "عيش أبو اللحم", price: "14 ريال", image: "/appetizers.jpg" },
+      { name: "فرموزة", price: "14 ريال", image: "/appetizers.jpg" },
+      { name: "بف حجازي", price: "12 ريال", image: "/appetizers.jpg" },
+      { name: "مطبق مالح", price: "12 ريال", image: "/appetizers.jpg" },
+      { name: "بطاطا حارة", price: "12 ريال", image: "/appetizers.jpg" },
+      { name: "بطاطس مقلى", price: "8 ريال", image: "/appetizers.jpg" }
     ]
   },
   {
     category: "الإدامات",
     image: "/png.jpeg",
     items: [
-      { name: "بامية", price: "16 ريال" },
-      { name: "ملوخية", price: "14 ريال" },
-      { name: "مسقعة", price: "16 ريال" },
-      { name: "قرع", price: "14 ريال" }
+      { name: "بامية", price: "16 ريال", image: "/png.jpeg" },
+      { name: "ملوخية", price: "14 ريال", image: "/png.jpeg" },
+      { name: "مسقعة", price: "16 ريال", image: "/png.jpeg" },
+      { name: "قرع", price: "14 ريال", image: "/png.jpeg" }
     ]
   },
   {
     category: "الشعبيات والاطباق الجانبية",
     image: "/png.jpeg",
     items: [
-      { name: "مرقوق", price: "24 ريال" },
-      { name: "قرصان", price: "23 ريال" },
-      { name: "جريش حائلي", price: "24 ريال" },
-      { name: "جريش نجدي", price: "22 ريال" },
-      { name: "مكرونة بشاميل", price: "21 ريال" }
+      { name: "مرقوق", price: "24 ريال", image: "/png.jpeg" },
+      { name: "قرصان", price: "23 ريال", image: "/png.jpeg" },
+      { name: "جريش حائلي", price: "24 ريال", image: "/png.jpeg" },
+      { name: "جريش نجدي", price: "22 ريال", image: "/png.jpeg" },
+      { name: "مكرونة بشاميل", price: "21 ريال", image: "/png.jpeg" }
     ]
   },
   {
     category: "الاطباق الرئيسية",
     image: "/png (2).jpeg",
     items: [
-      { name: "سليق دجاج", price: "32 ريال" },
-      { name: "زروبيان دجاج", price: "28 ريال" },
-      { name: "برياني دجاج", price: "27 ريال" },
-      { name: "مقلوبة دجاج", price: "31 ريال" },
-      { name: "دجاج فحم", price: "24 ريال" },
-      { name: "دجاج شواية", price: "24 ريال" },
-      { name: "مشخول روبيان", price: "32 ريال" },
-      { name: "مشخول لحم", price: "78 ريال" },
-      { name: "كابلي لحم", price: "78 ريال" },
-      { name: "مثلوثة دجاج", price: "34 ريال" },
-      { name: "مثلوثة لحم", price: "86 ريال" }
+      { name: "سليق دجاج", price: "32 ريال", image: "/png (2).jpeg" },
+      { name: "زروبيان دجاج", price: "28 ريال", image: "/png (2).jpeg" },
+      { name: "برياني دجاج", price: "27 ريال", image: "/png (2).jpeg" },
+      { name: "مقلوبة دجاج", price: "31 ريال", image: "/png (2).jpeg" },
+      { name: "دجاج فحم", price: "24 ريال", image: "/png (2).jpeg" },
+      { name: "دجاج شواية", price: "24 ريال", image: "/png (2).jpeg" },
+      { name: "مشخول روبيان", price: "32 ريال", image: "/png (2).jpeg" },
+      { name: "مشخول لحم", price: "78 ريال", image: "/png (2).jpeg" },
+      { name: "كابلي لحم", price: "78 ريال", image: "/png (2).jpeg" },
+      { name: "مثلوثة دجاج", price: "34 ريال", image: "/png (2).jpeg" },
+      { name: "مثلوثة لحم", price: "86 ريال", image: "/png (2).jpeg" }
     ]
   },
   {
     category: "الحلا",
     image: "/appetizers.jpg",
     items: [
-      { name: "كريم كراميل", price: "17 ريال" },
-      { name: "مهلبية ورد", price: "18 ريال" },
-      { name: "ساكو", price: "15 ريال" },
-      { name: "بسبوسة قشطة", price: "14 ريال" },
-      { name: "كنافة قشطة", price: "14 ريال" },
-      { name: "حنيني", price: "16 ريال" },
-      { name: "لقيمات", price: "14 ريال" },
-      { name: "مراصيع عسل", price: "14 ريال" }
+      { name: "كريم كراميل", price: "17 ريال", image: "/appetizers.jpg" },
+      { name: "مهلبية ورد", price: "18 ريال", image: "/appetizers.jpg" },
+      { name: "ساكو", price: "15 ريال", image: "/appetizers.jpg" },
+      { name: "بسبوسة قشطة", price: "14 ريال", image: "/appetizers.jpg" },
+      { name: "كنافة قشطة", price: "14 ريال", image: "/appetizers.jpg" },
+      { name: "حنيني", price: "16 ريال", image: "/appetizers.jpg" },
+      { name: "لقيمات", price: "14 ريال", image: "/appetizers.jpg" },
+      { name: "مراصيع عسل", price: "14 ريال", image: "/appetizers.jpg" }
     ]
   },
   {
     category: "المشروبات",
     image: "/png (3).jpeg",
     items: [
-      { name: "كركديه ورد", price: "12 ريال" },
-      { name: "ليمون نعناع", price: "15 ريال" },
-      { name: "برتقال", price: "18 ريال" },
-      { name: "بطيخ", price: "18 ريال" },
-      { name: "لبن القرية", price: "5 ريال" },
-      { name: "لبن اسم المطعم", price: "9 ريال" },
-      { name: "مشروبات غازية", price: "5 ريال" }
+      { name: "كركديه ورد", price: "12 ريال", image: "/png (3).jpeg" },
+      { name: "ليمون نعناع", price: "15 ريال", image: "/png (3).jpeg" },
+      { name: "برتقال", price: "18 ريال", image: "/png (3).jpeg" },
+      { name: "بطيخ", price: "18 ريال", image: "/png (3).jpeg" },
+      { name: "لبن القرية", price: "5 ريال", image: "/png (3).jpeg" },
+      { name: "لبن اسم المطعم", price: "9 ريال", image: "/png (3).jpeg" },
+      { name: "مشروبات غازية", price: "5 ريال", image: "/png (3).jpeg" }
     ]
   }
 ];
@@ -216,6 +216,7 @@ export default function App() {
   const [selectedCategoryIndex, setSelectedCategoryIndex] = useState(0);
   const [newItemName, setNewItemName] = useState('');
   const [newItemPrice, setNewItemPrice] = useState('');
+  const [newItemImage, setNewItemImage] = useState('/png.jpeg');
 
   useEffect(() => {
     const handleHashOrPathChange = () => {
@@ -274,13 +275,15 @@ export default function App() {
     const updatedMenu = [...dailyMenu];
     updatedMenu[selectedCategoryIndex].items.push({
       name: newItemName,
-      price: newItemPrice
+      price: newItemPrice,
+      image: newItemImage
     });
 
     setDailyMenu(updatedMenu);
     setNewItemName('');
     setNewItemPrice('');
-    alert('تم إضافة الطبق بنجاح إلى المنيو اليومي!');
+    setNewItemImage('/png.jpeg');
+    alert('تم إضافة الطبق مع صورته بنجاح إلى المنيو اليومي!');
   };
 
   const isExplicitAdminRoute = routePath.includes('/admin') || routePath === '/admin';
@@ -347,10 +350,12 @@ export default function App() {
                   <select 
                     value={selectedCategoryIndex} 
                     onChange={(e) => setSelectedCategoryIndex(Number(e.target.value))}
-                    className="w-full bg-black/50 border border-[#D4AF37]/30 rounded-xl px-4 py-3 text-white text-xs focus:outline-none focus:border-[#D4AF37]"
+                    className="w-full bg-[#181513] border border-[#D4AF37]/30 rounded-xl px-4 py-3 text-[#D4AF37] font-bold text-xs focus:outline-none focus:border-[#D4AF37]"
                   >
                     {dailyMenu.map((sec, idx) => (
-                      <option key={idx} value={idx}>{sec.category}</option>
+                      <option key={idx} value={idx} className="bg-[#181513] text-[#D4AF37] py-2">
+                        {sec.category}
+                      </option>
                     ))}
                   </select>
                 </div>
@@ -377,11 +382,25 @@ export default function App() {
                   />
                 </div>
 
+                <div className="space-y-1.5 text-right">
+                  <label className="text-xs font-sans text-gray-300 block">صورة الطبق (اختر صورة المتاحة)</label>
+                  <select 
+                    value={newItemImage}
+                    onChange={(e) => setNewItemImage(e.target.value)}
+                    className="w-full bg-[#181513] border border-[#D4AF37]/30 rounded-xl px-4 py-3 text-[#D4AF37] font-bold text-xs focus:outline-none focus:border-[#D4AF37]"
+                  >
+                    <option value="/png.jpeg" className="bg-[#181513] text-[#D4AF37]">صورة رقم 1 (png.jpeg)</option>
+                    <option value="/png (2).jpeg" className="bg-[#181513] text-[#D4AF37]">صورة رقم 2 (png 2.jpeg)</option>
+                    <option value="/png (3).jpeg" className="bg-[#181513] text-[#D4AF37]">صورة رقم 3 (png 3.jpeg)</option>
+                    <option value="/appetizers.jpg" className="bg-[#181513] text-[#D4AF37]">صورة المقبلات (appetizers.jpg)</option>
+                  </select>
+                </div>
+
                 <button 
                   type="submit" 
                   className="w-full bg-gradient-to-r from-[#D4AF37] to-[#AA7C11] text-black py-3.5 rounded-xl font-sans font-bold text-xs tracking-widest shadow-xl hover:opacity-90 transition-all mt-4"
                 >
-                  إضافة الطبق للمنيو فوراً
+                  إضافة الطبق وصورته للمنيو فوراً
                 </button>
               </form>
             </div>
@@ -511,10 +530,15 @@ export default function App() {
                       <h3 className="text-xl sm:text-2xl font-bold text-[#FFFDF9]">{section.category}</h3>
                       <div className="space-y-3">
                         {section.items.map((item, itemIdx) => (
-                          <div key={itemIdx} className="flex items-center justify-between bg-black/30 px-4 sm:px-5 py-3.5 rounded-xl border border-[#D4AF37]/10 gap-2">
-                            <div>
-                              <span className="text-[#FFFDF9] font-medium text-xs sm:text-sm block">{item.name}</span>
-                              <span className="text-[#D4AF37] font-sans font-bold text-xs">{item.price}</span>
+                          <div key={itemIdx} className="flex items-center justify-between bg-black/30 px-4 sm:px-5 py-3.5 rounded-xl border border-[#D4AF37]/10 gap-3">
+                            <div className="flex items-center gap-3">
+                              {item.image && (
+                                <img src={item.image} alt={item.name} className="w-12 h-12 rounded-lg object-cover border border-[#D4AF37]/30 shrink-0" />
+                              )}
+                              <div>
+                                <span className="text-[#FFFDF9] font-medium text-xs sm:text-sm block">{item.name}</span>
+                                <span className="text-[#D4AF37] font-sans font-bold text-xs">{item.price}</span>
+                              </div>
                             </div>
                             <button 
                               onClick={() => addToCart(item.name, item.price)}
