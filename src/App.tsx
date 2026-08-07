@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { Utensils, CalendarHeart, Sparkles, ShoppingBag, ShieldCheck, Lock, LogOut } from 'lucide-react';
+import { Utensils, CalendarHeart, Sparkles, ShoppingBag, ShieldCheck, Lock, LogOut, Upload } from 'lucide-react';
 
 const heroImages = [
   '/png (3).jpeg',
@@ -265,6 +265,15 @@ export default function App() {
     }
   };
 
+  // دالة لاختيار أو رفع صورة من جهاز اللابتوب أو الموبايل
+  const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    if (e.target.files && e.target.files[0]) {
+      const file = e.target.files[0];
+      const imageUrl = URL.createObjectURL(file);
+      setNewItemImage(imageUrl);
+    }
+  };
+
   const handleAddNewItem = (e: React.FormEvent) => {
     e.preventDefault();
     if (!newItemName || !newItemPrice) {
@@ -283,7 +292,7 @@ export default function App() {
     setNewItemName('');
     setNewItemPrice('');
     setNewItemImage('/png.jpeg');
-    alert('تم إضافة الطبق مع صورته بنجاح إلى المنيو اليومي!');
+    alert('تم إضافة الطبق مع الصورة بنجاح إلى المنيو اليومي!');
   };
 
   const isExplicitAdminRoute = routePath.includes('/admin') || routePath === '/admin';
@@ -383,17 +392,23 @@ export default function App() {
                 </div>
 
                 <div className="space-y-1.5 text-right">
-                  <label className="text-xs font-sans text-gray-300 block">صورة الطبق (اختر صورة المتاحة)</label>
-                  <select 
-                    value={newItemImage}
-                    onChange={(e) => setNewItemImage(e.target.value)}
-                    className="w-full bg-[#181513] border border-[#D4AF37]/30 rounded-xl px-4 py-3 text-[#D4AF37] font-bold text-xs focus:outline-none focus:border-[#D4AF37]"
-                  >
-                    <option value="/png.jpeg" className="bg-[#181513] text-[#D4AF37]">صورة رقم 1 (png.jpeg)</option>
-                    <option value="/png (2).jpeg" className="bg-[#181513] text-[#D4AF37]">صورة رقم 2 (png 2.jpeg)</option>
-                    <option value="/png (3).jpeg" className="bg-[#181513] text-[#D4AF37]">صورة رقم 3 (png 3.jpeg)</option>
-                    <option value="/appetizers.jpg" className="bg-[#181513] text-[#D4AF37]">صورة المقبلات (appetizers.jpg)</option>
-                  </select>
+                  <label className="text-xs font-sans text-gray-300 block">اختر صورة الطبق من الاستوديو أو الملفات</label>
+                  <label className="flex items-center justify-center gap-2 w-full bg-black/50 border border-dashed border-[#D4AF37]/50 rounded-xl px-4 py-3 text-[#D4AF37] text-xs cursor-pointer hover:bg-[#D4AF37]/10 transition-all">
+                    <Upload className="w-4 h-4" />
+                    <span>{newItemImage.startsWith('blob:') ? 'تم اختيار الصورة بنجاح (اضغط لتغييرها)' : 'اختر صورة من الجهاز'}</span>
+                    <input 
+                      type="file" 
+                      accept="image/*"
+                      onChange={handleImageChange}
+                      className="hidden" 
+                    />
+                  </label>
+                  {newItemImage && (
+                    <div className="mt-2 flex items-center gap-2">
+                      <img src={newItemImage} alt="معاينة" className="w-10 h-10 rounded-lg object-cover border border-[#D4AF37]/40" />
+                      <span className="text-[10px] text-gray-400 font-sans">معاينة الصورة المختارة</span>
+                    </div>
+                  )}
                 </div>
 
                 <button 
