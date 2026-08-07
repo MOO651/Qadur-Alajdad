@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { Utensils, CalendarHeart, Sparkles, ShoppingBag, ShieldCheck, Lock, LogOut, Upload, Star, Award, HeartHandshake, ChefHat } from 'lucide-react';
+import { Utensils, CalendarHeart, Sparkles, ShoppingBag, ShieldCheck, Lock, LogOut, Upload, Star, Award, HeartHandshake, ChefHat, MapPin, Phone, Mail, Clock } from 'lucide-react';
 
 const heroImages = [
   '/png (3).jpeg',
@@ -280,12 +280,12 @@ export default function App() {
   const isExplicitAdminRoute = routePath.includes('/admin') || routePath === '/admin';
 
   return (
-    <div className="min-h-screen bg-[#0C0B0A] text-[#F5F2EC] font-serif selection:bg-[#D4AF37] selection:text-black overflow-x-hidden w-full" dir="rtl">
+    <div className="min-h-screen bg-[#0C0B0A] text-[#F5F2EC] font-serif selection:bg-[#D4AF37] selection:text-black overflow-x-hidden w-full flex flex-col justify-between" dir="rtl">
       
       <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full max-w-[1200px] h-[600px] bg-gradient-to-b from-[#D4AF37]/15 via-[#AA7C11]/5 to-transparent blur-[150px] pointer-events-none"></div>
 
       {isExplicitAdminRoute ? (
-        <div className="max-w-md mx-auto px-4 sm:px-6 py-20 space-y-8 animate-fadeIn min-h-screen flex flex-col justify-center">
+        <div className="max-w-md mx-auto px-4 sm:px-6 py-20 space-y-8 animate-fadeIn min-h-screen flex flex-col justify-center w-full">
           <div className="text-center mb-4">
             <button 
               onClick={() => navigateTo('/')} 
@@ -491,7 +491,7 @@ export default function App() {
             )}
           </header>
 
-          <main className="pt-24 sm:pt-28 w-full overflow-hidden">
+          <main className="pt-24 sm:pt-28 w-full overflow-hidden flex-grow">
 
             {(routePath === '/' || routePath === '') && (
               <div className="space-y-20 pb-20">
@@ -784,6 +784,87 @@ export default function App() {
             )}
 
           </main>
+
+          {/* Footer Section (العنوان ورقم التواصل) */}
+          <footer className="bg-[#080706] border-t border-[#D4AF37]/30 pt-16 pb-8 px-4 sm:px-8 mt-20">
+            <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-4 gap-10 pb-12 border-b border-[#D4AF37]/20 text-right">
+              
+              {/* Column 1: Brand / About */}
+              <div className="space-y-4">
+                <div className="flex items-center gap-3">
+                  <div className="w-10 h-10 rounded-full border-2 border-[#D4AF37] bg-[#1C1815] overflow-hidden flex items-center justify-center shrink-0">
+                    <img src="/logo.png" alt="شعار" className="w-full h-full object-cover" />
+                  </div>
+                  <div>
+                    <h3 className="text-base font-bold text-[#FFFDF9]">قُدُور الأَجْدَاد</h3>
+                    <p className="text-[7px] font-sans tracking-[0.2em] text-[#D4AF37] uppercase">ROYAL HERITAGE</p>
+                  </div>
+                </div>
+                <p className="text-gray-400 text-xs font-sans leading-relaxed">
+                  الوجهة الأولى لتناول ألذ الأطباق السعودية الشعبية وتجهيز ولائم الأفراح الكبرى بأصولها العريقة ونكهاتها الفاخرة.
+                </p>
+              </div>
+
+              {/* Column 2: Quick Links */}
+              <div className="space-y-4">
+                <h4 className="text-[#D4AF37] font-bold text-sm tracking-wider">روابط سريعة</h4>
+                <ul className="space-y-2.5 text-xs font-sans text-gray-300">
+                  <li><button onClick={() => navigateTo('/')} className="hover:text-[#D4AF37] transition-colors">الصفحة الرئيسية</button></li>
+                  <li><button onClick={() => navigateTo('/daily')} className="hover:text-[#D4AF37] transition-colors">المنيو اليومي والشعبيات</button></li>
+                  <li><button onClick={() => navigateTo('/events')} className="hover:text-[#D4AF37] transition-colors">قسم الأفراح والولائم</button></li>
+                  <li><button onClick={() => navigateTo('/cart')} className="hover:text-[#D4AF37] transition-colors">سلة الطلبات</button></li>
+                </ul>
+              </div>
+
+              {/* Column 3: Contact Info */}
+              <div className="space-y-4">
+                <h4 className="text-[#D4AF37] font-bold text-sm tracking-wider">تواصل معنا</h4>
+                <div className="space-y-3 text-xs font-sans text-gray-300">
+                  <div className="flex items-start gap-2.5">
+                    <MapPin className="w-4 h-4 text-[#D4AF37] shrink-0 mt-0.5" />
+                    <span>المملكة العربية السعودية - الشارع الرئيسي</span>
+                  </div>
+                  <div className="flex items-center gap-2.5">
+                    <Phone className="w-4 h-4 text-[#D4AF37] shrink-0" />
+                    <span dir="ltr">+966 50 000 0000</span>
+                  </div>
+                  <div className="flex items-center gap-2.5">
+                    <Mail className="w-4 h-4 text-[#D4AF37] shrink-0" />
+                    <span>info@qadur-alajdad.com</span>
+                  </div>
+                </div>
+              </div>
+
+              {/* Column 4: Working Hours */}
+              <div className="space-y-4">
+                <h4 className="text-[#D4AF37] font-bold text-sm tracking-wider">أوقات العمل</h4>
+                <div className="space-y-3 text-xs font-sans text-gray-300">
+                  <div className="flex items-start gap-2.5">
+                    <Clock className="w-4 h-4 text-[#D4AF37] shrink-0 mt-0.5" />
+                    <div>
+                      <p className="font-bold text-white">طوال أيام الأسبوع</p>
+                      <p className="text-gray-400">من الساعة 11:00 صباحاً وحتى 12:00 منتصف الليل</p>
+                    </div>
+                  </div>
+                  <div className="pt-2">
+                    <span className="inline-block bg-[#D4AF37]/10 border border-[#D4AF37]/30 text-[#D4AF37] px-3 py-1 rounded-lg text-[10px] font-bold">
+                      مستعدون لتجهيز ولائم الأفراح على مدار الساعة
+                    </span>
+                  </div>
+                </div>
+              </div>
+
+            </div>
+
+            <div className="max-w-7xl mx-auto pt-6 flex flex-col sm:flex-row items-center justify-between text-gray-500 text-[11px] font-sans gap-4">
+              <p>جميع الحقوق محفوظة © 2026 مطعم قُدُور الأَجْدَاد (Royal Heritage)</p>
+              <div className="flex gap-4">
+                <span className="hover:text-[#D4AF37] cursor-pointer">سياسة الاستخدام</span>
+                <span>•</span>
+                <span className="hover:text-[#D4AF37] cursor-pointer">الشروط والأحكام</span>
+              </div>
+            </div>
+          </footer>
         </>
       )}
 
