@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { Utensils, CalendarHeart, Sparkles, ShoppingBag, ShieldCheck, Lock, LogOut, Upload } from 'lucide-react';
+import { Utensils, CalendarHeart, Sparkles, ShoppingBag, ShieldCheck, Lock, LogOut, Upload, Star, Award, HeartHandshake, ChefHat } from 'lucide-react';
 
 const heroImages = [
   '/png (3).jpeg',
@@ -122,7 +122,7 @@ const initialWeddingMenuSections = [
     description: "أجود أنواع الذبائح البلدية المحضرة لأفخم المناسبات",
     items: [
       { name: "الذبائح الشعبية", price: "حسب الطلب", details: "شعبي، غوزي، مندي، عييلة، كابلي، زييان، بخاري، سليق، ومثلوثة." },
-      { name: "الذبائح المحشية", price: "حسب الطلب", details: "خروف مع المحاشي، محشي ورق عنب، محشي مكرونة، محشي بالفريك، محشي مسقعة، محشي كبيبة، ومحشي فقع." }
+      { name: "الذبائح المحشية", price: "حسب الطلب", details: "خروف مع المحاشي، محشي ورق عنب، محشي مكرونة، محشي بالفريك، محشي مسقعة، ومحشي كبيبة." }
     ]
   },
   {
@@ -130,7 +130,7 @@ const initialWeddingMenuSections = [
     image: "/banquet.jpg",
     description: "تخضيرة أرز ملكية مفلفلة بأرقى البهارات",
     items: [
-      { name: "تشكيلة الأرز", price: "حسب الطلب", details: "المعمر، الصيادية، المشخول، الحساوي، المندي، الكليبي، الزييان، وبخاري." }
+      { name: "تشكيلة الأرز", price: "حسب الطلب", details: "المعمر، الصيادية، المشخول، الحساوي، المندي، والكليبي." }
     ]
   },
   {
@@ -138,7 +138,7 @@ const initialWeddingMenuSections = [
     image: "/png.jpeg",
     description: "طعم الأصالة العريقة المطهوة بالسمن البري",
     items: [
-      { name: "الأطباق الشعبية", price: "حسب الطلب", details: "المرقوق، الجريش (حائل، قصيمي، نجدي)، هريس حساوي، سليق مكاوي، مفلق حساوي، وقرصان." }
+      { name: "الأطباق الشعبية", price: "حسب الطلب", details: "المرقوق، الجريش (حائل، قصيمي، نجدي)، هريس حساوي، سليق مكاوي، وقرصان." }
     ]
   },
   {
@@ -146,42 +146,7 @@ const initialWeddingMenuSections = [
     image: "/png (2).jpeg",
     description: "نكهات أهل أول المميزة",
     items: [
-      { name: "الأصناف المتفرقة", price: "حسب الطلب", details: "قرع بلدي أهل أول، بامية أهل المدينة، مسقعة حجازية، كبسة، شعبي مكسرات، ريزتو، ومكرونة (مشروم، بشاميل، مرقوق، بيستو)." }
-    ]
-  },
-  {
-    category: "[أفراح] الأطباق الجانبية والمقبلات السخنة",
-    image: "/appetizers.jpg",
-    description: "أصناف متكاملة لتشريف ضيوفك",
-    items: [
-      { name: "الجانبيات", price: "حسب الطلب", details: "لفائف الباذنجان، دجاج بالكريمة، صينية بطاطس بالأجبان، مراصيع منصلة، شيش برك، وداوود باشا." }
-    ]
-  },
-  {
-    category: "[أفراح] المحاشي والفتات الملكية",
-    image: "/stuffed-lamb.jpg",
-    description: "تشكيلة غنية ومميزة للمناسبات",
-    items: [
-      { name: "المحاشي", price: "حسب الطلب", details: "محشي مشكلة، كوسة ورق عنب، كبيبة حائل، وملفوف." },
-      { name: "الفتات", price: "حسب الطلب", details: "فته ورق عنب، فته كبة، فته كوارع، وفته شاورما." }
-    ]
-  },
-  {
-    category: "[أفراح] الشوربات والمقبلات والسلطات",
-    image: "/appetizers.jpg",
-    description: "مقبلات طازجة ومنعشة تفتح النفس",
-    items: [
-      { name: "الشوربات", price: "حسب الطلب", details: "كويكر، كوارع، عدس، وجريش." },
-      { name: "المقبلات الباردة", price: "حسب الطلب", details: "متبل سعودي، لبنة شمندر، متبل خضار، ورق عنب، حمص، وكبة." },
-      { name: "السلطات المتنوعة", price: "حسب الطلب", details: "جرجير بالقرع، رقائق الكوسة، بروكلي، جرجير أقط، جرجير شمندر، تبولة سعودية، متبل شمندر، سلطة فلافل، فتوش، تبولة باللبنة، تبولة، البحر الأحمر، يامية الذفة، رجله، حمام البر، الكينواه، سيزر، وزهرة." }
-    ]
-  },
-  {
-    category: "[أفراح] المعجنات والمخبوزات",
-    image: "/banquet.jpg",
-    description: "مخبوزات طازجة وساخنة يومياً",
-    items: [
-      { name: "المعجنات", price: "حسب الطلب", details: "يغمش حجازي، عيش أبو اللحم، فرمزة حجازية، خلية نحل، سمبوسة، فطور، منتو، ومطبق (مالح - حلو)." }
+      { name: "الأصناف المتفرقة", price: "حسب الطلب", details: "قرع بلدي أهل أول، بامية أهل المدينة، مسقعة حجازية، وكبسة." }
     ]
   },
   {
@@ -189,7 +154,7 @@ const initialWeddingMenuSections = [
     image: "/appetizers.jpg",
     description: "مسك الختام لأفخم الولائم",
     items: [
-      { name: "حلويات المناسبات", price: "حسب الطلب", details: "مقشوش، حنيني، عريكة، حسية، كيكة، ساقو، أم علي زعفران، شعبرية الأولين، كريمة، قلاوة تمر، ميني سمبوسة، بسبوسة مكة، كنافة قشطة، باناكوتا، كنافة تمر، طرمية، ومراصيع." }
+      { name: "حلويات المناسبات", price: "حسب الطلب", details: "مقشوش، حنيني، عريكة، حسية، كيكة، ساقو، وأم علي زعفران." }
     ]
   },
   {
@@ -197,7 +162,7 @@ const initialWeddingMenuSections = [
     image: "/png (3).jpeg",
     description: "تشكيلة من العصائر الطبيعية والمياه",
     items: [
-      { name: "المشروبات", price: "حسب الطلب", details: "ليمون حبق، برتقال، أناناس، مياه برين، مياه نوفا، مياه غازية، وتشكيلة من المشروبات الباردة." }
+      { name: "المشروبات", price: "حسب الطلب", details: "ليمون حبق، برتقال، أناناس، ومياه نوفا غازية." }
     ]
   }
 ];
@@ -529,7 +494,8 @@ export default function App() {
           <main className="pt-24 sm:pt-28 w-full overflow-hidden">
 
             {(routePath === '/' || routePath === '') && (
-              <div className="space-y-16 sm:space-y-24 pb-20">
+              <div className="space-y-20 pb-20">
+                {/* Hero Section */}
                 <section className="relative min-h-[85vh] sm:min-h-[90vh] flex flex-col items-center justify-center text-center px-4 overflow-hidden">
                   <div className="absolute inset-0 z-0">
                     <div className="absolute inset-0 bg-gradient-to-t from-[#0C0B0A] via-[#0C0B0A]/50 to-[#0C0B0A]/70 z-10"></div>
@@ -573,6 +539,112 @@ export default function App() {
                     </div>
                   </div>
                 </section>
+
+                {/* Features / Why Us Section */}
+                <section className="max-w-7xl mx-auto px-4 sm:px-6">
+                  <div className="text-center space-y-3 mb-12">
+                    <span className="text-[#D4AF37] font-sans text-xs tracking-[0.3em] font-bold uppercase bg-[#D4AF37]/10 px-4 py-1.5 rounded-full border border-[#D4AF37]/30 inline-block">تميزنا</span>
+                    <h3 className="text-2xl sm:text-3xl font-bold text-[#FFFDF9]">لماذا تختار قُدُور الأَجْدَاد؟</h3>
+                  </div>
+
+                  <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+                    <div className="bg-[#181513] border border-[#D4AF37]/30 rounded-3xl p-6 sm:p-8 text-center space-y-4 shadow-xl">
+                      <div className="w-14 h-14 rounded-2xl bg-[#D4AF37]/10 border border-[#D4AF37]/40 flex items-center justify-center mx-auto text-[#D4AF37]">
+                        <ChefHat className="w-7 h-7" />
+                      </div>
+                      <h4 className="text-lg font-bold text-[#FFFDF9]">وصفات الأجداد الأصلية</h4>
+                      <p className="text-gray-400 text-xs font-sans leading-relaxed">
+                        نحافظ على الوصفات التقليدية العريقة المطهوة ببطء في القدور النحاسية لضمان غنى النكهة والمذاق الأصيل.
+                      </p>
+                    </div>
+
+                    <div className="bg-[#181513] border border-[#D4AF37]/30 rounded-3xl p-6 sm:p-8 text-center space-y-4 shadow-xl">
+                      <div className="w-14 h-14 rounded-2xl bg-[#D4AF37]/10 border border-[#D4AF37]/40 flex items-center justify-center mx-auto text-[#D4AF37]">
+                        <Award className="w-7 h-7" />
+                      </div>
+                      <h4 className="text-lg font-bold text-[#FFFDF9]">ذبائح بلدي طازجة</h4>
+                      <p className="text-gray-400 text-xs font-sans leading-relaxed">
+                        نختار أجود أنواع الذبائح البلدية بعناية فائقة لتليق بمقام ضيوفكم وأفراحكم الكبرى في جميع المناسبات.
+                      </p>
+                    </div>
+
+                    <div className="bg-[#181513] border border-[#D4AF37]/30 rounded-3xl p-6 sm:p-8 text-center space-y-4 shadow-xl">
+                      <div className="w-14 h-14 rounded-2xl bg-[#D4AF37]/10 border border-[#D4AF37]/40 flex items-center justify-center mx-auto text-[#D4AF37]">
+                        <HeartHandshake className="w-7 h-7" />
+                      </div>
+                      <h4 className="text-lg font-bold text-[#FFFDF9]">ضيافة ملكية فاخرة</h4>
+                      <p className="text-gray-400 text-xs font-sans leading-relaxed">
+                        فريق متخصص لتجهيز ولائم الأفراح الكبرى والاجتماعات الرسمية بأعلى معايير الإتقان والفخامة.
+                      </p>
+                    </div>
+                  </div>
+                </section>
+
+                {/* Quick Highlights / Featured Dishes */}
+                <section className="max-w-7xl mx-auto px-4 sm:px-6 bg-gradient-to-b from-transparent via-[#181513]/50 to-transparent py-12 rounded-3xl border border-[#D4AF37]/10">
+                  <div className="flex flex-col sm:flex-row items-center justify-between mb-8 gap-4 px-4">
+                    <div>
+                      <span className="text-[#D4AF37] font-sans text-xs tracking-[0.2em] font-bold uppercase">من مختاراتنا</span>
+                      <h3 className="text-2xl font-bold text-[#FFFDF9]">أطباق نالت إعجاب ضيوفنا</h3>
+                    </div>
+                    <button onClick={() => navigateTo('/daily')} className="text-[#D4AF37] text-xs font-sans font-bold hover:underline">
+                      عرض المنيو كامل ←
+                    </button>
+                  </div>
+
+                  <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6 px-4">
+                    {[
+                      { name: "كابلي لحم بلدي", price: "78 ريال", img: "/png (2).jpeg" },
+                      { name: "جريش حائلي بالسمن", price: "24 ريال", img: "/png.jpeg" },
+                      { name: "سليق دجاج ملكي", price: "32 ريال", img: "/png (2).jpeg" },
+                      { name: "مهلبية ورد", price: "18 ريال", img: "/appetizers.jpg" }
+                    ].map((dish, i) => (
+                      <div key={i} className="bg-[#181513] border border-[#D4AF37]/30 rounded-2xl overflow-hidden shadow-lg group">
+                        <div className="h-36 bg-cover bg-center group-hover:scale-105 transition-transform duration-500" style={{ backgroundImage: `url('${dish.img}')` }}></div>
+                        <div className="p-4 space-y-2">
+                          <h4 className="text-white font-bold text-sm">{dish.name}</h4>
+                          <div className="flex justify-between items-center">
+                            <span className="text-[#D4AF37] font-sans font-bold text-xs">{dish.price}</span>
+                            <button onClick={() => addToCart(dish.name, dish.price)} className="bg-[#D4AF37]/20 hover:bg-[#D4AF37] text-[#D4AF37] hover:text-black px-3 py-1.5 rounded-lg text-xs font-sans font-bold transition-all">
+                              أضف للسلة
+                            </button>
+                          </div>
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                </section>
+
+                {/* Testimonials */}
+                <section className="max-w-5xl mx-auto px-4 sm:px-6 text-center space-y-8">
+                  <div className="space-y-3">
+                    <span className="text-[#D4AF37] font-sans text-xs tracking-[0.3em] font-bold uppercase bg-[#D4AF37]/10 px-4 py-1.5 rounded-full border border-[#D4AF37]/30 inline-block">آراء العملاء</span>
+                    <h3 className="text-2xl sm:text-3xl font-bold text-[#FFFDF9]">ماذا يقول ضيوفنا عنا؟</h3>
+                  </div>
+
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div className="bg-[#181513] border border-[#D4AF37]/30 rounded-3xl p-6 sm:p-8 text-right space-y-4">
+                      <div className="flex text-[#D4AF37] gap-1">
+                        {[...Array(5)].map((_, i) => <Star key={i} className="w-4 h-4 fill-current" />)}
+                      </div>
+                      <p className="text-gray-300 text-xs sm:text-sm font-sans italic leading-relaxed">
+                        "أخذنا منيو الأفراح لمناسبة زواج، صراحة الوليمة كانت تبيض الوجه والذبائح مستوية على أصولها والأرز مفلفل وطعم ولا أروع. شكراً قدور الأجداد."
+                      </p>
+                      <span className="text-[#D4AF37] text-xs font-sans font-bold block">- أبو تراب الحائلي</span>
+                    </div>
+
+                    <div className="bg-[#181513] border border-[#D4AF37]/30 rounded-3xl p-6 sm:p-8 text-right space-y-4">
+                      <div className="flex text-[#D4AF37] gap-1">
+                        {[...Array(5)].map((_, i) => <Star key={i} className="w-4 h-4 fill-current" />)}
+                      </div>
+                      <p className="text-gray-300 text-xs sm:text-sm font-sans italic leading-relaxed">
+                        "الجريش والمرقوق عندهم يذكرونك بأكل الوالدة ربي يحفظها. المنيو اليومي ثابت عندي للغداء بشكل دائم. أنصح بالتعامل معهم بقوة."
+                      </p>
+                      <span className="text-[#D4AF37] text-xs font-sans font-bold block">- م. خالد الشمري</span>
+                    </div>
+                  </div>
+                </section>
+
               </div>
             )}
 
