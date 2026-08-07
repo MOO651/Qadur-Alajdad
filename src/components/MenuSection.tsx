@@ -3,9 +3,10 @@ import { menuDishes, subCategoriesMap } from '../data/menuData';
 
 interface MenuSectionProps {
   selectedMainCat?: string;
+  onAddToCart?: (dish: { id: string; name: string; price: number; image: string }) => void;
 }
 
-export default function MenuSection({ selectedMainCat = 'najd' }: MenuSectionProps) {
+export default function MenuSection({ selectedMainCat = 'najd', onAddToCart }: MenuSectionProps) {
   const [selectedSubCat, setSelectedSubCat] = useState('all-najd');
 
   const subCategories = subCategoriesMap[selectedMainCat] || [];
@@ -15,6 +16,17 @@ export default function MenuSection({ selectedMainCat = 'najd' }: MenuSectionPro
     if (selectedSubCat.startsWith('all')) return true;
     return dish.subCategory === selectedSubCat;
   });
+
+  const handleAdd = (dish: any) => {
+    if (onAddToCart) {
+      onAddToCart({
+        id: dish.id,
+        name: dish.name,
+        price: Number(dish.price),
+        image: dish.image,
+      });
+    }
+  };
 
   return (
     <div className="space-y-10">
@@ -77,7 +89,10 @@ export default function MenuSection({ selectedMainCat = 'najd' }: MenuSectionPro
                   <span className="text-[10px] text-gray-400 block">السعر شامل الضريبة</span>
                   <span className="text-xl font-black text-[#d4af37]">{dish.price} <span className="text-xs font-normal text-gray-300">ر.س</span></span>
                 </div>
-                <button className="bg-gradient-to-r from-[#d4af37] to-[#aa8c2c] text-black font-black px-5 py-2.5 rounded-xl text-xs hover:scale-105 transition-all shadow-md shadow-[#d4af37]/20 border border-white/20">
+                <button 
+                  onClick={() => handleAdd(dish)}
+                  className="bg-gradient-to-r from-[#d4af37] to-[#aa8c2c] text-black font-black px-5 py-2.5 rounded-xl text-xs hover:scale-105 transition-all shadow-md shadow-[#d4af37]/20 border border-white/20"
+                >
                   إضافة للطلب +
                 </button>
               </div>
