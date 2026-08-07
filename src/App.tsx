@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { Utensils, CalendarHeart, Sparkles, MapPin, ShoppingBag, ShieldCheck } from 'lucide-react';
+import { Utensils, CalendarHeart, Sparkles, MapPin, ShoppingBag, ShieldCheck, Lock, LogOut } from 'lucide-react';
 
 const heroImages = [
   '/png (3).jpeg',
@@ -209,7 +209,12 @@ export default function App() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [dailyMenu, setDailyMenu] = useState(initialDailyMenuSections);
 
-  // حقول نموذج الأدمن لإضافة صنف جديد
+  // حالات تسجيل دخول الأدمن
+  const [isAdminLoggedIn, setIsAdminLoggedIn] = useState(false);
+  const [adminPasswordInput, setAdminPasswordInput] = useState('');
+  const ADMIN_SECRET_CODE = "1234"; // تقدر تغير الرقم السري هنا لأي كلمة سر تبيها
+
+  // حقول نموذج إضافة صنف للأدمن
   const [selectedCategoryIndex, setSelectedCategoryIndex] = useState(0);
   const [newItemName, setNewItemName] = useState('');
   const [newItemPrice, setNewItemPrice] = useState('');
@@ -228,6 +233,16 @@ export default function App() {
 
   const removeFromCart = (index: number) => {
     setCartItems((prev) => prev.filter((_, i) => i !== index));
+  };
+
+  const handleAdminLogin = (e: React.FormEvent) => {
+    e.preventDefault();
+    if (adminPasswordInput === ADMIN_SECRET_CODE) {
+      setIsAdminLoggedIn(true);
+      setAdminPasswordInput('');
+    } else {
+      alert('كلمة المرور غير صحيحة!');
+    }
   };
 
   const handleAddNewItem = (e: React.FormEvent) => {
@@ -298,7 +313,6 @@ export default function App() {
               )}
             </button>
 
-            {/* زر القائمة المنسدلة للجوال */}
             <button 
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
               className="lg:hidden border border-[#D4AF37]/60 bg-[#181513] text-[#D4AF37] p-2 rounded-xl text-xs font-sans"
@@ -370,7 +384,7 @@ export default function App() {
           </div>
         )}
 
-        {/* المنيو اليومي (يعرض البيانات المحدثة ديناميكياً) */}
+        {/* المنيو اليومي */}
         {currentPage === 'daily' && (
           <div className="max-w-7xl mx-auto px-4 sm:px-6 py-12 space-y-12 animate-fadeIn">
             <div className="text-center space-y-4">
@@ -451,58 +465,97 @@ export default function App() {
           </div>
         )}
 
-        {/* صفحة الأدمن (لوحة التحكم الجديدة) */}
+        {/* صفحة الأدمن مع حماية بكلمة مرور */}
         {currentPage === 'admin' && (
-          <div className="max-w-3xl mx-auto px-4 sm:px-6 py-16 space-y-8 animate-fadeIn">
-            <div className="text-center space-y-3">
-              <ShieldCheck className="w-12 h-12 text-[#D4AF37] mx-auto" />
-              <h2 className="text-2xl sm:text-3xl font-bold text-[#FFFDF9]">لوحة تحكم "قدور الأجداد"</h2>
-              <p className="text-gray-400 text-xs font-sans">أضف منتجاً جديداً مباشرة للمنيو اليومي وتعديله فوراً</p>
-            </div>
+          <div className="max-w-md mx-auto px-4 sm:px-6 py-20 space-y-8 animate-fadeIn">
+            {!isAdminLoggedIn ? (
+              /* نموذج تسجيل الدخول */
+              <form onSubmit={handleAdminLogin} className="bg-[#181513] border border-[#D4AF37]/40 rounded-3xl p-8 space-y-6 shadow-2xl text-center">
+                <Lock className="w-12 h-12 text-[#D4AF37] mx-auto" />
+                <div className="space-y-2">
+                  <h2 className="text-2xl font-bold text-[#FFFDF9]">دخول لوحة التحكم</h2>
+                  <p className="text-gray-400 text-xs font-sans">هذه الصفحة خاصة بإدارة المطعم فقط</p>
+                </div>
+                
+                <div className="space-y-2 text-right">
+                  <label className="text-xs font-sans text-gray-300 block">أدخل الرقم السري للأدمن</label>
+                  <input 
+                    type="password" 
+                    value={adminPasswordInput}
+                    onChange={(e) => setAdminPasswordInput(e.target.value)}
+                    placeholder="****" 
+                    className="w-full bg-black/50 border border-[#D4AF37]/30 rounded-xl px-4 py-3 text-white text-center tracking-widest text-lg focus:outline-none focus:border-[#D4AF37]" 
+                  />
+                </div>
 
-            <form onSubmit={handleAddNewItem} className="bg-[#181513] border border-[#D4AF37]/30 rounded-3xl p-6 sm:p-8 space-y-6">
-              <div className="space-y-2">
-                <label className="text-xs font-sans text-gray-300 block">اختر القسم في المنيو</label>
-                <select 
-                  value={selectedCategoryIndex} 
-                  onChange={(e) => setSelectedCategoryIndex(Number(e.target.value))}
-                  className="w-full bg-black/50 border border-[#D4AF37]/30 rounded-xl px-4 py-3 text-white text-xs focus:outline-none focus:border-[#D4AF37]"
+                <button 
+                  type="submit" 
+                  className="w-full bg-gradient-to-r from-[#D4AF37] to-[#AA7C11] text-black py-3.5 rounded-xl font-sans font-bold text-xs tracking-widest shadow-xl hover:opacity-90 transition-all"
                 >
-                  {dailyMenu.map((sec, idx) => (
-                    <option key={idx} value={idx}>{sec.category}</option>
-                  ))}
-                </select>
-              </div>
+                  تسجيل الدخول
+                </button>
+              </form>
+            ) : (
+              /* لوحة التحكم الفعلية بعد إدخال الكود الصحيح */
+              <div className="bg-[#181513] border border-[#D4AF37]/30 rounded-3xl p-6 sm:p-8 space-y-6 shadow-2xl">
+                <div className="flex justify-between items-center border-b border-[#D4AF37]/20 pb-4">
+                  <div className="flex items-center gap-2">
+                    <ShieldCheck className="w-6 h-6 text-[#D4AF37]" />
+                    <h2 className="text-lg font-bold text-[#FFFDF9]">لوحة التحكم المعتمدة</h2>
+                  </div>
+                  <button 
+                    onClick={() => setIsAdminLoggedIn(false)} 
+                    className="text-red-400 hover:text-red-300 text-xs font-sans flex items-center gap-1 bg-red-500/10 px-3 py-1.5 rounded-lg border border-red-500/20"
+                  >
+                    <LogOut className="w-3.5 h-3.5" /> خروج
+                  </button>
+                </div>
 
-              <div className="space-y-2">
-                <label className="text-xs font-sans text-gray-300 block">اسم الطبق الجديد</label>
-                <input 
-                  type="text" 
-                  value={newItemName}
-                  onChange={(e) => setNewItemName(e.target.value)}
-                  placeholder="مثال: كبسة دجاج خاصة" 
-                  className="w-full bg-black/50 border border-[#D4AF37]/30 rounded-xl px-4 py-3 text-white text-xs focus:outline-none focus:border-[#D4AF37]" 
-                />
-              </div>
+                <form onSubmit={handleAddNewItem} className="space-y-4">
+                  <div className="space-y-1.5 text-right">
+                    <label className="text-xs font-sans text-gray-300 block">اختر القسم في المنيو</label>
+                    <select 
+                      value={selectedCategoryIndex} 
+                      onChange={(e) => setSelectedCategoryIndex(Number(e.target.value))}
+                      className="w-full bg-black/50 border border-[#D4AF37]/30 rounded-xl px-4 py-3 text-white text-xs focus:outline-none focus:border-[#D4AF37]"
+                    >
+                      {dailyMenu.map((sec, idx) => (
+                        <option key={idx} value={idx}>{sec.category}</option>
+                      ))}
+                    </select>
+                  </div>
 
-              <div className="space-y-2">
-                <label className="text-xs font-sans text-gray-300 block">السعر (مع العملة)</label>
-                <input 
-                  type="text" 
-                  value={newItemPrice}
-                  onChange={(e) => setNewItemPrice(e.target.value)}
-                  placeholder="مثال: 35 ريال" 
-                  className="w-full bg-black/50 border border-[#D4AF37]/30 rounded-xl px-4 py-3 text-white text-xs focus:outline-none focus:border-[#D4AF37]" 
-                />
-              </div>
+                  <div className="space-y-1.5 text-right">
+                    <label className="text-xs font-sans text-gray-300 block">اسم الطبق الجديد</label>
+                    <input 
+                      type="text" 
+                      value={newItemName}
+                      onChange={(e) => setNewItemName(e.target.value)}
+                      placeholder="مثال: كبسة دجاج خاصة" 
+                      className="w-full bg-black/50 border border-[#D4AF37]/30 rounded-xl px-4 py-3 text-white text-xs focus:outline-none focus:border-[#D4AF37]" 
+                    />
+                  </div>
 
-              <button 
-                type="submit" 
-                className="w-full bg-gradient-to-r from-[#D4AF37] to-[#AA7C11] text-black py-4 rounded-xl font-sans font-bold text-xs sm:text-sm tracking-widest shadow-xl hover:opacity-90 transition-all"
-              >
-                إضافة الطبق للمنيو فوراً
-              </button>
-            </form>
+                  <div className="space-y-1.5 text-right">
+                    <label className="text-xs font-sans text-gray-300 block">السعر (مع العملة)</label>
+                    <input 
+                      type="text" 
+                      value={newItemPrice}
+                      onChange={(e) => setNewItemPrice(e.target.value)}
+                      placeholder="مثال: 35 ريال" 
+                      className="w-full bg-black/50 border border-[#D4AF37]/30 rounded-xl px-4 py-3 text-white text-xs focus:outline-none focus:border-[#D4AF37]" 
+                    />
+                  </div>
+
+                  <button 
+                    type="submit" 
+                    className="w-full bg-gradient-to-r from-[#D4AF37] to-[#AA7C11] text-black py-3.5 rounded-xl font-sans font-bold text-xs tracking-widest shadow-xl hover:opacity-90 transition-all mt-4"
+                  >
+                    إضافة الطبق للمنيو فوراً
+                  </button>
+                </form>
+              </div>
+            )}
           </div>
         )}
 
@@ -569,24 +622,24 @@ export default function App() {
 
             <div className="bg-[#181513] border border-[#D4AF37]/30 rounded-3xl p-6 sm:p-8 space-y-6">
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                <div className="space-y-2">
+                <div className="space-y-2 text-right">
                   <label className="text-xs font-sans text-gray-300">الاسم الكريم</label>
                   <input type="text" placeholder="أدخل اسمك الكامل" className="w-full bg-black/40 border border-[#D4AF37]/30 rounded-xl px-4 py-3 text-white text-xs focus:outline-none focus:border-[#D4AF37]" />
                 </div>
-                <div className="space-y-2">
+                <div className="space-y-2 text-right">
                   <label className="text-xs font-sans text-gray-300">رقم الجوال</label>
                   <input type="text" placeholder="05xxxxxxxx" className="w-full bg-black/40 border border-[#D4AF37]/30 rounded-xl px-4 py-3 text-white text-xs focus:outline-none focus:border-[#D4AF37]" />
                 </div>
-                <div className="space-y-2">
+                <div className="space-y-2 text-right">
                   <label className="text-xs font-sans text-gray-300">تاريخ الحجز</label>
                   <input type="date" className="w-full bg-black/40 border border-[#D4AF37]/30 rounded-xl px-4 py-3 text-white text-xs focus:outline-none focus:border-[#D4AF37]" />
                 </div>
-                <div className="space-y-2">
+                <div className="space-y-2 text-right">
                   <label className="text-xs font-sans text-gray-300">نوع المناسبة / الطلب</label>
                   <input type="text" placeholder="مثال: غداء عمل، عشاء عائلي، ذبيحة مناسبة" className="w-full bg-black/40 border border-[#D4AF37]/30 rounded-xl px-4 py-3 text-white text-xs focus:outline-none focus:border-[#D4AF37]" />
                 </div>
               </div>
-              <button onClick={() => alert('تم استلام طلب حجزك بنجاح! نتشرف بزيارتك.')} className="w-full bg-gradient-to-r from-[#D4AF37] to-[#AA7C11] text-black py-4 rounded-xl font-sans font-bold text-xs sm:text-sm tracking-widest shadow-xl">
+              <button onClick={() => alert('تم استلام طلب حجزك بنجاح! نتشرف بزيارتك.')} className="w-full bg-gradient-to-r from-['#D4AF37'] to-[#AA7C11] bg-gradient-to-r from-[#D4AF37] to-[#AA7C11] text-black py-4 rounded-xl font-sans font-bold text-xs sm:text-sm tracking-widest shadow-xl">
                 تأكيد الحجز الآن
               </button>
             </div>
