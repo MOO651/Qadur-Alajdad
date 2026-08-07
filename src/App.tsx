@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { Utensils, CalendarHeart, Sparkles, MapPin, ShoppingBag, ShieldCheck, Lock, LogOut } from 'lucide-react';
+import { Utensils, CalendarHeart, Sparkles, ShoppingBag, ShieldCheck, Lock, LogOut } from 'lucide-react';
 
 const heroImages = [
   '/png (3).jpeg',
@@ -410,7 +410,6 @@ export default function App() {
                 <button onClick={() => navigateTo('/events')} className={`transition-colors flex items-center gap-1.5 ${routePath === '/events' ? 'text-[#D4AF37] font-bold' : 'hover:text-[#D4AF37]'}`}>
                   <CalendarHeart className="w-3.5 h-3.5" /> منيو الأفراح
                 </button>
-                <button onClick={() => navigateTo('/booking')} className={`transition-colors ${routePath === '/booking' ? 'text-[#D4AF37] font-bold' : 'hover:text-[#D4AF37]'}`}>حجز مأدبة</button>
               </nav>
 
               <div className="flex items-center gap-3">
@@ -440,7 +439,6 @@ export default function App() {
                 <button onClick={() => { navigateTo('/'); setMobileMenuOpen(false); }} className={`text-right py-2 ${routePath === '/' ? 'text-[#D4AF37] font-bold' : 'text-gray-300'}`}>الرئيسية</button>
                 <button onClick={() => { navigateTo('/daily'); setMobileMenuOpen(false); }} className={`text-right py-2 ${routePath === '/daily' ? 'text-[#D4AF37] font-bold' : 'text-gray-300'}`}>المنيو اليومي</button>
                 <button onClick={() => { navigateTo('/events'); setMobileMenuOpen(false); }} className={`text-right py-2 ${routePath === '/events' ? 'text-[#D4AF37] font-bold' : 'text-gray-300'}`}>منيو الأفراح</button>
-                <button onClick={() => { navigateTo('/booking'); setMobileMenuOpen(false); }} className={`text-right py-2 ${routePath === '/booking' ? 'text-[#D4AF37] font-bold' : 'text-gray-300'}`}>حجز مأدبة</button>
               </div>
             )}
           </header>
@@ -616,58 +614,16 @@ export default function App() {
                         alert('تم إرسال طلبك بنجاح إلى المطعم، سنتواصل معك قريباً!');
                         setCartItems([]);
                       }} 
-                      className="w-full bg-gradient-to-r from-[#D4AF37] to-[#AA7C11] text-black py-4 rounded-xl font-sans font-bold text-xs sm:text-sm tracking-widest shadow-xl"
+                      className="w-full bg-gradient-to-r from-[#D4AF37] to-[#AA7C11] text-black py-4 rounded-xl font-sans font-bold text-sm tracking-widest shadow-xl hover:opacity-90 transition-all"
                     >
-                      تأكيد وإرسال الطلب
+                      تأكيد الطلب وإرساله
                     </button>
                   </div>
                 )}
               </div>
             )}
 
-            {routePath === '/booking' && (
-              <div className="max-w-4xl mx-auto px-4 sm:px-6 py-16 space-y-10 animate-fadeIn">
-                <div className="text-center space-y-3">
-                  <CalendarHeart className="w-12 h-12 text-[#D4AF37] mx-auto" />
-                  <h2 className="text-2xl sm:text-3xl font-bold text-[#FFFDF9]">حجز مأدبة أو طاولة</h2>
-                  <p className="text-gray-400 text-xs font-sans">املأ البيانات أدناه وسنقوم بتأكيد حجزك فوراً</p>
-                </div>
-
-                <div className="bg-[#181513] border border-[#D4AF37]/30 rounded-3xl p-6 sm:p-8 space-y-6">
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                    <div className="space-y-2 text-right">
-                      <label className="text-xs font-sans text-gray-300">الاسم الكريم</label>
-                      <input type="text" placeholder="أدخل اسمك الكامل" className="w-full bg-black/40 border border-[#D4AF37]/30 rounded-xl px-4 py-3 text-white text-xs focus:outline-none focus:border-[#D4AF37]" />
-                    </div>
-                    <div className="space-y-2 text-right">
-                      <label className="text-xs font-sans text-gray-300">رقم الجوال</label>
-                      <input type="text" placeholder="05xxxxxxxx" className="w-full bg-black/40 border border-[#D4AF37]/30 rounded-xl px-4 py-3 text-white text-xs focus:outline-none focus:border-[#D4AF37]" />
-                    </div>
-                    <div className="space-y-2 text-right">
-                      <label className="text-xs font-sans text-gray-300">تاريخ الحجز</label>
-                      <input type="date" className="w-full bg-black/40 border border-[#D4AF37]/30 rounded-xl px-4 py-3 text-white text-xs focus:outline-none focus:border-[#D4AF37]" />
-                    </div>
-                    <div className="space-y-2 text-right">
-                      <label className="text-xs font-sans text-gray-300">نوع المناسبة / الطلب</label>
-                      <input type="text" placeholder="مثال: غداء عمل، عشاء عائلي، ذبيحة مناسبة" className="w-full bg-black/40 border border-[#D4AF37]/30 rounded-xl px-4 py-3 text-white text-xs focus:outline-none focus:border-[#D4AF37]" />
-                    </div>
-                  </div>
-                  <button onClick={() => alert('تم استلام طلب حجزك بنجاح! نتشرف بزيارتك.')} className="w-full bg-gradient-to-r from-[#D4AF37] to-[#AA7C11] text-black py-4 rounded-xl font-sans font-bold text-xs sm:text-sm tracking-widest shadow-xl">
-                    تأكيد الحجز الآن
-                  </button>
-                </div>
-              </div>
-            )}
-
           </main>
-
-          <footer className="border-t border-[#D4AF37]/30 bg-[#080706] py-12 sm:py-16 px-4 sm:px-6 text-center space-y-4 font-sans relative z-20 mt-12">
-            <p className="text-[#FFFDF9] font-serif font-bold tracking-[0.25em] sm:tracking-[0.35em] text-base sm:text-lg">قُدُور الأَجْدَاد</p>
-            <p className="text-[#D4AF37] text-[11px] sm:text-xs tracking-wider flex items-center justify-center gap-2 flex-wrap">
-              <MapPin className="w-4 h-4 text-[#D4AF37]" /> الرياض ✦ حي المونسية، طريق الثمامة، مجمع كريزي بلازا
-            </p>
-            <p className="text-gray-400 text-[10px] tracking-wider">جميع الحقوق محفوظة لمطعم قدور الأجداد © 2026</p>
-          </footer>
         </>
       )}
 
