@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { Utensils, CalendarHeart, Sparkles, MapPin, ShoppingBag } from 'lucide-react';
+import { Utensils, CalendarHeart, Sparkles, MapPin, ShoppingBag, ShieldCheck } from 'lucide-react';
 
 const heroImages = [
   '/png (3).jpeg',
@@ -7,7 +7,7 @@ const heroImages = [
   '/png (2).jpeg'
 ];
 
-const dailyMenuSections = [
+const initialDailyMenuSections = [
   {
     category: "الشوربات",
     image: "/appetizers.jpg",
@@ -203,10 +203,16 @@ const weddingMenuSections = [
 ];
 
 export default function App() {
-  const [currentPage, setCurrentPage] = useState<'home' | 'daily' | 'events' | 'cart' | 'booking'>('home');
+  const [currentPage, setCurrentPage] = useState<'home' | 'daily' | 'events' | 'cart' | 'booking' | 'admin'>('home');
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
   const [cartItems, setCartItems] = useState<{name: string, price: string}[]>([]);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [dailyMenu, setDailyMenu] = useState(initialDailyMenuSections);
+
+  // حقول نموذج الأدمن لإضافة صنف جديد
+  const [selectedCategoryIndex, setSelectedCategoryIndex] = useState(0);
+  const [newItemName, setNewItemName] = useState('');
+  const [newItemPrice, setNewItemPrice] = useState('');
 
   useEffect(() => {
     const timer = setInterval(() => {
@@ -222,6 +228,25 @@ export default function App() {
 
   const removeFromCart = (index: number) => {
     setCartItems((prev) => prev.filter((_, i) => i !== index));
+  };
+
+  const handleAddNewItem = (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!newItemName || !newItemPrice) {
+      alert('الرجاء إدخال اسم الطبق والسعر!');
+      return;
+    }
+
+    const updatedMenu = [...dailyMenu];
+    updatedMenu[selectedCategoryIndex].items.push({
+      name: newItemName,
+      price: newItemPrice
+    });
+
+    setDailyMenu(updatedMenu);
+    setNewItemName('');
+    setNewItemPrice('');
+    alert('تم إضافة الطبق بنجاح إلى المنيو اليومي!');
   };
 
   return (
@@ -254,6 +279,9 @@ export default function App() {
               <CalendarHeart className="w-3.5 h-3.5" /> منيو الأفراح
             </button>
             <button onClick={() => setCurrentPage('booking')} className={`transition-colors ${currentPage === 'booking' ? 'text-[#D4AF37] font-bold' : 'hover:text-[#D4AF37]'}`}>حجز مأدبة</button>
+            <button onClick={() => setCurrentPage('admin')} className={`transition-colors flex items-center gap-1 text-[#D4AF37] font-bold ${currentPage === 'admin' ? 'underline' : 'hover:opacity-80'}`}>
+              <ShieldCheck className="w-4 h-4" /> لوحة التحكم
+            </button>
           </nav>
 
           {/* زر السلة وقائمة الجوال */}
@@ -287,6 +315,7 @@ export default function App() {
             <button onClick={() => { setCurrentPage('daily'); setMobileMenuOpen(false); }} className={`text-right py-2 ${currentPage === 'daily' ? 'text-[#D4AF37] font-bold' : 'text-gray-300'}`}>المنيو اليومي</button>
             <button onClick={() => { setCurrentPage('events'); setMobileMenuOpen(false); }} className={`text-right py-2 ${currentPage === 'events' ? 'text-[#D4AF37] font-bold' : 'text-gray-300'}`}>منيو الأفراح</button>
             <button onClick={() => { setCurrentPage('booking'); setMobileMenuOpen(false); }} className={`text-right py-2 ${currentPage === 'booking' ? 'text-[#D4AF37] font-bold' : 'text-gray-300'}`}>حجز مأدبة</button>
+            <button onClick={() => { setCurrentPage('admin'); setMobileMenuOpen(false); }} className={`text-right py-2 text-[#D4AF37] font-bold`}>لوحة التحكم (الأدمن)</button>
           </div>
         )}
       </header>
@@ -338,32 +367,10 @@ export default function App() {
                 </div>
               </div>
             </section>
-
-            <section className="max-w-6xl mx-auto px-4 sm:px-6 grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
-              <div className="space-y-6 text-right">
-                <span className="text-[#D4AF37] font-sans text-xs tracking-[0.3em] font-bold uppercase bg-[#D4AF37]/10 px-3.5 py-1.5 rounded-full border border-[#D4AF37]/30 inline-block">قصتنا العريقة</span>
-                <h3 className="text-2xl sm:text-3xl md:text-4xl font-bold text-[#FFFDF9]">سر الطعم الأصيل في كل قدر</h3>
-                <p className="text-gray-300 text-xs sm:text-sm font-sans font-light leading-relaxed">
-                  بدأت مسيرتنا من شغف حقيقي بالحفاظ على التراث الطهوي السعودي العريق. نستخدم أجود أنواع اللحوم البلدية والبهارات المنتقاة بعناية لتقديم أطباق تحاكي كرم وطيبة أهل المذاق العريق.
-                </p>
-                <div className="grid grid-cols-2 gap-4 pt-2">
-                  <div className="bg-[#181513] p-4 rounded-2xl border border-[#D4AF37]/20">
-                    <h4 className="text-[#D4AF37] font-bold text-sm sm:text-lg mb-1">لحوم بلدية</h4>
-                    <p className="text-gray-400 text-[11px] sm:text-xs font-sans">تخضير يومي طازج بأعلى معايير الجودة.</p>
-                  </div>
-                  <div className="bg-[#181513] p-4 rounded-2xl border border-[#D4AF37]/20">
-                    <h4 className="text-[#D4AF37] font-bold text-sm sm:text-lg mb-1">وصفات الأجداد</h4>
-                    <p className="text-gray-400 text-[11px] sm:text-xs font-sans">نكهات متوارثة بإتقان تامة.</p>
-                  </div>
-                </div>
-              </div>
-              <div className="h-[300px] sm:h-[400px] rounded-[2rem] sm:rounded-[2.5rem] overflow-hidden border border-[#D4AF37]/40 shadow-2xl relative">
-                <div className="absolute inset-0 bg-cover bg-center" style={{ backgroundImage: `url('/png.jpeg')` }}></div>
-              </div>
-            </section>
           </div>
         )}
 
+        {/* المنيو اليومي (يعرض البيانات المحدثة ديناميكياً) */}
         {currentPage === 'daily' && (
           <div className="max-w-7xl mx-auto px-4 sm:px-6 py-12 space-y-12 animate-fadeIn">
             <div className="text-center space-y-4">
@@ -373,7 +380,7 @@ export default function App() {
             </div>
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-              {dailyMenuSections.map((section, idx) => (
+              {dailyMenu.map((section, idx) => (
                 <div key={idx} className="bg-gradient-to-b from-[#181513] via-[#12100E] to-[#0A0908] border border-[#D4AF37]/30 rounded-[2rem] sm:rounded-[2.5rem] p-5 sm:p-6 space-y-6 shadow-2xl">
                   <div className="h-40 sm:h-44 bg-cover bg-center rounded-2xl overflow-hidden relative">
                     <div className="absolute inset-0 bg-cover bg-center" style={{ backgroundImage: `url('${section.image}')` }}></div>
@@ -402,6 +409,7 @@ export default function App() {
           </div>
         )}
 
+        {/* منيو الأفراح */}
         {currentPage === 'events' && (
           <div className="max-w-7xl mx-auto px-4 sm:px-6 py-12 space-y-12 animate-fadeIn">
             <div className="text-center space-y-4">
@@ -443,6 +451,62 @@ export default function App() {
           </div>
         )}
 
+        {/* صفحة الأدمن (لوحة التحكم الجديدة) */}
+        {currentPage === 'admin' && (
+          <div className="max-w-3xl mx-auto px-4 sm:px-6 py-16 space-y-8 animate-fadeIn">
+            <div className="text-center space-y-3">
+              <ShieldCheck className="w-12 h-12 text-[#D4AF37] mx-auto" />
+              <h2 className="text-2xl sm:text-3xl font-bold text-[#FFFDF9]">لوحة تحكم "قدور الأجداد"</h2>
+              <p className="text-gray-400 text-xs font-sans">أضف منتجاً جديداً مباشرة للمنيو اليومي وتعديله فوراً</p>
+            </div>
+
+            <form onSubmit={handleAddNewItem} className="bg-[#181513] border border-[#D4AF37]/30 rounded-3xl p-6 sm:p-8 space-y-6">
+              <div className="space-y-2">
+                <label className="text-xs font-sans text-gray-300 block">اختر القسم في المنيو</label>
+                <select 
+                  value={selectedCategoryIndex} 
+                  onChange={(e) => setSelectedCategoryIndex(Number(e.target.value))}
+                  className="w-full bg-black/50 border border-[#D4AF37]/30 rounded-xl px-4 py-3 text-white text-xs focus:outline-none focus:border-[#D4AF37]"
+                >
+                  {dailyMenu.map((sec, idx) => (
+                    <option key={idx} value={idx}>{sec.category}</option>
+                  ))}
+                </select>
+              </div>
+
+              <div className="space-y-2">
+                <label className="text-xs font-sans text-gray-300 block">اسم الطبق الجديد</label>
+                <input 
+                  type="text" 
+                  value={newItemName}
+                  onChange={(e) => setNewItemName(e.target.value)}
+                  placeholder="مثال: كبسة دجاج خاصة" 
+                  className="w-full bg-black/50 border border-[#D4AF37]/30 rounded-xl px-4 py-3 text-white text-xs focus:outline-none focus:border-[#D4AF37]" 
+                />
+              </div>
+
+              <div className="space-y-2">
+                <label className="text-xs font-sans text-gray-300 block">السعر (مع العملة)</label>
+                <input 
+                  type="text" 
+                  value={newItemPrice}
+                  onChange={(e) => setNewItemPrice(e.target.value)}
+                  placeholder="مثال: 35 ريال" 
+                  className="w-full bg-black/50 border border-[#D4AF37]/30 rounded-xl px-4 py-3 text-white text-xs focus:outline-none focus:border-[#D4AF37]" 
+                />
+              </div>
+
+              <button 
+                type="submit" 
+                className="w-full bg-gradient-to-r from-[#D4AF37] to-[#AA7C11] text-black py-4 rounded-xl font-sans font-bold text-xs sm:text-sm tracking-widest shadow-xl hover:opacity-90 transition-all"
+              >
+                إضافة الطبق للمنيو فوراً
+              </button>
+            </form>
+          </div>
+        )}
+
+        {/* سلة الطلبات */}
         {currentPage === 'cart' && (
           <div className="max-w-3xl mx-auto px-4 sm:px-6 py-16 space-y-8 animate-fadeIn">
             <div className="text-center space-y-3">
@@ -494,6 +558,7 @@ export default function App() {
           </div>
         )}
 
+        {/* حجز مأدبة */}
         {currentPage === 'booking' && (
           <div className="max-w-4xl mx-auto px-4 sm:px-6 py-16 space-y-10 animate-fadeIn">
             <div className="text-center space-y-3">
