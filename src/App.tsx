@@ -785,7 +785,7 @@ export default function App() {
 
           </main>
 
-          {/* Footer Section (العنوان ورقم التواصل) */}
+          {/* Footer Section (تم تعديل العنوان ورقم الهاتف هنا) */}
           <footer className="bg-[#080706] border-t border-[#D4AF37]/30 pt-16 pb-8 px-4 sm:px-8 mt-20">
             <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-4 gap-10 pb-12 border-b border-[#D4AF37]/20 text-right">
               
@@ -822,11 +822,11 @@ export default function App() {
                 <div className="space-y-3 text-xs font-sans text-gray-300">
                   <div className="flex items-start gap-2.5">
                     <MapPin className="w-4 h-4 text-[#D4AF37] shrink-0 mt-0.5" />
-                    <span>المملكة العربية السعودية - الشارع الرئيسي</span>
+                    <span>المملكة العربية السعودية - حائل - حي الوسيطاء</span>
                   </div>
                   <div className="flex items-center gap-2.5">
                     <Phone className="w-4 h-4 text-[#D4AF37] shrink-0" />
-                    <span dir="ltr">+966 50 000 0000</span>
+                    <span dir="ltr">+966 55 123 4567</span>
                   </div>
                   <div className="flex items-center gap-2.5">
                     <Mail className="w-4 h-4 text-[#D4AF37] shrink-0" />
