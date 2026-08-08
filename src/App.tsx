@@ -6,6 +6,8 @@ import Home from './pages/Home';
 import Cart from './pages/Cart';
 import Admin from './pages/Admin';
 import EventsMenu from './pages/EventsMenu';
+// إذا كنت تحتاج لاستيراد Dish type في المستقبل، استخدم هذا النمط لتتوافق مع إعدادات TypeScript:
+// import type { Dish } from './data/menuData';
 
 export default function App() {
   const [cart, setCart] = useState<any[]>([]);
@@ -25,9 +27,9 @@ export default function App() {
     return () => window.removeEventListener('popstate', handlePopState);
   }, []);
 
-  const addToCart = (item: any) => {
+  const addToCart = (item: any, ...args: any[]) => {
     if (typeof item === 'string') {
-      const price = arguments[1] || '0 ريال';
+      const price = args[0] || '0 ريال';
       setCart([...cart, { name: item, price }]);
     } else {
       setCart([...cart, item]);
