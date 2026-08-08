@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { LayoutDashboard, Plus, Trash2, Save, Lock } from 'lucide-react';
+import { LayoutDashboard, Plus, Trash2, Lock } from 'lucide-react';
 
 interface AdminProps {
   navigateTo: (path: string) => void;
