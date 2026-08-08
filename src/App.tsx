@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import Header from './components/Header';
 import Footer from './components/Footer';
-import DailyMenu from './pages/DailyMenu';
+import { DailyMenu } from './pages/DailyMenu';
 import Home from './pages/Home';
 import Cart from './pages/Cart';
 import Admin from './pages/Admin';
@@ -68,7 +68,7 @@ export default function App() {
       case '':
         return <Home navigateTo={navigateTo} addToCart={addToCart} />;
       case 'daily':
-        return <DailyMenu addToCart={addToCart} />;
+        return <DailyMenu onAddToCart={addToCart} />;
       case 'events':
         return <EventsMenu addToCart={addToCart} />;
       case 'cart':

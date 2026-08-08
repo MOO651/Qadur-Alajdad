@@ -1,125 +1,165 @@
-import { useState } from 'react';
-import { menuDishes } from '../data/menuData';
+import React, { useState } from 'react';
 import type { Dish } from '../data/menuData';
-import { Search } from 'lucide-react';
+import { 
+  brandInfo, 
+  mainCategories, 
+  subCategoriesMap, 
+  menuDishes 
+} from '../data/menuData';
 
 interface DailyMenuProps {
-  addToCart: (item: Dish) => void;
+  onAddToCart?: (dish: Dish) => void;
 }
 
-export default function DailyMenu({ addToCart }: DailyMenuProps) {
-  const [selectedSubTab, setSelectedSubTab] = useState('all');
-  const [searchQuery, setSearchQuery] = useState('');
+export const DailyMenu: React.FC<DailyMenuProps> = ({ onAddToCart }) => {
+  const [selectedMainCat, setSelectedMainCat] = useState<string>('najd');
+  const [selectedSubCat, setSelectedSubCat] = useState<string>('all-najd');
+  const [searchQuery, setSearchQuery] = useState<string>('');
 
-  // استخراج عناصر المنيو اليومي فقط
-  const dailyDishes = menuDishes.filter(dish => dish.category === 'daily');
+  // تغيير التصنيف الرئيسي وإعادة ضبط التصنيف الفرعي لأول خيار متاح
+  const handleMainCatChange = (catId: string) => {
+    setSelectedMainCat(catId);
+    const subCats = subCategoriesMap[catId];
+    if (subCats && subCats.length > 0) {
+      setSelectedSubCat(subCats[0].id);
+    }
+  };
 
-  // الأقسام المتاحة للتبديل (يمكنك تعديلها حسب رغبتك)
-  const subTabs = [
-    { id: 'all', name: 'الكل' },
-    { id: 'main', name: 'الأطباق الرئيسية' },
-    { id: 'appetizers', name: 'المقبلات' },
-    { id: 'drinks', name: 'المشروبات' },
-    { id: 'desserts', name: 'الحلويات' },
-  ];
+  // تصفية الأطباق بناءً على التصنيف الرئيسي، التصنيف الفرعي، ونص البحث
+  const filteredDishes = menuDishes.filter((dish) => {
+    const matchesMain = dish.category === selectedMainCat;
+    
+    const currentSubCats = subCategoriesMap[selectedMainCat] || [];
+    const isAllSub = currentSubCats[0]?.id === selectedSubCat; // هل هو خيار "الكل"
 
-  // تصفية الأطباق بناءً على التبويب المختار ونص البحث
-  const filteredDishes = dailyDishes.filter(dish => {
-    // تصفية حسب التبويب
-    const matchesTab = 
-      selectedSubTab === 'all' || 
-      dish.subCategory === selectedSubTab || 
-      (selectedSubTab === 'drinks' && dish.name.toLowerCase().includes('مشروب')) || // أو حسب تصنيفك
-      (selectedSubTab === 'main' && (!dish.subCategory || dish.subCategory === 'main'));
+    const matchesSub = isAllSub || dish.subCategory === selectedSubCat;
+    const matchesSearch = dish.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
+                          dish.description.toLowerCase().includes(searchQuery.toLowerCase());
 
-    // تصفية حسب البحث
-    const matchesSearch = 
-      dish.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
-      dish.description.toLowerCase().includes(searchQuery.toLowerCase());
-
-    return matchesTab && matchesSearch;
+    return matchesMain && matchesSub && matchesSearch;
   });
 
   return (
-    <div className="max-w-7xl mx-auto px-4 sm:px-6 py-12 space-y-8">
-      {/* العنوان */}
-      <div className="text-center space-y-3 max-w-2xl mx-auto">
-        <span className="text-[#D4AF37] font-sans text-xs tracking-[0.3em] font-bold uppercase bg-[#D4AF37]/10 px-4 py-1.5 rounded-full border border-[#D4AF37]/30 inline-block">المنيو اليومي الأصيل</span>
-        <h2 className="text-3xl font-bold text-[#FFFDF9]">ما تيسر من قدور الأجداد اليوم</h2>
-        <p className="text-gray-400 text-xs sm:text-sm font-sans">تشكيلة طازجة ومحضرة يومياً بأجود المكونات المحلية</p>
-      </div>
+    <div className="min-h-screen bg-stone-50 text-stone-800 font-sans pb-16" dir="rtl">
+      {/* رأس الصفحة والهوية */}
+      <header className="bg-amber-900 text-amber-50 py-10 px-4 text-center shadow-md">
+        <div className="max-w-4xl mx-auto">
+          <h1 className="text-4xl font-bold mb-2 tracking-wide">{brandInfo.name}</h1>
+          <p className="text-lg text-amber-200 font-medium">{brandInfo.subtitle}</p>
+        </div>
+      </header>
 
-      {/* شريط البحث والتبويبات */}
-      <div className="space-y-6 max-w-3xl mx-auto">
+      <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-8">
         {/* شريط البحث */}
-        <div className="relative">
-          <Search className="absolute right-4 top-1/2 -translate-y-1/2 w-5 h-5 text-[#D4AF37]" />
-          <input 
+        <div className="mb-8 max-w-xl mx-auto">
+          <input
             type="text"
+            placeholder="ابحث عن طبقك المفضلة (مثل: المرقوق، سليق، كابلي)..."
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
-            placeholder="ابحث عن طبقك المفضلة أو المشروب..."
-            className="w-full bg-[#181513] border border-[#D4AF37]/30 rounded-2xl py-3.5 pr-12 pl-4 text-white text-sm focus:border-[#D4AF37] outline-none shadow-lg placeholder:text-gray-500"
+            className="w-full px-5 py-3 rounded-xl border border-stone-300 focus:outline-none focus:ring-2 focus:ring-amber-700 bg-white shadow-sm text-stone-700"
           />
         </div>
 
-        {/* أزرار التنقل بين الأقسام (التبويبات) */}
-        <div className="flex flex-wrap justify-center gap-2 bg-[#181513] p-2 rounded-2xl border border-[#D4AF37]/20 shadow-xl">
-          {subTabs.map((tab) => (
-            <button
-              key={tab.id}
-              onClick={() => setSelectedSubTab(tab.id)}
-              className={`px-4 py-2 rounded-xl text-xs sm:text-sm font-bold transition-all ${
-                selectedSubTab === tab.id
-                  ? 'bg-[#D4AF37] text-black shadow-md scale-105'
-                  : 'text-gray-400 hover:text-white hover:bg-black/40'
-              }`}
-            >
-              {tab.name}
-            </button>
-          ))}
+        {/* أزرار التصنيفات الرئيسية */}
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-8">
+          {mainCategories.map((cat) => {
+            const isSelected = selectedMainCat === cat.id;
+            return (
+              <button
+                key={cat.id}
+                onClick={() => handleMainCatChange(cat.id)}
+                className={`p-5 rounded-2xl text-right transition-all duration-300 flex items-start space-x-4 space-x-reverse border ${
+                  isSelected 
+                    ? 'bg-amber-900 text-white border-amber-900 shadow-lg transform -translate-y-1' 
+                    : 'bg-white text-stone-700 border-stone-200 hover:bg-amber-50'
+                }`}
+              >
+                <span className="text-3xl p-2 bg-white/10 rounded-xl">{cat.icon}</span>
+                <div>
+                  <h3 className="font-bold text-lg mb-1">{cat.name}</h3>
+                  <p className={`text-xs leading-relaxed ${isSelected ? 'text-amber-100' : 'text-stone-500'}`}>
+                    {cat.description}
+                  </p>
+                </div>
+              </button>
+            );
+          })}
         </div>
-      </div>
 
-      {/* عرض الأطباق */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+        {/* أزرار التصنيفات الفرعية (Tabs) */}
+        <div className="flex overflow-x-auto space-x-2 space-x-reverse pb-4 mb-8 scrollbar-hide">
+          {subCategoriesMap[selectedMainCat]?.map((sub) => {
+            const isSubSelected = selectedSubCat === sub.id;
+            return (
+              <button
+                key={sub.id}
+                onClick={() => setSelectedSubCat(sub.id)}
+                className={`px-5 py-2.5 rounded-full text-sm font-semibold whitespace-nowrap transition-colors ${
+                  isSubSelected
+                    ? 'bg-amber-700 text-white shadow-md'
+                    : 'bg-white text-stone-600 border border-stone-200 hover:bg-stone-100'
+                }`}
+              >
+                {sub.name}
+              </button>
+            );
+          })}
+        </div>
+
+        {/* شبكة عرض الأطباق */}
         {filteredDishes.length > 0 ? (
-          filteredDishes.map((dish) => (
-            <div key={dish.id} className="bg-[#181513] border border-[#D4AF37]/30 rounded-2xl overflow-hidden shadow-xl flex flex-col justify-between group hover:border-[#D4AF37] transition-all">
-              <div className="relative h-48 bg-cover bg-center group-hover:scale-105 transition-transform duration-500" style={{ backgroundImage: `url('${dish.image}')` }}>
-                {dish.badge && (
-                  <span className="absolute top-3 right-3 bg-black/75 backdrop-blur-md text-[#D4AF37] border border-[#D4AF37]/40 text-[10px] px-2.5 py-1 rounded-full font-bold">
-                    {dish.badge}
-                  </span>
-                )}
-              </div>
-
-              <div className="p-5 space-y-3 flex flex-col flex-grow justify-between">
-                <div className="space-y-2">
-                  <div className="flex justify-between items-start gap-2">
-                    <h4 className="text-[#FFFDF9] font-bold text-base leading-snug">{dish.name}</h4>
-                    <span className="text-[#D4AF37] font-sans font-bold text-sm whitespace-nowrap bg-[#D4AF37]/10 px-2.5 py-1 rounded-lg border border-[#D4AF37]/30">
-                      {dish.price} ريال
-                    </span>
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+            {filteredDishes.map((dish) => (
+              <div 
+                key={dish.id} 
+                className="bg-white rounded-2xl overflow-hidden border border-stone-200 shadow-sm hover:shadow-md transition-shadow flex flex-col justify-between"
+              >
+                <div>
+                  <div className="relative h-48 overflow-hidden bg-stone-100">
+                    <img 
+                      src={dish.image} 
+                      alt={dish.name} 
+                      className="w-full h-full object-cover hover:scale-105 transition-transform duration-500"
+                    />
+                    {dish.badge && (
+                      <span className="absolute top-3 right-3 bg-amber-800 text-amber-50 text-xs px-3 py-1 rounded-full font-medium shadow">
+                        {dish.badge}
+                      </span>
+                    )}
+                    {dish.calories && (
+                      <span className="absolute bottom-3 left-3 bg-black/60 backdrop-blur-md text-white text-xs px-2.5 py-1 rounded-md">
+                        {dish.calories}
+                      </span>
+                    )}
                   </div>
-                  <p className="text-gray-300 text-xs font-sans leading-relaxed">{dish.description}</p>
+
+                  <div className="p-5">
+                    <h3 className="text-xl font-bold text-stone-900 mb-2">{dish.name}</h3>
+                    <p className="text-stone-600 text-sm leading-relaxed mb-4">{dish.description}</p>
+                  </div>
                 </div>
 
-                <button 
-                  onClick={() => addToCart(dish)}
-                  className="w-full bg-[#D4AF37]/10 border border-[#D4AF37]/50 text-[#D4AF37] hover:bg-[#D4AF37] hover:text-black py-2.5 rounded-xl text-xs font-sans font-bold transition-all flex items-center justify-center gap-2 mt-4"
-                >
-                  إضافة للسلة +
-                </button>
+                <div className="px-5 pb-5 pt-0 flex items-center justify-between border-t border-stone-100 mt-2">
+                  <span className="text-lg font-bold text-amber-900">
+                    {typeof dish.price === 'number' ? `${dish.price} ر.س` : dish.price}
+                  </span>
+                  <button 
+                    onClick={() => onAddToCart && onAddToCart(dish)}
+                    className="bg-amber-900 hover:bg-amber-800 text-white px-4 py-2 rounded-xl text-sm font-medium transition-colors shadow-sm"
+                  >
+                    أضف للسلة
+                  </button>
+                </div>
               </div>
-            </div>
-          ))
+            ))}
+          </div>
         ) : (
-          <div className="col-span-full py-16 text-center text-gray-400 bg-[#181513] rounded-2xl border border-[#D4AF37]/20">
-            <p className="text-base">عذراً، لم نجد نتائج مطابقة لبحثك في هذا القسم.</p>
+          <div className="text-center py-16 bg-white rounded-2xl border border-stone-200 shadow-sm">
+            <p className="text-stone-500 text-lg">عذراً، لم نجد أطباق مطابقة لبحثك في هذا القسم.</p>
           </div>
         )}
-      </div>
+      </main>
     </div>
   );
-}
+};
