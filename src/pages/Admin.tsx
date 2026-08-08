@@ -11,7 +11,6 @@ export default function Admin({ navigateTo }: AdminProps) {
   const ADMIN_SECRET_CODE = "1234";
 
   const [menuType, setMenuType] = useState<'daily' | 'wedding'>('daily');
-  const [selectedCategoryIndex, setSelectedCategoryIndex] = useState(0);
   const [newItemName, setNewItemName] = useState('');
   const [newItemPrice, setNewItemPrice] = useState('');
   const [newItemDetails, setNewItemDetails] = useState('');
@@ -105,14 +104,14 @@ export default function Admin({ navigateTo }: AdminProps) {
               <div className="grid grid-cols-2 gap-2">
                 <button
                   type="button"
-                  onClick={() => { setMenuType('daily'); setSelectedCategoryIndex(0); }}
+                  onClick={() => setMenuType('daily')}
                   className={`py-2.5 rounded-xl text-xs font-sans font-bold transition-all border ${menuType === 'daily' ? 'bg-[#D4AF37] text-black border-[#D4AF37]' : 'bg-black/40 text-gray-300 border-[#D4AF37]/30'}`}
                 >
                   المنيو اليومي
                 </button>
                 <button
                   type="button"
-                  onClick={() => { setMenuType('wedding'); setSelectedCategoryIndex(0); }}
+                  onClick={() => setMenuType('wedding')}
                   className={`py-2.5 rounded-xl text-xs font-sans font-bold transition-all border ${menuType === 'wedding' ? 'bg-[#D4AF37] text-black border-[#D4AF37]' : 'bg-black/40 text-gray-300 border-[#D4AF37]/30'}`}
                 >
                   منيو الأفراح
