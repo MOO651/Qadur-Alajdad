@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import Header from './components/Header';
 import Footer from './components/Footer';
 import DailyMenu from './pages/DailyMenu';
@@ -9,13 +9,24 @@ import EventsMenu from './pages/EventsMenu';
 
 export default function App() {
   const [cart, setCart] = useState<any[]>([]);
-  // اجعل الصفحة الافتتاحية هي الرئيسية 'home'
-  const [currentPage, setCurrentPage] = useState('home');
+  
+  // قراءة المسار المباشر من المتصفح (مثل /admin) عند فتح الصفحة لأول مرة
+  const [currentPage, setCurrentPage] = useState(() => {
+    const path = window.location.pathname.replace('/', '');
+    return path || 'home';
+  });
+
+  useEffect(() => {
+    const handlePopState = () => {
+      const path = window.location.pathname.replace('/', '');
+      setCurrentPage(path || 'home');
+    };
+    window.addEventListener('popstate', handlePopState);
+    return () => window.removeEventListener('popstate', handlePopState);
+  }, []);
 
   const addToCart = (item: any) => {
-    // دعم استقبال العناصر سواء ك كائن كامل أو (name, price)
     if (typeof item === 'string') {
-      // لو تم إرسال الاسم والسعر كـ parameters منفصلة
       const price = arguments[1] || '0 ريال';
       setCart([...cart, { name: item, price }]);
     } else {
@@ -34,9 +45,9 @@ export default function App() {
   };
 
   const navigateTo = (page: string) => {
-    // تنظيف المسار لو جاي معاه سلاش
     const cleanPage = page.startsWith('/') ? page.substring(1) : page;
     setCurrentPage(cleanPage || 'home');
+    window.history.pushState({}, '', `/${cleanPage === 'home' ? '' : cleanPage}`);
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
@@ -48,7 +59,7 @@ export default function App() {
       case 'daily':
         return <DailyMenu addToCart={addToCart} />;
       case 'events':
-        return <EventsMenu weddingMenu={[]} addToCart={addToCart} />;
+        return <EventsMenu addToCart={addToCart} />;
       case 'cart':
         return (
           <Cart 
