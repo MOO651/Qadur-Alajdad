@@ -1,51 +1,54 @@
+import { CalendarHeart } from 'lucide-react';
+import { menuDishes } from '../data/menuData';
+
 interface EventsMenuProps {
-  weddingMenu: Array<{
-    category: string;
-    image: string;
-    description: string;
-    items: Array<{ name: string; price: string; details: string }>;
-  }>;
-  addToCart: (name: string, price: string) => void;
+  weddingMenu?: any[];
+  addToCart: (item: any) => void;
 }
 
-export default function EventsMenu({ weddingMenu, addToCart }: EventsMenuProps) {
+export default function EventsMenu({ addToCart }: EventsMenuProps) {
+  // تصفية ولائم الأفراح فقط
+  const weddingItems = menuDishes.filter(dish => dish.category === 'weddings');
+
   return (
-    <div className="max-w-7xl mx-auto px-4 sm:px-6 py-10 space-y-12 animate-fadeIn">
+    <div className="max-w-7xl mx-auto px-4 sm:px-6 py-12 space-y-10">
       <div className="text-center space-y-3 max-w-2xl mx-auto">
-        <span className="text-[#D4AF37] font-sans text-xs tracking-[0.3em] font-bold uppercase bg-[#D4AF37]/10 px-4 py-1.5 rounded-full border border-[#D4AF37]/30 inline-block">الأفراح والولائم</span>
-        <h2 className="text-3xl font-bold text-[#FFFDF9]">مفخرة الولائم والمناسبات الكبرى</h2>
-        <p className="text-gray-400 text-xs sm:text-sm font-sans">تجهيز كامل للذبائح البلدية والولائم الفاخرة لتشريف ضيوفكم في الأعراس والمناسبات الخاصة</p>
+        <span className="text-[#D4AF37] font-sans text-xs tracking-[0.3em] font-bold uppercase bg-[#D4AF37]/10 px-4 py-1.5 rounded-full border border-[#D4AF37]/30 inline-block">ولائم الأفراح الكبرى</span>
+        <h2 className="text-3xl font-bold text-[#FFFDF9]">منيو المناسبات والولائم الملكية</h2>
+        <p className="text-gray-400 text-xs sm:text-sm font-sans">تجهيز الذبائح الكاملة وبوفيهات كبار الشخصيات لأفراحكم ومناسباتكم الخاصة</p>
       </div>
 
-      <div className="space-y-16">
-        {weddingMenu.map((section, secIdx) => (
-          <div key={secIdx} className="space-y-6">
-            <div className="flex items-center gap-4 border-b border-[#D4AF37]/30 pb-3">
-              <div>
-                <h3 className="text-xl font-bold text-[#D4AF37]">{section.category}</h3>
-                <p className="text-gray-400 text-xs font-sans">{section.description}</p>
-              </div>
-              <div className="flex-grow h-[1px] bg-gradient-to-l from-transparent via-[#D4AF37]/30 to-transparent"></div>
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+        {weddingItems.map((dish) => (
+          <div key={dish.id} className="bg-[#181513] border border-[#D4AF37]/30 rounded-2xl overflow-hidden shadow-xl flex flex-col justify-between group hover:border-[#D4AF37] transition-all">
+            <div className="relative h-48 bg-cover bg-center group-hover:scale-105 transition-transform duration-500" style={{ backgroundImage: `url('${dish.image}')` }}>
+              {dish.badge && (
+                <span className="absolute top-3 right-3 bg-black/75 backdrop-blur-md text-[#D4AF37] border border-[#D4AF37]/40 text-[10px] px-2.5 py-1 rounded-full font-bold">
+                  {dish.badge}
+                </span>
+              )}
             </div>
 
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-              {section.items.map((item, itemIdx) => (
-                <div key={itemIdx} className="bg-[#181513] border border-[#D4AF37]/30 rounded-2xl p-6 shadow-xl flex flex-col justify-between space-y-4">
-                  <div className="space-y-2">
-                    <div className="flex justify-between items-start">
-                      <h4 className="text-[#FFFDF9] font-bold text-lg">{item.name}</h4>
-                      <span className="text-[#D4AF37] font-sans font-bold text-xs bg-[#D4AF37]/10 px-3 py-1 rounded-lg border border-[#D4AF37]/30">{item.price}</span>
-                    </div>
-                    <p className="text-gray-300 text-xs font-sans leading-relaxed">{item.details}</p>
-                  </div>
-                  <button 
-                    onClick={() => addToCart(item.name, item.price)}
-                    className="w-full bg-[#D4AF37]/10 border border-[#D4AF37]/50 text-[#D4AF37] hover:bg-[#D4AF37] hover:text-black py-2.5 rounded-xl text-xs font-sans font-bold transition-all"
-                  >
-                    طلب استفسار أو حجز الصنف
-                  </button>
+            <div className="p-5 space-y-3 flex flex-col flex-grow justify-between">
+              <div className="space-y-2">
+                <div className="flex justify-between items-start gap-2">
+                  <h4 className="text-[#FFFDF9] font-bold text-base leading-snug">{dish.name}</h4>
+                  <span className="text-[#D4AF37] font-sans font-bold text-sm whitespace-nowrap bg-[#D4AF37]/10 px-2.5 py-1 rounded-lg border border-[#D4AF37]/30">
+                    {dish.price} ريال
+                  </span>
                 </div>
-              ))}
+                <p className="text-gray-300 text-xs font-sans leading-relaxed">{dish.description}</p>
+                {dish.calories && (
+                  <span className="text-gray-500 text-[11px] block">{dish.calories}</span>
+                )}
+              </div>
+
+              <button 
+                onClick={() => addToCart(dish)}
+                className="w-full bg-[#D4AF37]/10 border border-[#D4AF37]/50 text-[#D4AF37] hover:bg-[#D4AF37] hover:text-black py-2.5 rounded-xl text-xs font-sans font-bold transition-all flex items-center justify-center gap-2 mt-4"
+              >
+                <CalendarHeart className="w-3.5 h-3.5" /> احجز الوليمة الآن
+              </button>
             </div>
           </div>
         ))}

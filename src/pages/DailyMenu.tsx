@@ -1,12 +1,12 @@
 import { Utensils } from 'lucide-react';
-import { menuDishes } from '../data/menuData'; // تأكد من مسار ملف البيانات لديك
+import { menuDishes } from '../data/menuData';
 
 interface DailyMenuProps {
   addToCart: (item: any) => void;
 }
 
 export default function DailyMenu({ addToCart }: DailyMenuProps) {
-  // تصفية الأطباق الخاصة بالمنيو اليومي والأقسام العامة أو نجد
+  // تصفية أطباق المنيو اليومي ونجد والأقسام العامة (بدون الأفراح)
   const dailyItems = menuDishes.filter(dish => dish.category === 'najd' || dish.category === 'general');
 
   return (
@@ -17,11 +17,9 @@ export default function DailyMenu({ addToCart }: DailyMenuProps) {
         <p className="text-gray-400 text-xs sm:text-sm font-sans">نخبة أطباقنا المتاحة يومياً لتستمتع بمذاقها الأصيل</p>
       </div>
 
-      {/* تصميم المربعات المنظمة (Grid) */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 gap-6">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
         {dailyItems.map((dish) => (
           <div key={dish.id} className="bg-[#181513] border border-[#D4AF37]/30 rounded-2xl overflow-hidden shadow-xl flex flex-col justify-between group hover:border-[#D4AF37] transition-all">
-            {/* صورة الصنف مع الشارة (Badge) */}
             <div className="relative h-48 bg-cover bg-center group-hover:scale-105 transition-transform duration-500" style={{ backgroundImage: `url('${dish.image}')` }}>
               {dish.badge && (
                 <span className="absolute top-3 right-3 bg-black/70 backdrop-blur-md text-[#D4AF37] border border-[#D4AF37]/40 text-[10px] px-2.5 py-1 rounded-full font-bold">
@@ -30,7 +28,6 @@ export default function DailyMenu({ addToCart }: DailyMenuProps) {
               )}
             </div>
 
-            {/* تفاصيل الصنف */}
             <div className="p-5 space-y-3 flex flex-col flex-grow justify-between">
               <div className="space-y-2">
                 <div className="flex justify-between items-start gap-2">
@@ -45,7 +42,6 @@ export default function DailyMenu({ addToCart }: DailyMenuProps) {
                 )}
               </div>
 
-              {/* زر الإضافة للسلة */}
               <button 
                 onClick={() => addToCart(dish)}
                 className="w-full bg-[#D4AF37]/10 border border-[#D4AF37]/50 text-[#D4AF37] hover:bg-[#D4AF37] hover:text-black py-2.5 rounded-xl text-xs font-sans font-bold transition-all flex items-center justify-center gap-2 mt-4"
