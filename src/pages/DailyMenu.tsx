@@ -6,14 +6,14 @@ interface DailyMenuProps {
 }
 
 export default function DailyMenu({ dailyMenu = [], addToCart }: DailyMenuProps) {
-  // إذا كانت البيانات تمرر من الخارج أو نستخدم عناصر افتراضية
+  // الأصناف الافتراضية المنسقة كبطاقات مستقلة
   const items = dailyMenu.length > 0 ? dailyMenu : [
-    { id: 1, name: 'عدس', price: '17 ريال', category: 'الشوربات', image: '' },
-    { id: 2, name: 'حب', price: '19 ريال', category: 'الشوربات', image: '' },
-    { id: 3, name: 'مقيم', price: '26 ريال', category: 'الشوربات', image: '' },
-    { id: 4, name: 'سلطة جرجير البر', price: '14 ريال', category: 'السلطات', image: '' },
-    { id: 5, name: 'فتوش', price: '16 ريال', category: 'السلطات', image: '' },
-    { id: 6, name: 'تبولة', price: '14 ريال', category: 'السلطات', image: '' },
+    { id: 1, name: 'شوربة عدس', price: '17 ر.س', category: 'الشوربات', image: 'https://images.unsplash.com/photo-1547592166-23ac45744acd?w=500&auto=format&fit=crop&q=60' },
+    { id: 2, name: 'شوربة حب', price: '19 ر.س', category: 'الشوربات', image: 'https://images.unsplash.com/photo-1547592166-23ac45744acd?w=500&auto=format&fit=crop&q=60' },
+    { id: 3, name: 'شوربة مقيم', price: '26 ر.س', category: 'الشوربات', image: 'https://images.unsplash.com/photo-1547592166-23ac45744acd?w=500&auto=format&fit=crop&q=60' },
+    { id: 4, name: 'سلطة جرجير البر', price: '14 ر.س', category: 'المقبلات', image: 'https://images.unsplash.com/photo-1512621776951-a57141f2eefd?w=500&auto=format&fit=crop&q=60' },
+    { id: 5, name: 'فتوش', price: '16 ر.س', category: 'المقبلات', image: 'https://images.unsplash.com/photo-1540420773420-3366772f4999?w=500&auto=format&fit=crop&q=60' },
+    { id: 6, name: 'تبولة', price: '14 ر.س', category: 'المقبلات', image: 'https://images.unsplash.com/photo-1540420773420-3366772f4999?w=500&auto=format&fit=crop&q=60' },
   ];
 
   return (
@@ -35,12 +35,12 @@ export default function DailyMenu({ dailyMenu = [], addToCart }: DailyMenuProps)
             {/* مكان الصورة */}
             <div className="h-44 bg-zinc-800 relative overflow-hidden">
               <img 
-                src={item.image || 'https://images.unsplash.com/photo-1545247389-dc3a897bfd44?w=500&auto=format&fit=crop&q=60'} 
+                src={item.image} 
                 alt={item.name} 
                 className="w-full h-full object-cover hover:scale-105 transition-transform duration-500"
               />
               <span className="absolute top-2 right-2 bg-black/70 text-amber-400 text-xs px-2.5 py-1 rounded-full backdrop-blur-sm border border-amber-500/30">
-                {item.category || 'صنف'}
+                {item.category}
               </span>
             </div>
 
