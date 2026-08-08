@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import type { Dish } from '../data/menuData';
 import { 
-  brandInfo, 
   mainCategories, 
   subCategoriesMap, 
   menuDishes 
@@ -26,12 +25,8 @@ export const DailyMenu: React.FC<DailyMenuProps> = ({ onAddToCart }) => {
     }
   };
 
-  // فلترة الأطباق بمرونة عالية لمنع ظهور رسالة "لا توجد نتائج" بالخطأ
   const filteredDishes = menuDishes.filter((dish) => {
-    // مطابقة القسم الرئيسي (مع السماح بعرض الكل إذا لم يتطابق حرفياً)
     const matchesMain = !selectedMainCat || dish.category === selectedMainCat || true;
-    
-    // مطابقة البحث النصي
     const matchesSearch = searchQuery.trim() === '' || 
                           dish.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
                           dish.description.toLowerCase().includes(searchQuery.toLowerCase());
@@ -41,7 +36,6 @@ export const DailyMenu: React.FC<DailyMenuProps> = ({ onAddToCart }) => {
 
   return (
     <div className="min-h-screen bg-stone-900 text-stone-100 font-sans pb-16" dir="rtl">
-      {/* رأس الصفحة */}
       <header className="bg-stone-950 border-b border-stone-800 py-10 px-4 text-center">
         <div className="max-w-4xl mx-auto">
           <span className="text-amber-500 text-xs font-bold tracking-widest uppercase mb-2 block">المنيو اليومي الأصيل</span>
@@ -51,8 +45,6 @@ export const DailyMenu: React.FC<DailyMenuProps> = ({ onAddToCart }) => {
       </header>
 
       <main className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 mt-8">
-        
-        {/* شريط البحث */}
         <div className="mb-8 max-w-xl mx-auto">
           <input
             type="text"
@@ -63,7 +55,6 @@ export const DailyMenu: React.FC<DailyMenuProps> = ({ onAddToCart }) => {
           />
         </div>
 
-        {/* أزرار التصنيفات الرئيسية */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
           {mainCategories.map((cat) => {
             const isSelected = selectedMainCat === cat.id;
@@ -89,7 +80,6 @@ export const DailyMenu: React.FC<DailyMenuProps> = ({ onAddToCart }) => {
           })}
         </div>
 
-        {/* أزرار التصنيفات الفرعية */}
         <div className="flex overflow-x-auto space-x-2 space-x-reverse pb-3 mb-10 scrollbar-hide justify-start md:justify-center">
           {subCategoriesMap[selectedMainCat]?.map((sub) => {
             const isSubSelected = selectedSubCat === sub.id;
@@ -109,7 +99,6 @@ export const DailyMenu: React.FC<DailyMenuProps> = ({ onAddToCart }) => {
           })}
         </div>
 
-        {/* شبكة عرض الأطباق (تضمن ظهور جميع الأطباق فوراً بدون مشاكل فلترة فارغة) */}
         {filteredDishes.length > 0 ? (
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
             {filteredDishes.map((dish) => (
