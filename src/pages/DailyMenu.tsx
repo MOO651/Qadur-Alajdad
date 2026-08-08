@@ -1,13 +1,12 @@
 import React from 'react';
 
 interface DailyMenuProps {
-  dailyMenu?: any[];
   addToCart: (item: any) => void;
 }
 
-export default function DailyMenu({ dailyMenu = [], addToCart }: DailyMenuProps) {
-  // الأصناف الافتراضية المنسقة كبطاقات مستقلة
-  const items = dailyMenu.length > 0 ? dailyMenu : [
+export default function DailyMenu({ addToCart }: DailyMenuProps) {
+  // مصفوفة الأصناف مباشرة داخل الصفحة لضمان ظهور الكرتات فورا
+  const allDishes = [
     { id: 1, name: 'شوربة عدس', price: '17 ر.س', category: 'الشوربات', image: 'https://images.unsplash.com/photo-1547592166-23ac45744acd?w=500&auto=format&fit=crop&q=60' },
     { id: 2, name: 'شوربة حب', price: '19 ر.س', category: 'الشوربات', image: 'https://images.unsplash.com/photo-1547592166-23ac45744acd?w=500&auto=format&fit=crop&q=60' },
     { id: 3, name: 'شوربة مقيم', price: '26 ر.س', category: 'الشوربات', image: 'https://images.unsplash.com/photo-1547592166-23ac45744acd?w=500&auto=format&fit=crop&q=60' },
@@ -27,9 +26,9 @@ export default function DailyMenu({ dailyMenu = [], addToCart }: DailyMenuProps)
 
       {/* شبكة الكرتات المنفصلة */}
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
-        {items.map((item, index) => (
+        {allDishes.map((item) => (
           <div 
-            key={item.id || index} 
+            key={item.id} 
             className="bg-zinc-900 border border-zinc-800 rounded-2xl overflow-hidden shadow-xl hover:border-amber-500/50 transition-all duration-300 flex flex-col justify-between"
           >
             {/* مكان الصورة */}
