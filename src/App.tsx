@@ -1,43 +1,35 @@
 import React, { useState } from 'react';
 import Header from './components/Header';
 import Footer from './components/Footer';
-import Home from './pages/Home';
 import DailyMenu from './pages/DailyMenu';
-import EventsMenu from './pages/EventsMenu';
-import Cart from './pages/Cart';
-import Admin from './pages/Admin';
 
-export function App() {
-  const [currentPage, setCurrentPage] = useState('home');
-  const [cartItems, setCartItems] = useState<any[]>([]);
+export default function App() {
+  const [cart, setCart] = useState<any[]>([]);
 
   const addToCart = (item: any) => {
-    setCartItems(prev => [...prev, item]);
+    setCart([...cart, item]);
   };
 
-  const removeFromCart = (index: number) => {
-    setCartItems(prev => prev.filter((_, i) => i !== index));
-  };
-
-  const clearCart = () => {
-    setCartItems([]);
+  // وظيفة للتنقل بين الصفحات
+  const navigateTo = (page: string) => {
+    console.log("Navigating to:", page);
   };
 
   return (
-    <div className="min-h-screen bg-black text-white flex flex-col font-sans">
-      <Header routePath={currentPage} navigateTo={setCurrentPage} cartItemsCount={cartItems.length} />
+    <div className="min-h-screen bg-black text-white flex flex-col">
+      {/* تمرير الخصائص المطلوبة للـ Header */}
+      <Header 
+        routePath="/" 
+        navigateTo={navigateTo} 
+        cartItemsCount={cart.length} 
+      />
       
       <main className="flex-grow">
-        {currentPage === 'home' && <Home navigateTo={setCurrentPage} addToCart={addToCart} />}
-        {currentPage === 'daily' && <DailyMenu dailyMenu={[]} addToCart={addToCart} />}
-        {currentPage === 'events' && <EventsMenu weddingMenu={[]} addToCart={addToCart} />}
-        {currentPage === 'cart' && <Cart cartItems={cartItems} removeFromCart={removeFromCart} navigateTo={setCurrentPage} clearCart={clearCart} />}
-        {currentPage === 'admin' && <Admin navigateTo={setCurrentPage} />}
+        <DailyMenu addToCart={addToCart} />
       </main>
 
-      <Footer navigateTo={setCurrentPage} />
+      {/* تمرير الخاصية المطلوبة للـ Footer */}
+      <Footer navigateTo={navigateTo} />
     </div>
   );
 }
-
-export default App;
