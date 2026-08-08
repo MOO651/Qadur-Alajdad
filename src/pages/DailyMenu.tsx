@@ -1,36 +1,64 @@
 import React from 'react';
 
-// هذا هو الشكل الجديد للبطاقة
-const MenuCard = ({ item, onAdd }: { item: any; onAdd: () => void }) => (
-  <div className="bg-zinc-900 border border-zinc-800 rounded-2xl p-4 flex flex-col items-center text-center shadow-lg hover:border-amber-500/50 transition-all">
-    <div className="w-full h-32 bg-zinc-800 rounded-xl mb-3 overflow-hidden">
-      {/* هنا ستحط صورة كل صنف */}
-      <img src={item.image || 'https://via.placeholder.com/150'} alt={item.name} className="w-full h-full object-cover" />
-    </div>
-    <h3 className="text-white font-bold text-lg mb-1">{item.name}</h3>
-    <p className="text-amber-500 font-semibold mb-3">{item.price}</p>
-    <button 
-      onClick={onAdd}
-      className="w-full bg-amber-500 hover:bg-amber-600 text-black font-bold py-2 rounded-lg transition-colors"
-    >
-      إضافة للسلة
-    </button>
-  </div>
-);
+interface DailyMenuProps {
+  dailyMenu?: any[];
+  addToCart: (item: any) => void;
+}
 
-export default function DailyMenu({ dailyMenu = [], addToCart }: any) {
+export default function DailyMenu({ dailyMenu = [], addToCart }: DailyMenuProps) {
+  // إذا كانت البيانات تمرر من الخارج أو نستخدم عناصر افتراضية
   const items = dailyMenu.length > 0 ? dailyMenu : [
-    { id: 1, name: 'سلطة جرجير', price: '13 ريال', image: '' },
-    { id: 2, name: 'تبولة', price: '14 ريال', image: '' },
+    { id: 1, name: 'عدس', price: '17 ريال', category: 'الشوربات', image: '' },
+    { id: 2, name: 'حب', price: '19 ريال', category: 'الشوربات', image: '' },
+    { id: 3, name: 'مقيم', price: '26 ريال', category: 'الشوربات', image: '' },
+    { id: 4, name: 'سلطة جرجير البر', price: '14 ريال', category: 'السلطات', image: '' },
+    { id: 5, name: 'فتوش', price: '16 ريال', category: 'السلطات', image: '' },
+    { id: 6, name: 'تبولة', price: '14 ريال', category: 'السلطات', image: '' },
   ];
 
   return (
     <div className="container mx-auto px-4 py-8">
-      <h2 className="text-2xl text-amber-500 font-bold mb-6 text-center">القائمة اليومية</h2>
-      
-      <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
-        {items.map((item: any) => (
-          <MenuCard key={item.id} item={item} onAdd={() => addToCart(item)} />
+      {/* عنوان الصفحة */}
+      <div className="text-center mb-10">
+        <span className="text-amber-500 text-sm bg-amber-500/10 px-4 py-1 rounded-full border border-amber-500/20">أطباق طازجة يومياً</span>
+        <h1 className="text-3xl md:text-4xl font-bold text-white mt-3 mb-2">المنيو اليومي والشعبيات</h1>
+        <p className="text-gray-400 text-sm">اطلب أطباقك المفضلة واستمتع بمذاق لا ينسى</p>
+      </div>
+
+      {/* شبكة الكرتات المنفصلة */}
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+        {items.map((item, index) => (
+          <div 
+            key={item.id || index} 
+            className="bg-zinc-900 border border-zinc-800 rounded-2xl overflow-hidden shadow-xl hover:border-amber-500/50 transition-all duration-300 flex flex-col justify-between"
+          >
+            {/* مكان الصورة */}
+            <div className="h-44 bg-zinc-800 relative overflow-hidden">
+              <img 
+                src={item.image || 'https://images.unsplash.com/photo-1545247389-dc3a897bfd44?w=500&auto=format&fit=crop&q=60'} 
+                alt={item.name} 
+                className="w-full h-full object-cover hover:scale-105 transition-transform duration-500"
+              />
+              <span className="absolute top-2 right-2 bg-black/70 text-amber-400 text-xs px-2.5 py-1 rounded-full backdrop-blur-sm border border-amber-500/30">
+                {item.category || 'صنف'}
+              </span>
+            </div>
+
+            {/* تفاصيل الصنف */}
+            <div className="p-4 flex flex-col flex-grow justify-between">
+              <div>
+                <h3 className="text-white font-bold text-lg mb-1">{item.name}</h3>
+                <p className="text-amber-400 font-semibold text-base mb-4">{item.price}</p>
+              </div>
+
+              <button 
+                onClick={() => addToCart(item)}
+                className="w-full bg-gradient-to-r from-amber-500 to-yellow-600 hover:from-amber-600 hover:to-yellow-700 text-black font-bold py-2.5 rounded-xl text-sm transition-all shadow-md active:scale-95"
+              >
+                إضافة للسلة
+              </button>
+            </div>
+          </div>
         ))}
       </div>
     </div>
