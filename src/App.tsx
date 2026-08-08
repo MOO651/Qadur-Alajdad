@@ -9,10 +9,18 @@ import EventsMenu from './pages/EventsMenu';
 
 export default function App() {
   const [cart, setCart] = useState<any[]>([]);
-  const [currentPage, setCurrentPage] = useState('daily');
+  // اجعل الصفحة الافتتاحية هي الرئيسية 'home'
+  const [currentPage, setCurrentPage] = useState('home');
 
   const addToCart = (item: any) => {
-    setCart([...cart, item]);
+    // دعم استقبال العناصر سواء ك كائن كامل أو (name, price)
+    if (typeof item === 'string') {
+      // لو تم إرسال الاسم والسعر كـ parameters منفصلة
+      const price = arguments[1] || '0 ريال';
+      setCart([...cart, { name: item, price }]);
+    } else {
+      setCart([...cart, item]);
+    }
   };
 
   const removeFromCart = (index: number) => {
@@ -26,13 +34,16 @@ export default function App() {
   };
 
   const navigateTo = (page: string) => {
-    setCurrentPage(page);
+    // تنظيف المسار لو جاي معاه سلاش
+    const cleanPage = page.startsWith('/') ? page.substring(1) : page;
+    setCurrentPage(cleanPage || 'home');
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
   const renderPage = () => {
     switch (currentPage) {
       case 'home':
+      case '':
         return <Home navigateTo={navigateTo} addToCart={addToCart} />;
       case 'daily':
         return <DailyMenu addToCart={addToCart} />;
@@ -50,7 +61,7 @@ export default function App() {
       case 'admin':
         return <Admin navigateTo={navigateTo} />;
       default:
-        return <DailyMenu addToCart={addToCart} />;
+        return <Home navigateTo={navigateTo} addToCart={addToCart} />;
     }
   };
 
