@@ -16,32 +16,28 @@ export const brandInfo = {
   logoUrl: '/logo.png', 
 };
 
+// تم حذف "منيو نجد العريق" والتركيز على الأقسام العامة وأفراح قدور الأجداد
 export const mainCategories = [
-  { id: 'najd', name: 'منيو نجد العريق', icon: '🏜️', description: 'أصالة المطبخ النجدي العريق على أصوله في قدور الأجداد.' },
+  { id: 'general', name: 'الأقسام العامة واليومية', icon: '🍲', description: 'الشوربات، المقبلات الباردة والحارة، الإدامات، الأطباق الرئيسية، الحلا والمشروبات.' },
   { id: 'weddings', name: 'منيو الأفراح والمناسبات', icon: '🐑', description: 'ولائم كبار الشخصيات والذبائح الكاملة لأفراحكم ومناسباتكم.' },
-  { id: 'general', name: 'الأقسام العامة واليومية', icon: '🍲', description: 'الشوربات، المقبلات، الأطباق الرئيسية، الحلا والمشروبات التراثية.' },
 ];
 
 export const subCategoriesMap: Record<string, { id: string; name: string }[]> = {
-  najd: [
-    { id: 'all-najd', name: 'كل أطباق نجد' },
-    { id: 'najd-main', name: 'الأطباق الرئيسية والقرصان' },
-    { id: 'najd-sweets-bakes', name: 'المقشوش والمعجنات النجدية' },
-  ],
-  weddings: [
-    { id: 'all-weddings', name: 'كل ولائم الأفراح' },
-    { id: 'whole-sheep', name: 'الذبائح والمفطحات الكاملة' },
-    { id: 'vip-trays', name: 'صواني وبوفيهات VIP' },
-  ],
   general: [
+    { id: 'all-general', name: 'كل الأطباق العامة' },
     { id: 'soup', name: 'الشوربات' },
     { id: 'cold-appetizers', name: 'السلطات والمقبلات الباردة' },
     { id: 'hot-appetizers', name: 'المقبلات الحارة' },
     { id: 'stews', name: 'الإدامات' },
     { id: 'side-traditional', name: 'الشعبيات والأطباق الجانبية' },
     { id: 'main-dishes', name: 'الأطباق الرئيسية' },
-    { id: 'desserts', name: 'الحلا' },
+    { id: 'desserts', name: 'الحلا والمقشوش' },
     { id: 'drinks', name: 'المشروبات التراثية' },
+  ],
+  weddings: [
+    { id: 'all-weddings', name: 'كل ولائم الأفراح' },
+    { id: 'whole-sheep', name: 'الذبائح والمفطحات الكاملة' },
+    { id: 'vip-trays', name: 'صواني وبوفيهات VIP' },
   ]
 };
 
@@ -63,7 +59,7 @@ export const menuDishes: Dish[] = [
     name: 'حب',
     description: 'شوربة الحب السعودية الأصيلة بمرق اللحم والبهارات الفاخرة.',
     price: 19,
-    image: 'https://images.unsplash.com/photo-1547592166-23ac45744acd?auto=format&fit=crop&w=800&q=80',
+    image: 'https://images.unsplash.com/photo-1541544741938-0af808871cc0?auto=format&fit=crop&w=800&q=80',
     category: 'general',
     subCategory: 'soup',
     badge: 'تقليدي',
@@ -74,7 +70,7 @@ export const menuDishes: Dish[] = [
     name: 'مقادم',
     description: 'شوربة المقادم الغنية والمرق الصافي المنكه بالبهارات العطرية.',
     price: 26,
-    image: 'https://images.unsplash.com/photo-1547592166-23ac45744acd?auto=format&fit=crop&w=800&q=80',
+    image: 'https://images.unsplash.com/photo-1547592180-85f173990554?auto=format&fit=crop&w=800&q=80',
     category: 'general',
     subCategory: 'soup',
     badge: 'خاص الأجداد',
@@ -326,8 +322,8 @@ export const menuDishes: Dish[] = [
     description: 'رقائق العجين البر الرقيقة المطبوخة بمرق اللحم البلدي والخضار الطازجة على أصول أهل نجد.',
     price: 24,
     image: 'https://images.unsplash.com/photo-1604908176997-125f2596f378?auto=format&fit=crop&w=800&q=80',
-    category: 'najd',
-    subCategory: 'najd-main',
+    category: 'general',
+    subCategory: 'side-traditional',
     badge: 'توقيع قدور الأجداد',
     calories: '650 سعرة'
   },
@@ -586,8 +582,8 @@ export const menuDishes: Dish[] = [
     description: 'فطائر دائرية صغيرة طرية تُخبز على الصاج وتُقدم مغمورة بالسمن البري والعسل الطبيعي.',
     price: 35,
     image: 'https://images.unsplash.com/photo-1589301760014-d929f3979dbc?auto=format&fit=crop&w=800&q=80',
-    category: 'najd',
-    subCategory: 'najd-sweets-bakes',
+    category: 'general',
+    subCategory: 'desserts',
     badge: 'طعم زمان',
     calories: '480 سعرة'
   },

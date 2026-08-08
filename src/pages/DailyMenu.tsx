@@ -11,7 +11,8 @@ interface DailyMenuProps {
 }
 
 export const DailyMenu: React.FC<DailyMenuProps> = ({ onAddToCart }) => {
-  const [selectedMainCat, setSelectedMainCat] = useState<string>(mainCategories[0]?.id || 'najd');
+  // تم تحديث القيمة الافتراضية لتتوافق مع القسم الجديد 'general'
+  const [selectedMainCat, setSelectedMainCat] = useState<string>(mainCategories[0]?.id || 'general');
   const [selectedSubCat, setSelectedSubCat] = useState<string>('all');
   const [searchQuery, setSearchQuery] = useState<string>('');
 
@@ -86,7 +87,7 @@ export const DailyMenu: React.FC<DailyMenuProps> = ({ onAddToCart }) => {
           />
         </div>
 
-        {/* شريط التصنيفات الفرعية (الفلاتر الداخلية للقسم الحالي مثل: الأطباق الرئيسية، المقبّلات، المشروبات) */}
+        {/* شريط التصنيفات الفرعية (الفلاتر الداخلية للقسم الحالي) */}
         <div className="flex overflow-x-auto space-x-2 space-x-reverse pb-3 mb-10 scrollbar-hide justify-start md:justify-center">
           {subCategoriesMap[selectedMainCat]?.map((sub) => {
             const isSubSelected = selectedSubCat === sub.id;
