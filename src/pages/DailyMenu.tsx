@@ -1,12 +1,13 @@
 import React from 'react';
 
 interface DailyMenuProps {
+  dailyMenu?: any[];
   addToCart: (item: any) => void;
 }
 
-export default function DailyMenu({ addToCart }: DailyMenuProps) {
-  // مصفوفة الأصناف مباشرة داخل الصفحة لضمان ظهور الكرتات فورا
-  const allDishes = [
+export default function DailyMenu({ dailyMenu = [], addToCart }: DailyMenuProps) {
+  // استخدام القائمة المرسلة أو القائمة الافتراضية المنسقة ككرتات مستقلة
+  const itemsToDisplay = dailyMenu.length > 0 ? dailyMenu : [
     { id: 1, name: 'شوربة عدس', price: '17 ر.س', category: 'الشوربات', image: 'https://images.unsplash.com/photo-1547592166-23ac45744acd?w=500&auto=format&fit=crop&q=60' },
     { id: 2, name: 'شوربة حب', price: '19 ر.س', category: 'الشوربات', image: 'https://images.unsplash.com/photo-1547592166-23ac45744acd?w=500&auto=format&fit=crop&q=60' },
     { id: 3, name: 'شوربة مقيم', price: '26 ر.س', category: 'الشوربات', image: 'https://images.unsplash.com/photo-1547592166-23ac45744acd?w=500&auto=format&fit=crop&q=60' },
@@ -26,20 +27,20 @@ export default function DailyMenu({ addToCart }: DailyMenuProps) {
 
       {/* شبكة الكرتات المنفصلة */}
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
-        {allDishes.map((item) => (
+        {itemsToDisplay.map((item, index) => (
           <div 
-            key={item.id} 
+            key={item.id || index} 
             className="bg-zinc-900 border border-zinc-800 rounded-2xl overflow-hidden shadow-xl hover:border-amber-500/50 transition-all duration-300 flex flex-col justify-between"
           >
             {/* مكان الصورة */}
             <div className="h-44 bg-zinc-800 relative overflow-hidden">
               <img 
-                src={item.image} 
+                src={item.image || 'https://images.unsplash.com/photo-1547592166-23ac45744acd?w=500&auto=format&fit=crop&q=60'} 
                 alt={item.name} 
                 className="w-full h-full object-cover hover:scale-105 transition-transform duration-500"
               />
               <span className="absolute top-2 right-2 bg-black/70 text-amber-400 text-xs px-2.5 py-1 rounded-full backdrop-blur-sm border border-amber-500/30">
-                {item.category}
+                {item.category || 'الصنف'}
               </span>
             </div>
 
