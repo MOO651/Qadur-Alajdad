@@ -25,17 +25,23 @@ export const DailyMenu: React.FC<DailyMenuProps> = ({ onAddToCart }) => {
     }
   };
 
+  // فلترة الأطباق بناءً على القسم الرئيسي والفرعي والبحث
   const filteredDishes = menuDishes.filter((dish) => {
-    const matchesMain = !selectedMainCat || dish.category === selectedMainCat || true;
+    const matchesMain = !selectedMainCat || dish.category === selectedMainCat;
+    const currentSubCats = subCategoriesMap[selectedMainCat] || [];
+    const isAllSub = currentSubCats[0]?.id === selectedSubCat || selectedSubCat === 'all';
+    const matchesSub = isAllSub || dish.subCategory === selectedSubCat;
+    
     const matchesSearch = searchQuery.trim() === '' || 
                           dish.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
                           dish.description.toLowerCase().includes(searchQuery.toLowerCase());
 
-    return matchesMain && matchesSearch;
+    return matchesMain && matchesSub && matchesSearch;
   });
 
   return (
-    <div className="min-h-screen bg-stone-900 text-stone-100 font-sans pb-16" dir="rtl">
+    <div className="min-h-screen bg-stone-900 text-stone-100 font-sans pb-20" dir="rtl">
+      {/* رأس الصفحة */}
       <header className="bg-stone-950 border-b border-stone-800 py-10 px-4 text-center">
         <div className="max-w-4xl mx-auto">
           <span className="text-amber-500 text-xs font-bold tracking-widest uppercase mb-2 block">المنيو اليومي الأصيل</span>
@@ -44,7 +50,32 @@ export const DailyMenu: React.FC<DailyMenuProps> = ({ onAddToCart }) => {
         </div>
       </header>
 
+      {/* شريط الأقسام الرئيسي الثابت في الأعلى للتنقل السريع */}
+      <nav className="sticky top-0 z-30 bg-stone-950/90 backdrop-blur-md border-b border-stone-800 shadow-lg py-3 px-4">
+        <div className="max-w-6xl mx-auto flex items-center justify-start md:justify-center overflow-x-auto space-x-3 space-x-reverse scrollbar-hide">
+          {mainCategories.map((cat) => {
+            const isSelected = selectedMainCat === cat.id;
+            return (
+              <button
+                key={cat.id}
+                onClick={() => handleMainCatChange(cat.id)}
+                className={`flex items-center space-x-2 space-x-reverse px-5 py-2.5 rounded-full text-sm font-bold whitespace-nowrap transition-all ${
+                  isSelected 
+                    ? 'bg-amber-600 text-white shadow-md scale-105' 
+                    : 'bg-stone-800 text-stone-300 hover:bg-stone-700 border border-stone-700'
+                }`}
+              >
+                <span>{cat.icon}</span>
+                <span>{cat.name}</span>
+              </button>
+            );
+          })}
+        </div>
+      </nav>
+
       <main className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 mt-8">
+        
+        {/* شريط البحث */}
         <div className="mb-8 max-w-xl mx-auto">
           <input
             type="text"
@@ -55,31 +86,7 @@ export const DailyMenu: React.FC<DailyMenuProps> = ({ onAddToCart }) => {
           />
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
-          {mainCategories.map((cat) => {
-            const isSelected = selectedMainCat === cat.id;
-            return (
-              <button
-                key={cat.id}
-                onClick={() => handleMainCatChange(cat.id)}
-                className={`p-4 rounded-xl text-right transition-all duration-200 flex items-center space-x-3 space-x-reverse border ${
-                  isSelected 
-                    ? 'bg-amber-700 text-white border-amber-600 shadow-lg' 
-                    : 'bg-stone-800 text-stone-300 border-stone-700 hover:bg-stone-700'
-                }`}
-              >
-                <span className="text-2xl p-2.5 bg-black/20 rounded-lg">{cat.icon}</span>
-                <div className="overflow-hidden flex-1">
-                  <h3 className="font-bold text-base mb-0.5 truncate">{cat.name}</h3>
-                  <p className={`text-xs truncate ${isSelected ? 'text-amber-100' : 'text-stone-400'}`}>
-                    {cat.description}
-                  </p>
-                </div>
-              </button>
-            );
-          })}
-        </div>
-
+        {/* شريط التصنيفات الفرعية (الفلاتر الداخلية للقسم الحالي مثل: الأطباق الرئيسية، المقبّلات، المشروبات) */}
         <div className="flex overflow-x-auto space-x-2 space-x-reverse pb-3 mb-10 scrollbar-hide justify-start md:justify-center">
           {subCategoriesMap[selectedMainCat]?.map((sub) => {
             const isSubSelected = selectedSubCat === sub.id;
@@ -87,10 +94,10 @@ export const DailyMenu: React.FC<DailyMenuProps> = ({ onAddToCart }) => {
               <button
                 key={sub.id}
                 onClick={() => setSelectedSubCat(sub.id)}
-                className={`px-5 py-2 rounded-full text-xs font-semibold whitespace-nowrap transition-colors ${
+                className={`px-5 py-2 rounded-xl text-xs font-semibold whitespace-nowrap transition-colors border ${
                   isSubSelected
-                    ? 'bg-amber-600 text-white shadow'
-                    : 'bg-stone-800 text-stone-300 border border-stone-700 hover:bg-stone-700'
+                    ? 'bg-amber-700 text-white border-amber-600 shadow'
+                    : 'bg-stone-800 text-stone-300 border-stone-700 hover:bg-stone-700'
                 }`}
               >
                 {sub.name}
@@ -99,6 +106,7 @@ export const DailyMenu: React.FC<DailyMenuProps> = ({ onAddToCart }) => {
           })}
         </div>
 
+        {/* شبكة عرض الأطباق لكل قسم */}
         {filteredDishes.length > 0 ? (
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
             {filteredDishes.map((dish) => (
@@ -147,7 +155,7 @@ export const DailyMenu: React.FC<DailyMenuProps> = ({ onAddToCart }) => {
           </div>
         ) : (
           <div className="text-center py-16 bg-stone-800 rounded-2xl border border-stone-700">
-            <p className="text-stone-400 text-base">عذراً، لم نجد أطباق مطابقة لبحثك في هذا القسم.</p>
+            <p className="text-stone-400 text-base">عذراً، لم نجد أطباق مطابقة في هذا القسم حالياً.</p>
           </div>
         )}
       </main>
