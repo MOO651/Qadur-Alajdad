@@ -1,9 +1,10 @@
 import { useState } from 'react';
 import { menuDishes, subCategoriesMap } from '../data/menuData';
+import type { Dish } from '../data/menuData';
 
 interface MenuSectionProps {
   selectedMainCat?: string;
-  onAddToCart?: (dish: { id: string; name: string; price: number; image: string }) => void;
+  onAddToCart?: (dish: Dish) => void;
 }
 
 export default function MenuSection({ selectedMainCat = 'najd', onAddToCart }: MenuSectionProps) {
@@ -17,14 +18,9 @@ export default function MenuSection({ selectedMainCat = 'najd', onAddToCart }: M
     return dish.subCategory === selectedSubCat;
   });
 
-  const handleAdd = (dish: any) => {
+  const handleAdd = (dish: Dish) => {
     if (onAddToCart) {
-      onAddToCart({
-        id: dish.id,
-        name: dish.name,
-        price: Number(dish.price),
-        image: dish.image,
-      });
+      onAddToCart(dish);
     }
   };
 

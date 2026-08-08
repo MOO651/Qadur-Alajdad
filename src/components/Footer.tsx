@@ -62,7 +62,7 @@ export default function Footer({ navigateTo }: FooterProps) {
 
       {/* خط الحفظ وحقوق النشر */}
       <div className="max-w-7xl mx-auto px-4 sm:px-6 pt-8 border-t border-[#D4AF37]/10 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs">
-        <p>© 2026 مطعم قدور الأجداد. جميع Rights المحفوظة.</p>
+        <p>© 2026 مطعم قدور الأجداد. جميع الحقوق محفوظة.</p>
         <button 
           onClick={() => navigateTo('admin')}
           className="flex items-center gap-1.5 text-gray-500 hover:text-[#D4AF37] transition-colors"

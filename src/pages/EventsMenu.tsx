@@ -1,9 +1,9 @@
 import { CalendarHeart } from 'lucide-react';
-import { menuDishes } from '../data/menuData';
+import { type Dish, menuDishes } from '../data/menuData';
 
 interface EventsMenuProps {
-  weddingMenu?: any[];
-  addToCart: (item: any) => void;
+  weddingMenu?: Dish[];
+  addToCart: (item: Dish) => void;
 }
 
 export default function EventsMenu({ addToCart }: EventsMenuProps) {

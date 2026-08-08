@@ -1,8 +1,8 @@
 import { Utensils } from 'lucide-react';
-import { menuDishes } from '../data/menuData';
+import { type Dish, menuDishes } from '../data/menuData';
 
 interface DailyMenuProps {
-  addToCart: (item: any) => void;
+  addToCart: (item: Dish) => void;
 }
 
 export default function DailyMenu({ addToCart }: DailyMenuProps) {
@@ -12,15 +12,23 @@ export default function DailyMenu({ addToCart }: DailyMenuProps) {
   return (
     <div className="max-w-7xl mx-auto px-4 sm:px-6 py-12 space-y-10">
       <div className="text-center space-y-3 max-w-2xl mx-auto">
-        <span className="text-[#D4AF37] font-sans text-xs tracking-[0.3em] font-bold uppercase bg-[#D4AF37]/10 px-4 py-1.5 rounded-full border border-[#D4AF37]/30 inline-block">أطباق قدور الأجداد</span>
+        <span className="text-[#D4AF37] font-sans text-xs tracking-[0.3em] font-bold uppercase bg-[#D4AF37]/10 px-4 py-1.5 rounded-full border border-[#D4AF37]/30 inline-block">
+          أطباق قدور الأجداد
+        </span>
         <h2 className="text-3xl font-bold text-[#FFFDF9]">المنيو اليومي والشعبيات</h2>
         <p className="text-gray-400 text-xs sm:text-sm font-sans">نخبة أطباقنا المتاحة يومياً لتستمتع بمذاقها الأصيل</p>
       </div>
 
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
         {dailyItems.map((dish) => (
-          <div key={dish.id} className="bg-[#181513] border border-[#D4AF37]/30 rounded-2xl overflow-hidden shadow-xl flex flex-col justify-between group hover:border-[#D4AF37] transition-all">
-            <div className="relative h-48 bg-cover bg-center group-hover:scale-105 transition-transform duration-500" style={{ backgroundImage: `url('${dish.image}')` }}>
+          <div 
+            key={dish.id} 
+            className="bg-[#181513] border border-[#D4AF37]/30 rounded-2xl overflow-hidden shadow-xl flex flex-col justify-between group hover:border-[#D4AF37] transition-all"
+          >
+            <div 
+              className="relative h-48 bg-cover bg-center group-hover:scale-105 transition-transform duration-500" 
+              style={{ backgroundImage: `url('${dish.image}')` }} 
+            >
               {dish.badge && (
                 <span className="absolute top-3 right-3 bg-black/70 backdrop-blur-md text-[#D4AF37] border border-[#D4AF37]/40 text-[10px] px-2.5 py-1 rounded-full font-bold">
                   {dish.badge}

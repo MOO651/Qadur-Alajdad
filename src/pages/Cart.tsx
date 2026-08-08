@@ -49,7 +49,7 @@ export default function Cart({ cartItems, removeFromCart, navigateTo, clearCart 
           </div>
           <div>
             <h2 className="text-2xl font-bold text-[#FFFDF9]">سلة الطلبات</h2>
-            <p className="text-gray-400 text-xs font-sans">راجع أطباقك الم مختارة قبل تأكيد الطلب</p>
+            <p className="text-gray-400 text-xs font-sans">راجع أطباقك المختارة قبل تأكيد الطلب</p>
           </div>
         </div>
         <button 

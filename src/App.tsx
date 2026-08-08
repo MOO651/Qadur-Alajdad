@@ -6,11 +6,10 @@ import Home from './pages/Home';
 import Cart from './pages/Cart';
 import Admin from './pages/Admin';
 import EventsMenu from './pages/EventsMenu';
-// إذا كنت تحتاج لاستيراد Dish type في المستقبل، استخدم هذا النمط لتتوافق مع إعدادات TypeScript:
-// import type { Dish } from './data/menuData';
+import type { Dish } from './data/menuData';
 
 export default function App() {
-  const [cart, setCart] = useState<any[]>([]);
+  const [cart, setCart] = useState<Dish[]>([]);
   
   // قراءة المسار المباشر من المتصفح (مثل /admin) عند فتح الصفحة لأول مرة
   const [currentPage, setCurrentPage] = useState(() => {
@@ -27,10 +26,20 @@ export default function App() {
     return () => window.removeEventListener('popstate', handlePopState);
   }, []);
 
-  const addToCart = (item: any, ...args: any[]) => {
+  const addToCart = (item: Dish | string, ...args: (string | number)[]) => {
     if (typeof item === 'string') {
       const price = args[0] || '0 ريال';
-      setCart([...cart, { name: item, price }]);
+      // إضافة subCategory لمنع أي تعارض مع خصائص Dish
+      const newDish: Dish = {
+        id: Date.now().toString(), 
+        name: item,
+        price: typeof price === 'number' ? price : parseFloat(price.toString().replace(/[^0-9.]/g, '')) || 0,
+        description: '',
+        category: 'daily',
+        subCategory: '',
+        image: ''
+      };
+      setCart([...cart, newDish]);
     } else {
       setCart([...cart, item]);
     }

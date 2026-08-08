@@ -120,19 +120,19 @@ export default function Home({ navigateTo, addToCart }: HomeProps) {
 
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6 px-4">
           {[
-            { name: "كابلي لحم بلدي", price: "78 ريال", img: "/png (2).jpeg" },
-            { name: "جريش حائلي بالسمن", price: "24 ريال", img: "/png.jpeg" },
-            { name: "سليق دجاج ملكي", price: "32 ريال", img: "/png (2).jpeg" },
-            { name: "مهلبية ورد", price: "18 ريال", img: "/appetizers.jpg" }
+            { name: "كابلي لحم بلدي", price: "78", img: "/png (2).jpeg" },
+            { name: "جريش حائلي بالسمن", price: "24", img: "/png.jpeg" },
+            { name: "سليق دجاج ملكي", price: "32", img: "/png (2).jpeg" },
+            { name: "مهلبية ورد", price: "18", img: "/appetizers.jpg" }
           ].map((dish, i) => (
             <div key={i} className="bg-[#181513] border border-[#D4AF37]/30 rounded-2xl overflow-hidden shadow-lg group">
               <div className="h-36 bg-cover bg-center group-hover:scale-105 transition-transform duration-500" style={{ backgroundImage: `url('${dish.img}')` }}></div>
               <div className="p-4 space-y-2">
                 <h4 className="text-white font-bold text-sm">{dish.name}</h4>
                 <div className="flex items-center justify-between pt-2">
-                  <span className="text-[#D4AF37] font-sans font-bold text-xs">{dish.price}</span>
+                  <span className="text-[#D4AF37] font-sans font-bold text-xs">{dish.price} ريال</span>
                   <button 
-                    onClick={() => addToCart(dish.name, dish.price)}
+                    onClick={() => addToCart(dish.name, `${dish.price} ريال`)}
                     className="bg-[#D4AF37]/20 border border-[#D4AF37]/50 text-[#D4AF37] hover:bg-[#D4AF37] hover:text-black px-3 py-1.5 rounded-xl text-[10px] font-sans font-bold transition-all"
                   >
                     أضف للسلة
