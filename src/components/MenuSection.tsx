@@ -3,7 +3,11 @@ import { menuDishes, subCategoriesMap, type Dish } from '../data/menuData';
 
 interface MenuSectionProps {
   selectedMainCat?: string;
+<<<<<<< HEAD
   onAddToCart: (dish: Dish) => void;
+=======
+  onAddToCart?: (dish: { id: string; name: string; price: number; image: string }) => void;
+>>>>>>> b6f96fb83493d5d27076c393eee2f5920205031a
 }
 
 export default function MenuSection({ selectedMainCat = 'najd', onAddToCart }: MenuSectionProps) {
@@ -18,10 +22,22 @@ export default function MenuSection({ selectedMainCat = 'najd', onAddToCart }: M
     return dish.subCategory === selectedSubCat;
   });
 
+<<<<<<< HEAD
   const handleAddClick = (dish: Dish) => {
     onAddToCart(dish);
     setAddedId(dish.id);
     setTimeout(() => setAddedId(null), 1200);
+=======
+  const handleAdd = (dish: any) => {
+    if (onAddToCart) {
+      onAddToCart({
+        id: dish.id,
+        name: dish.name,
+        price: Number(dish.price),
+        image: dish.image,
+      });
+    }
+>>>>>>> b6f96fb83493d5d27076c393eee2f5920205031a
   };
 
   return (
@@ -98,6 +114,15 @@ export default function MenuSection({ selectedMainCat = 'najd', onAddToCart }: M
                     {isAdded ? '✓ تمت الإضافة' : 'إضافة للطلب +'}
                   </button>
                 </div>
+<<<<<<< HEAD
+=======
+                <button 
+                  onClick={() => handleAdd(dish)}
+                  className="bg-gradient-to-r from-[#d4af37] to-[#aa8c2c] text-black font-black px-5 py-2.5 rounded-xl text-xs hover:scale-105 transition-all shadow-md shadow-[#d4af37]/20 border border-white/20"
+                >
+                  إضافة للطلب +
+                </button>
+>>>>>>> b6f96fb83493d5d27076c393eee2f5920205031a
               </div>
             );
           })
