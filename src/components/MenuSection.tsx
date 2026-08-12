@@ -1,12 +1,14 @@
 import { useState } from 'react';
-import { menuDishes, subCategoriesMap } from '../data/menuData';
+import { menuDishes, subCategoriesMap, type Dish } from '../data/menuData';
 
 interface MenuSectionProps {
   selectedMainCat?: string;
+  onAddToCart: (dish: Dish) => void;
 }
 
-export default function MenuSection({ selectedMainCat = 'najd' }: MenuSectionProps) {
+export default function MenuSection({ selectedMainCat = 'najd', onAddToCart }: MenuSectionProps) {
   const [selectedSubCat, setSelectedSubCat] = useState('all-najd');
+  const [addedId, setAddedId] = useState<string | null>(null);
 
   const subCategories = subCategoriesMap[selectedMainCat] || [];
   
@@ -16,19 +18,25 @@ export default function MenuSection({ selectedMainCat = 'najd' }: MenuSectionPro
     return dish.subCategory === selectedSubCat;
   });
 
+  const handleAddClick = (dish: Dish) => {
+    onAddToCart(dish);
+    setAddedId(dish.id);
+    setTimeout(() => setAddedId(null), 1200);
+  };
+
   return (
-    <div className="space-y-10">
+    <div className="space-y-10" dir="rtl">
       
       {/* تبويبات الأقسام الفرعية */}
-      <div className="flex flex-wrap justify-center gap-2.5 bg-[#0f0c08] p-2 rounded-2xl border border-[#261e12] max-w-2xl mx-auto shadow-xl">
+      <div className="flex flex-wrap justify-center gap-2.5 bg-white p-2.5 rounded-2xl border border-[#d4af37]/30 max-w-2xl mx-auto shadow-md">
         {subCategories.map((sub) => (
           <button
             key={sub.id}
             onClick={() => setSelectedSubCat(sub.id)}
             className={`px-5 py-2.5 rounded-xl text-xs md:text-sm font-bold transition-all duration-300 ${
               selectedSubCat === sub.id
-                ? 'bg-gradient-to-r from-[#d4af37] to-[#aa8c2c] text-black shadow-lg scale-105'
-                : 'text-gray-400 hover:text-white hover:bg-[#1a140d]'
+                ? 'bg-[#d4af37] text-white shadow-md scale-105'
+                : 'text-[#6b5344] hover:text-[#2c1e14] hover:bg-[#f5f1ea]'
             }`}
           >
             {sub.name}
@@ -39,53 +47,63 @@ export default function MenuSection({ selectedMainCat = 'najd' }: MenuSectionPro
       {/* شبكة الأطباق الملكية */}
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
         {filteredDishes.length > 0 ? (
-          filteredDishes.map((dish) => (
-            <div 
-              key={dish.id} 
-              className="bg-[#0f0c08] rounded-3xl overflow-hidden border border-[#241c10] hover:border-[#d4af37]/60 transition-all duration-500 group shadow-xl flex flex-col justify-between hover:shadow-[0_10px_35px_rgba(212,175,55,0.15)] hover:-translate-y-1.5"
-            >
-              <div>
-                <div className="relative h-56 overflow-hidden">
-                  <img 
-                    src={dish.image} 
-                    alt={dish.name} 
-                    className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700 brightness-90 group-hover:brightness-100"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-[#0f0c08] via-transparent to-black/30"></div>
-                  
-                  {dish.badge && (
-                    <span className="absolute top-4 right-4 bg-[#14100c]/90 backdrop-blur-md text-[#f3e5ab] border border-[#d4af37]/50 px-3.5 py-1 rounded-full text-[11px] font-black shadow-lg">
-                      {dish.badge}
-                    </span>
-                  )}
-
-                  {dish.calories && (
-                    <span className="absolute bottom-4 left-4 bg-black/60 backdrop-blur-md text-gray-300 px-3 py-1 rounded-xl text-[10px] font-medium border border-white/10">
-                      ⚡ {dish.calories}
-                    </span>
-                  )}
-                </div>
-
-                <div className="p-6">
-                  <h3 className="text-lg font-bold text-white mb-2 group-hover:text-[#f3e5ab] transition-colors">{dish.name}</h3>
-                  <p className="text-gray-400 text-xs md:text-sm leading-relaxed mb-6 font-light">{dish.description}</p>
-                </div>
-              </div>
-
-              <div className="px-6 pb-6 pt-0 flex items-center justify-between border-t border-[#1e170f] pt-4 mt-auto">
+          filteredDishes.map((dish) => {
+            const isAdded = addedId === dish.id;
+            return (
+              <div 
+                key={dish.id} 
+                className="bg-white rounded-3xl overflow-hidden border border-[#d4af37]/30 hover:border-[#d4af37] transition-all duration-500 group shadow-lg flex flex-col justify-between hover:shadow-xl hover:-translate-y-1.5"
+              >
                 <div>
-                  <span className="text-[10px] text-gray-400 block">السعر شامل الضريبة</span>
-                  <span className="text-xl font-black text-[#d4af37]">{dish.price} <span className="text-xs font-normal text-gray-300">ر.س</span></span>
+                  <div className="relative h-56 overflow-hidden">
+                    <img 
+                      src={dish.image} 
+                      alt={dish.name} 
+                      className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent"></div>
+                    
+                    {dish.badge && (
+                      <span className="absolute top-4 right-4 bg-white/90 backdrop-blur-md text-[#8c6239] border border-[#d4af37]/50 px-3.5 py-1 rounded-full text-[11px] font-extrabold shadow-sm">
+                        {dish.badge}
+                      </span>
+                    )}
+
+                    {dish.calories && (
+                      <span className="absolute bottom-4 left-4 bg-black/60 backdrop-blur-md text-stone-200 px-3 py-1 rounded-xl text-[10px] font-medium border border-white/20">
+                        ⚡ {dish.calories}
+                      </span>
+                    )}
+                  </div>
+
+                  <div className="p-6">
+                    <h3 className="text-lg font-bold text-[#2c1e14] mb-2 group-hover:text-[#8c6239] transition-colors">{dish.name}</h3>
+                    <p className="text-[#6b5344] text-xs md:text-sm leading-relaxed mb-6 font-light">{dish.description}</p>
+                  </div>
                 </div>
-                <button className="bg-gradient-to-r from-[#d4af37] to-[#aa8c2c] text-black font-black px-5 py-2.5 rounded-xl text-xs hover:scale-105 transition-all shadow-md shadow-[#d4af37]/20 border border-white/20">
-                  إضافة للطلب +
-                </button>
+
+                <div className="px-6 pb-6 pt-0 flex items-center justify-between border-t border-[#d4af37]/15 pt-4 mt-auto">
+                  <div>
+                    <span className="text-[10px] text-[#8c6239] block">السعر شامل الضريبة</span>
+                    <span className="text-xl font-black text-[#2c1e14]">{dish.price} <span className="text-xs font-normal text-[#6b5344]">ر.س</span></span>
+                  </div>
+                  <button 
+                    onClick={() => handleAddClick(dish)}
+                    className={`font-black px-5 py-2.5 rounded-xl text-xs transition-all shadow-md border ${
+                      isAdded
+                        ? 'bg-green-600 text-white border-green-500 scale-95'
+                        : 'bg-[#d4af37] text-white hover:scale-105 hover:bg-[#c49f27] border-[#d4af37]/40 shadow-sm'
+                    }`}
+                  >
+                    {isAdded ? '✓ تمت الإضافة' : 'إضافة للطلب +'}
+                  </button>
+                </div>
               </div>
-            </div>
-          ))
+            );
+          })
         ) : (
-          <div className="col-span-full py-20 text-center text-gray-400 bg-[#0f0c08] rounded-3xl border border-[#241c10]">
-            <p className="text-lg">عذراً، لا توجد أطباق متاحة في هذا القسم حالياً.</p>
+          <div className="col-span-full py-20 text-center text-[#6b5344] bg-white rounded-3xl border border-[#d4af37]/30 shadow-sm">
+            <p className="text-lg font-medium">عذراً، لا توجد أطباق متاحة في هذا القسم حالياً.</p>
           </div>
         )}
       </div>

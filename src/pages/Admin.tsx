@@ -191,7 +191,7 @@ export default function Admin({ navigateTo }: AdminProps) {
               onChange={e => handleCategoryChange(e.target.value)} 
               className="w-full bg-black border border-gold/20 rounded-xl p-3 text-sm text-white outline-none focus:border-gold"
             >
-              {mainCategories.map(cat => (
+              {mainCategories.map((cat: any) => (
                 <option key={cat.id} value={cat.id}>{cat.name}</option>
               ))}
             </select>
@@ -204,7 +204,7 @@ export default function Admin({ navigateTo }: AdminProps) {
               onChange={e => setFormData({...formData, subCategory: e.target.value})} 
               className="w-full bg-black border border-gold/20 rounded-xl p-3 text-sm text-white outline-none focus:border-gold"
             >
-              {(subCategoriesMap[formData.category] || []).map(sub => (
+              {(subCategoriesMap[formData.category] || []).map((sub: any) => (
                 <option key={sub.id} value={sub.id}>{sub.name}</option>
               ))}
             </select>

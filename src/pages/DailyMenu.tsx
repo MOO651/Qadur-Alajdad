@@ -17,7 +17,6 @@ export const DailyMenu: React.FC<DailyMenuProps> = ({ onAddToCart }) => {
   const [selectedSubCat, setSelectedSubCat] = useState<string>(subCategoriesMap[mainCategories[0]?.id || 'general']?.[0]?.id || 'all');
   const [searchQuery, setSearchQuery] = useState<string>('');
   
-  // حالة لمعرفة الطبق الذي تتم إضافته حالياً لعرض تأثير بصري
   const [addingId, setAddingId] = useState<string | null>(null);
 
   const handleMainCatChange = (catId: string) => {
@@ -34,7 +33,7 @@ export const DailyMenu: React.FC<DailyMenuProps> = ({ onAddToCart }) => {
     if (onAddToCart) {
       onAddToCart(dish);
       setAddingId(dish.id);
-      setTimeout(() => setAddingId(null), 1200); // إرجاع الزر لحالته الطبيعية بعد 1.2 ثانية
+      setTimeout(() => setAddingId(null), 1200);
     }
   };
 
@@ -53,18 +52,18 @@ export const DailyMenu: React.FC<DailyMenuProps> = ({ onAddToCart }) => {
   });
 
   return (
-    <div className="min-h-screen bg-black text-stone-100 font-sans pb-20" dir="rtl">
+    <div className="min-h-screen bg-[#f5f1ea] text-[#2c1e14] font-sans pb-20" dir="rtl">
       {/* رأس الصفحة */}
-      <header className="bg-obsidian-light border-b border-gold/20 py-10 px-4 text-center">
+      <header className="bg-white border-b border-[#d4af37]/30 py-10 px-4 text-center shadow-sm">
         <div className="max-w-4xl mx-auto">
-          <span className="text-gold text-xs font-bold tracking-widest uppercase mb-2 block">المنيو اليومي الأصيل</span>
-          <h1 className="text-3xl md:text-4xl font-extrabold mb-2 text-[#FFFDF9]">ما تيسر من قدور الأجداد</h1>
-          <p className="text-sm text-stone-400">تشكيلة طازجة ومحضرة يومياً بأجود المكونات المحلية</p>
+          <span className="text-[#8c6239] text-xs font-bold tracking-widest uppercase mb-2 block bg-[#d4af37]/10 w-fit mx-auto px-4 py-1.5 rounded-full border border-[#d4af37]/30">المنيو اليومي الأصيل</span>
+          <h1 className="text-3xl md:text-4xl font-extrabold mb-2 text-[#2c1e14]">ما تيسر من قدور الأجداد</h1>
+          <p className="text-sm text-[#6b5344]">تشكيلة طازجة ومحضرة يومياً بأجود المكونات المحلية</p>
         </div>
       </header>
 
       {/* شريط الأقسام الرئيسية */}
-      <nav className="sticky top-0 z-30 bg-black/90 backdrop-blur-md border-b border-gold/20 shadow-lg py-3 px-4">
+      <nav className="sticky top-0 z-30 bg-[#f5f1ea]/95 backdrop-blur-md border-b border-[#d4af37]/30 shadow-sm py-3 px-4">
         <div className="max-w-6xl mx-auto flex items-center justify-start md:justify-center overflow-x-auto space-x-3 space-x-reverse scrollbar-hide">
           {mainCategories.map((cat) => {
             const isSelected = selectedMainCat === cat.id;
@@ -74,8 +73,8 @@ export const DailyMenu: React.FC<DailyMenuProps> = ({ onAddToCart }) => {
                 onClick={() => handleMainCatChange(cat.id)}
                 className={`flex items-center space-x-2 space-x-reverse px-5 py-2.5 rounded-full text-sm font-bold whitespace-nowrap transition-all ${
                   isSelected 
-                    ? 'bg-gold text-obsidian shadow-[0_0_15px_rgba(212,175,55,0.4)] scale-105' 
-                    : 'bg-obsidian-light text-stone-300 hover:bg-stone-800 border border-gold/20'
+                    ? 'bg-[#d4af37] text-white shadow-md scale-105' 
+                    : 'bg-white text-[#6b5344] hover:bg-[#d4af37]/10 border border-[#d4af37]/30'
                 }`}
               >
                 <span>{cat.icon}</span>
@@ -95,7 +94,7 @@ export const DailyMenu: React.FC<DailyMenuProps> = ({ onAddToCart }) => {
             placeholder="ابحث عن طبقك المفضل (مثل: المرقوق، سليق، كابلي)..."
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
-            className="w-full px-5 py-3.5 rounded-xl border border-gold/20 focus:outline-none focus:ring-2 focus:ring-gold bg-obsidian-light text-stone-100 placeholder-stone-500 shadow-inner text-center"
+            className="w-full px-5 py-3.5 rounded-xl border border-[#d4af37]/40 focus:outline-none focus:ring-2 focus:ring-[#d4af37] bg-white text-[#2c1e14] placeholder-[#8c6239]/60 shadow-sm text-center text-sm transition-all"
           />
         </div>
 
@@ -109,8 +108,8 @@ export const DailyMenu: React.FC<DailyMenuProps> = ({ onAddToCart }) => {
                 onClick={() => setSelectedSubCat(sub.id)}
                 className={`px-5 py-2 rounded-xl text-xs font-semibold whitespace-nowrap transition-colors border ${
                   isSubSelected
-                    ? 'bg-gold text-obsidian border-gold font-bold shadow'
-                    : 'bg-obsidian-light text-stone-300 border-gold/20 hover:border-gold'
+                    ? 'bg-[#d4af37] text-white border-[#d4af37] font-bold shadow-sm'
+                    : 'bg-white text-[#6b5344] border-[#d4af37]/30 hover:border-[#d4af37]'
                 }`}
               >
                 {sub.name}
@@ -127,17 +126,17 @@ export const DailyMenu: React.FC<DailyMenuProps> = ({ onAddToCart }) => {
               return (
                 <div 
                   key={dish.id} 
-                  className="bg-obsidian-light rounded-2xl overflow-hidden border border-gold/20 shadow-md hover:border-gold/50 transition-all flex flex-col justify-between"
+                  className="bg-white rounded-2xl overflow-hidden border border-[#d4af37]/30 shadow-sm hover:border-[#d4af37] transition-all flex flex-col justify-between"
                 >
                   <div>
-                    <div className="relative h-48 overflow-hidden bg-black">
+                    <div className="relative h-48 overflow-hidden bg-[#f5f1ea]">
                       <img 
                         src={dish.image} 
                         alt={dish.name} 
                         className="w-full h-full object-cover hover:scale-105 transition-transform duration-500"
                       />
                       {dish.badge && (
-                        <span className="absolute top-3 right-3 bg-gold text-obsidian text-xs px-3 py-1 rounded-full font-bold shadow">
+                        <span className="absolute top-3 right-3 bg-[#d4af37] text-white text-xs px-3 py-1 rounded-full font-bold shadow-sm">
                           {dish.badge}
                         </span>
                       )}
@@ -145,7 +144,7 @@ export const DailyMenu: React.FC<DailyMenuProps> = ({ onAddToCart }) => {
                       {/* السعرات الحرارية */}
                       <div className="absolute bottom-3 left-3">
                         {dish.calories && String(dish.calories).trim() !== '' && (
-                          <span className="bg-black/80 backdrop-blur-md text-stone-200 text-xs px-2.5 py-1 rounded-md font-sans border border-gold/20">
+                          <span className="bg-white/90 backdrop-blur-md text-[#2c1e14] text-xs px-2.5 py-1 rounded-md font-sans border border-[#d4af37]/30 shadow-sm font-medium">
                             {dish.calories}
                           </span>
                         )}
@@ -153,13 +152,13 @@ export const DailyMenu: React.FC<DailyMenuProps> = ({ onAddToCart }) => {
                     </div>
 
                     <div className="p-5 space-y-2">
-                      <h3 className="text-xl font-bold text-stone-100">{dish.name}</h3>
-                      <p className="text-stone-400 text-sm leading-relaxed">{dish.description}</p>
+                      <h3 className="text-xl font-bold text-[#2c1e14]">{dish.name}</h3>
+                      <p className="text-[#6b5344] text-sm leading-relaxed">{dish.description}</p>
                       
                       {/* مسببات الحساسية */}
                       {dish.allergens && String(dish.allergens).trim() !== '' && (
                         <div className="pt-2">
-                          <span className="inline-flex items-center gap-1.5 bg-amber-950/40 border border-gold/30 text-amber-300 text-xs px-3 py-1 rounded-lg font-medium">
+                          <span className="inline-flex items-center gap-1.5 bg-amber-50 border border-amber-200 text-amber-800 text-xs px-3 py-1 rounded-lg font-medium">
                             ⚠️ مسببات الحساسية: {dish.allergens}
                           </span>
                         </div>
@@ -167,8 +166,8 @@ export const DailyMenu: React.FC<DailyMenuProps> = ({ onAddToCart }) => {
                     </div>
                   </div>
 
-                  <div className="px-5 pb-5 pt-0 flex items-center justify-between border-t border-gold/10 mt-2 pt-3">
-                    <span className="text-lg font-bold text-gold font-sans">
+                  <div className="px-5 pb-5 pt-0 flex items-center justify-between border-t border-[#d4af37]/15 mt-2 pt-3">
+                    <span className="text-lg font-bold text-[#8c6239] font-sans">
                       {typeof dish.price === 'number' ? `${dish.price} ر.س` : dish.price}
                     </span>
                     <button 
@@ -176,8 +175,8 @@ export const DailyMenu: React.FC<DailyMenuProps> = ({ onAddToCart }) => {
                       className={`${
                         isAdded 
                           ? 'bg-green-600 text-white scale-95' 
-                          : 'bg-gold hover:bg-gold-dark text-obsidian'
-                      } px-4 py-2 rounded-xl text-sm font-bold transition-all shadow`}
+                          : 'bg-[#d4af37] hover:bg-[#c49f27] text-white'
+                      } px-4 py-2 rounded-xl text-sm font-bold transition-all shadow-sm`}
                     >
                       {isAdded ? '✓ تمت الإضافة' : 'أضف للسلة'}
                     </button>
@@ -187,8 +186,8 @@ export const DailyMenu: React.FC<DailyMenuProps> = ({ onAddToCart }) => {
             })}
           </div>
         ) : (
-          <div className="text-center py-16 bg-obsidian-light rounded-2xl border border-gold/20">
-            <p className="text-stone-400 text-base">عذراً، لم نجد أطباق مطابقة في هذا القسم حالياً.</p>
+          <div className="text-center py-16 bg-white rounded-2xl border border-[#d4af37]/30 shadow-sm">
+            <p className="text-[#6b5344] text-base">عذراً، لم نجد أطباق مطابقة في هذا القسم حالياً.</p>
           </div>
         )}
       </main>

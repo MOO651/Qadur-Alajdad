@@ -12,7 +12,6 @@ import { MenuProvider } from './context/MenuContext';
 function AppContent() {
   const [cart, setCart] = useState<Dish[]>([]);
   
-  // قراءة المسار المباشر من المتصفح (مثل /admin) عند فتح الصفحة لأول مرة
   const [currentPage, setCurrentPage] = useState(() => {
     const path = window.location.pathname.replace('/', '');
     return path || 'home';
@@ -88,7 +87,7 @@ function AppContent() {
   };
 
   return (
-    <div className="min-h-screen bg-[#f5f2eb] text-[#1c140d] flex flex-col">
+    <div className="min-h-screen bg-[#f5f1ea] text-[#2c1e14] flex flex-col font-sans" dir="rtl">
       <Header 
         routePath={currentPage} 
         navigateTo={navigateTo} 

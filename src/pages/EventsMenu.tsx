@@ -1,13 +1,10 @@
-import React from 'react';
 import { CalendarHeart } from 'lucide-react';
 
 interface EventsMenuProps {
   addToCart: (item: any) => void;
-  // أضف أي Props إضافية هنا لو محتاجها مثل حالة الحجز
 }
 
 export default function EventsMenu({ addToCart }: EventsMenuProps) {
-  // بيانات ولائم المناسبات والأفراح
   const weddingItems = [
     {
       id: 'w1',
@@ -25,30 +22,29 @@ export default function EventsMenu({ addToCart }: EventsMenuProps) {
     }
   ];
 
-  const isBooked = false; // مثال لحالة الحجز
-
   return (
-    <div className="min-h-screen bg-[#121212] text-[#FFFDF9] p-6">
+    <div className="min-h-screen bg-[#f5f1ea] text-[#2c1e14] p-6" dir="rtl">
       <div className="max-w-4xl mx-auto space-y-6">
-        <header className="text-center mb-8">
-          <h1 className="text-3xl font-bold text-[#D4AF37] mb-2">🎉 مناسبات وأفراح</h1>
-          <p className="text-gray-400">ولائم وأطباق خاصة لحفلاتكم ومناسباتكم السعيدة</p>
+        <header className="text-center mb-8 bg-white py-10 px-4 rounded-3xl border border-[#d4af37]/30 shadow-sm">
+          <span className="text-[#8c6239] text-xs font-bold tracking-widest uppercase mb-2 block bg-[#d4af37]/10 w-fit mx-auto px-4 py-1.5 rounded-full border border-[#d4af37]/30">المناسبات والولائم</span>
+          <h1 className="text-3xl font-extrabold text-[#2c1e14] mb-2">🎉 مناسبات وأفراح</h1>
+          <p className="text-[#6b5344] text-sm">ولائم وأطباق خاصة لحفلاتكم ومناسباتكم السعيدة</p>
         </header>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           {weddingItems && weddingItems.length > 0 ? (
             weddingItems.map((dish) => (
-              <div key={dish.id} className="bg-[#181513] p-5 rounded-2xl border border-[#D4AF37]/20 flex flex-col justify-between">
+              <div key={dish.id} className="bg-white p-6 rounded-3xl border border-[#d4af37]/30 flex flex-col justify-between shadow-sm hover:border-[#d4af37] transition-all">
                 <div>
-                  <h3 className="text-xl font-bold text-[#D4AF37] mb-2">{dish.name}</h3>
-                  <p className="text-gray-300 text-sm mb-4">{dish.description}</p>
-                  <span className="text-lg font-semibold text-white">{dish.price} ريال</span>
+                  <h3 className="text-xl font-bold text-[#2c1e14] mb-2">{dish.name}</h3>
+                  <p className="text-[#6b5344] text-sm mb-4 leading-relaxed">{dish.description}</p>
+                  <span className="text-lg font-bold text-[#8c6239] font-sans">{dish.price} ريال</span>
                 </div>
                 
-                <div className="mt-4 flex items-center justify-between">
+                <div className="mt-4 flex items-center justify-between pt-3 border-t border-[#d4af37]/15">
                   <button 
                     onClick={() => addToCart(dish)}
-                    className="bg-[#D4AF37] text-black px-4 py-2 rounded-xl font-bold hover:bg-[#c29b30] transition flex items-center gap-2"
+                    className="w-full bg-[#d4af37] hover:bg-[#c49f27] text-white px-4 py-3 rounded-xl font-bold transition flex items-center justify-center gap-2 text-xs shadow-sm"
                   >
                     <CalendarHeart className="w-4 h-4" />
                     إضافة للطلب
@@ -57,7 +53,7 @@ export default function EventsMenu({ addToCart }: EventsMenuProps) {
               </div>
             ))
           ) : (
-            <div className="col-span-full py-20 text-center text-gray-400">
+            <div className="col-span-full py-20 text-center text-[#6b5344] bg-white rounded-3xl border border-[#d4af37]/30 shadow-sm">
               <p className="text-lg">لا توجد ولائم أو مناسبات متاحة حالياً</p>
             </div>
           )}

@@ -1,106 +1,159 @@
 import React, { createContext, useContext, useState, useEffect } from 'react';
-import type { Dish } from '../data/menuData';
-import { menuDishes } from '../data/menuData';
 import { supabase } from '../supabaseClient';
+import type { Dish } from '../data/menuData';
 
 interface MenuContextType {
+  dailyMenu: any[];
+  weddingMenu: any[];
   dishes: Dish[];
+  loading: boolean;
   addDish: (dish: any) => Promise<void>;
   updateDish: (id: string, updatedDish: any) => Promise<void>;
   deleteDish: (id: string) => Promise<void>;
+  addMenuItem: (sectionIndex: number, item: any, type: 'daily' | 'wedding') => void;
+  updateMenuItem: (sectionIndex: number, itemIndex: number, updatedItem: any, type: 'daily' | 'wedding') => void;
+  deleteMenuItem: (sectionIndex: number, itemIndex: number, type: 'daily' | 'wedding') => void;
+  refreshDishes: () => Promise<void>;
 }
 
-const MenuContext = createContext<MenuContextType | null>(null);
+const MenuContext = createContext<MenuContextType | undefined>(undefined);
 
 export function MenuProvider({ children }: { children: React.ReactNode }) {
-  const [dishes, setDishes] = useState<Dish[]>(menuDishes);
+  const [dailyMenu, setDailyMenu] = useState<any[]>([]);
+  const [weddingMenu, setWeddingMenu] = useState<any[]>([]);
+  const [dishes, setDishes] = useState<Dish[]>([]);
+  const [loading, setLoading] = useState<boolean>(true);
 
+  // جلب الأطباق من Supabase عند التحميل
   useEffect(() => {
     fetchDishes();
-
-    const channel = supabase
-      .channel('public:dishes')
-      .on(
-        'postgres_changes',
-        { event: '*', schema: 'public', table: 'dishes' },
-        (payload: any) => {
-          if (payload.eventType === 'INSERT') {
-            setDishes((prev) => [...prev, payload.new as Dish]);
-          } else if (payload.eventType === 'UPDATE') {
-            setDishes((prev) =>
-              prev.map((d) => (d.id === payload.new.id ? (payload.new as Dish) : d))
-            );
-          } else if (payload.eventType === 'DELETE') {
-            setDishes((prev) => prev.filter((d) => d.id !== payload.old.id));
-          }
-        }
-      )
-      .subscribe();
-
-    return () => {
-      supabase.removeChannel(channel);
-    };
   }, []);
 
   const fetchDishes = async () => {
-    const { data, error } = await supabase.from('dishes').select('*');
-    if (error) {
-      console.error('Error fetching dishes:', error);
-    } else if (data && data.length > 0) {
-      setDishes(data as Dish[]);
+    try {
+      setLoading(true);
+      const { data, error } = await supabase.from('dishes').select('*');
+      if (error) throw error;
+      if (data) setDishes(data);
+    } catch (err) {
+      console.error('Error fetching dishes from Supabase:', err);
+    } finally {
+      setLoading(false);
     }
   };
 
-  const addDish = async (dish: any) => {
-    const { data, error } = await supabase.from('dishes').insert([dish]).select();
-    
-    if (error) {
-      console.error('Error adding dish to Supabase:', error);
-      alert('فشل الحفظ في قاعدة البيانات: ' + error.message);
-      throw error;
-    } else if (data) {
-      setDishes((prev) => [...prev, data[0] as Dish]);
+  // إضافة طبق جديد لقاعدة البيانات
+  const addDish = async (newDish: any) => {
+    try {
+      const { data, error } = await supabase.from('dishes').insert([newDish]).select();
+      if (error) throw error;
+      if (data && data.length > 0) {
+        setDishes((prev) => [...prev, data[0]]);
+      }
+    } catch (err) {
+      console.error('Error adding dish:', err);
+      throw err;
     }
   };
 
-  const updateDish = async (id: string, updatedData: any) => {
-    const { error } = await supabase
-      .from('dishes')
-      .update(updatedData)
-      .eq('id', id);
-
-    if (error) {
-      console.error('Error updating dish in Supabase:', error);
-      alert('فشل التعديل في قاعدة البيانات: ' + error.message);
-      throw error;
-    } else {
-      setDishes((prev) =>
-        prev.map((d) => (d.id === id ? { ...d, ...updatedData } : d))
-      );
+  // تحديث طبق موجود في قاعدة البيانات
+  const updateDish = async (id: string, updatedFields: any) => {
+    try {
+      const { error } = await supabase.from('dishes').update(updatedFields).eq('id', id);
+      if (error) throw error;
+      setDishes((prev) => prev.map((dish) => (dish.id === id ? { ...dish, ...updatedFields } : dish)));
+    } catch (err) {
+      console.error('Error updating dish:', err);
+      throw err;
     }
   };
 
+  // حذف طبق من قاعدة البيانات
   const deleteDish = async (id: string) => {
-    const { error } = await supabase.from('dishes').delete().eq('id', id);
+    try {
+      const { error } = await supabase.from('dishes').delete().eq('id', id);
+      if (error) throw error;
+      setDishes((prev) => prev.filter((dish) => dish.id !== id));
+    } catch (err) {
+      console.error('Error deleting dish:', err);
+      throw err;
+    }
+  };
 
-    if (error) {
-      console.error('Error deleting dish from Supabase:', error);
-      alert('فشل الحذف من قاعدة البيانات: ' + error.message);
-      throw error;
+  // دوال إدارة القوائم المحلية (اليومية والأفراح)
+  const addMenuItem = (sectionIndex: number, item: any, type: 'daily' | 'wedding') => {
+    if (type === 'daily') {
+      const updated = [...dailyMenu];
+      if (updated[sectionIndex]) {
+        updated[sectionIndex].items.push(item);
+        setDailyMenu(updated);
+      }
     } else {
-      setDishes((prev) => prev.filter((d) => d.id !== id));
+      const updated = [...weddingMenu];
+      if (updated[sectionIndex]) {
+        updated[sectionIndex].items.push(item);
+        setWeddingMenu(updated);
+      }
+    }
+  };
+
+  const updateMenuItem = (sectionIndex: number, itemIndex: number, updatedItem: any, type: 'daily' | 'wedding') => {
+    if (type === 'daily') {
+      const updated = [...dailyMenu];
+      if (updated[sectionIndex]?.items[itemIndex]) {
+        updated[sectionIndex].items[itemIndex] = updatedItem;
+        setDailyMenu(updated);
+      }
+    } else {
+      const updated = [...weddingMenu];
+      if (updated[sectionIndex]?.items[itemIndex]) {
+        updated[sectionIndex].items[itemIndex] = updatedItem;
+        setWeddingMenu(updated);
+      }
+    }
+  };
+
+  const deleteMenuItem = (sectionIndex: number, itemIndex: number, type: 'daily' | 'wedding') => {
+    if (type === 'daily') {
+      const updated = [...dailyMenu];
+      if (updated[sectionIndex]) {
+        updated[sectionIndex].items = updated[sectionIndex].items.filter((_: any, idx: number) => idx !== itemIndex);
+        setDailyMenu(updated);
+      }
+    } else {
+      const updated = [...weddingMenu];
+      if (updated[sectionIndex]) {
+        updated[sectionIndex].items = updated[sectionIndex].items.filter((_: any, idx: number) => idx !== itemIndex);
+        setWeddingMenu(updated);
+      }
     }
   };
 
   return (
-    <MenuContext.Provider value={{ dishes, addDish, updateDish, deleteDish }}>
+    <MenuContext.Provider
+      value={{
+        dailyMenu,
+        weddingMenu,
+        dishes,
+        loading,
+        addDish,
+        updateDish,
+        deleteDish,
+        addMenuItem,
+        updateMenuItem,
+        deleteMenuItem,
+        refreshDishes: fetchDishes,
+      }}
+    >
       {children}
     </MenuContext.Provider>
   );
 }
 
-export const useMenu = () => {
+export function useMenu() {
   const context = useContext(MenuContext);
-  if (!context) throw new Error('useMenu must be used within a MenuProvider');
+  if (!context) {
+    throw new Error('useMenu must be used within a MenuProvider');
+  }
   return context;
-};
+}

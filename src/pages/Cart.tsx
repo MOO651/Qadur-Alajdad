@@ -71,13 +71,13 @@ export default function Cart({ cartItems, removeFromCart, navigateTo, clearCart 
 
   if (orderPlaced) {
     return (
-      <div className="max-w-md mx-auto mt-20 text-center p-8 bg-[#181513] border border-[#D4AF37]/40 rounded-3xl space-y-6 shadow-2xl" dir="rtl">
-        <CheckCircle2 className="w-20 h-20 text-green-500 mx-auto animate-bounce" />
-        <h2 className="text-2xl font-bold text-[#FFFDF9]">تم إرسال طلبك بنجاح!</h2>
-        <p className="text-gray-400 text-xs font-sans">جاري تجهيز طلبك الآن في المطعم وسيصلك في أقرب وقت.</p>
+      <div className="max-w-md mx-auto mt-20 text-center p-8 bg-white border border-[#d4af37]/30 rounded-3xl space-y-6 shadow-xl" dir="rtl">
+        <CheckCircle2 className="w-20 h-20 text-green-600 mx-auto animate-bounce" />
+        <h2 className="text-2xl font-bold text-[#2c1e14]">تم إرسال طلبك بنجاح!</h2>
+        <p className="text-[#6b5344] text-xs font-sans">جاري تجهيز طلبك الآن في المطعم وسيصلك في أقرب وقت.</p>
         <button 
           onClick={() => { setOrderPlaced(false); navigateTo('daily'); }}
-          className="w-full bg-[#D4AF37] text-black py-3 rounded-xl text-xs font-bold hover:shadow-[0_0_20px_rgba(212,175,55,0.5)] transition-all"
+          className="w-full bg-[#d4af37] text-white py-3 rounded-xl text-xs font-bold hover:bg-[#c49f27] hover:shadow-md transition-all"
         >
           العودة للمنيو
         </button>
@@ -87,32 +87,32 @@ export default function Cart({ cartItems, removeFromCart, navigateTo, clearCart 
 
   return (
     <div className="max-w-4xl mx-auto px-4 py-12 space-y-8" dir="rtl">
-      <div className="flex items-center justify-between border-b border-[#D4AF37]/20 pb-6">
+      <div className="flex items-center justify-between border-b border-[#d4af37]/25 pb-6">
         <div className="flex items-center gap-3">
-          <div className="w-12 h-12 rounded-2xl bg-[#D4AF37]/10 border border-[#D4AF37]/30 flex items-center justify-center text-[#D4AF37]">
+          <div className="w-12 h-12 rounded-2xl bg-[#d4af37]/10 border border-[#d4af37]/30 flex items-center justify-center text-[#8c6239]">
             <ShoppingBag className="w-6 h-6" />
           </div>
           <div>
-            <h2 className="text-2xl font-bold text-[#FFFDF9]">سلة الطلبات وإتمام الشراء</h2>
-            <p className="text-gray-400 text-xs font-sans">أكمل بياناتك لتأكيد الطلب عبر السيستم فوراً</p>
+            <h2 className="text-2xl font-bold text-[#2c1e14]">سلة الطلبات وإتمام الشراء</h2>
+            <p className="text-[#6b5344] text-xs font-sans">أكمل بياناتك لتأكيد الطلب عبر السيستم فوراً</p>
           </div>
         </div>
         <button 
           onClick={() => navigateTo('daily')}
-          className="text-xs text-[#D4AF37] hover:underline flex items-center gap-1 font-bold"
+          className="text-xs text-[#8c6239] hover:underline flex items-center gap-1 font-bold"
         >
           متابعة التسوق <ArrowRight className="w-4 h-4" />
         </button>
       </div>
 
       {cartItems.length === 0 ? (
-        <div className="text-center py-20 bg-[#181513] border border-[#D4AF37]/20 rounded-3xl space-y-4">
-          <ShoppingBag className="w-16 h-16 text-gray-600 mx-auto" />
-          <h3 className="text-lg font-bold text-gray-300">سلة المشتريات فارغة</h3>
-          <p className="text-gray-500 text-xs font-sans">لم تقم بإضافة أي أطباق للسلة بعد.</p>
+        <div className="text-center py-20 bg-white border border-[#d4af37]/30 rounded-3xl space-y-4 shadow-sm">
+          <ShoppingBag className="w-16 h-16 text-[#8c6239]/40 mx-auto" />
+          <h3 className="text-lg font-bold text-[#2c1e14]">سلة المشتريات فارغة</h3>
+          <p className="text-[#6b5344] text-xs font-sans">لم تقم بإضافة أي أطباق للسلة بعد.</p>
           <button 
             onClick={() => navigateTo('daily')}
-            className="bg-[#D4AF37] text-black px-6 py-3 rounded-xl text-xs font-bold hover:shadow-[0_0_20px_rgba(212,175,55,0.5)] transition-all"
+            className="bg-[#d4af37] text-white px-6 py-3 rounded-xl text-xs font-bold hover:bg-[#c49f27] hover:shadow-md transition-all"
           >
             تصفح المنيو الآن
           </button>
@@ -121,26 +121,26 @@ export default function Cart({ cartItems, removeFromCart, navigateTo, clearCart 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
           {/* تفاصيل المنتجات في السلة */}
           <div className="md:col-span-2 space-y-4">
-            <h3 className="text-base font-bold text-[#D4AF37]">الأطباق المتاحة في السلة ({cartItems.length})</h3>
-            <div className="bg-[#181513] border border-[#D4AF37]/30 rounded-3xl divide-y divide-[#D4AF37]/10 overflow-hidden">
+            <h3 className="text-base font-bold text-[#8c6239]">الأطباق المتاحة في السلة ({cartItems.length})</h3>
+            <div className="bg-white border border-[#d4af37]/30 rounded-3xl divide-y divide-[#d4af37]/15 overflow-hidden shadow-sm">
               {cartItems.map((item, index) => (
                 <div key={index} className="p-4 flex items-center justify-between gap-4">
                   <div className="flex items-center gap-3">
                     {item.image ? (
-                      <img src={item.image} alt={item.name} className="w-14 h-14 rounded-xl object-cover border border-[#D4AF37]/20" />
+                      <img src={item.image} alt={item.name} className="w-14 h-14 rounded-xl object-cover border border-[#d4af37]/20" />
                     ) : (
-                      <div className="w-14 h-14 rounded-xl bg-black flex items-center justify-center text-[#D4AF37] border border-[#D4AF37]/20">
+                      <div className="w-14 h-14 rounded-xl bg-[#f5f1ea] flex items-center justify-center text-[#8c6239] border border-[#d4af37]/20">
                         <ShoppingBag className="w-6 h-6" />
                       </div>
                     )}
                     <div>
-                      <h4 className="text-[#FFFDF9] font-bold text-sm sm:text-base">{item.name}</h4>
-                      <span className="text-[#D4AF37] text-xs font-sans font-bold">{item.price} ريال</span>
+                      <h4 className="text-[#2c1e14] font-bold text-sm sm:text-base">{item.name}</h4>
+                      <span className="text-[#8c6239] text-xs font-sans font-bold">{item.price} ريال</span>
                     </div>
                   </div>
                   <button 
                     onClick={() => removeFromCart(index)}
-                    className="p-2 text-red-400 hover:bg-red-500/10 rounded-xl transition-colors"
+                    className="p-2 text-red-500 hover:bg-red-50 rounded-xl transition-colors"
                     title="حذف الصنف"
                   >
                     <Trash2 className="w-5 h-5" />
@@ -149,52 +149,52 @@ export default function Cart({ cartItems, removeFromCart, navigateTo, clearCart 
               ))}
             </div>
 
-            <form onSubmit={handleCheckout} id="checkout-form" className="bg-[#181513] border border-[#D4AF37]/30 rounded-3xl p-6 space-y-4 mt-6">
-              <h3 className="text-base font-bold text-[#D4AF37]">معلومات التوصيل والاتصال</h3>
+            <form onSubmit={handleCheckout} id="checkout-form" className="bg-white border border-[#d4af37]/30 rounded-3xl p-6 space-y-4 mt-6 shadow-sm">
+              <h3 className="text-base font-bold text-[#8c6239]">معلومات التوصيل والاتصال</h3>
               
               <div className="space-y-3">
                 <div className="relative">
-                  <User className="absolute right-3 top-3.5 w-4 h-4 text-gray-400" />
+                  <User className="absolute right-3 top-3.5 w-4 h-4 text-[#8c6239]" />
                   <input 
                     type="text" 
                     placeholder="الاسم الكامل *" 
                     value={customerName}
                     onChange={(e) => setCustomerName(e.target.value)}
                     required
-                    className="w-full bg-black border border-[#D4AF37]/20 rounded-xl py-3 pr-10 pl-4 text-sm text-white outline-none focus:border-[#D4AF37]"
+                    className="w-full bg-[#f5f1ea] border border-[#d4af37]/20 rounded-xl py-3 pr-10 pl-4 text-sm text-[#2c1e14] outline-none focus:border-[#d4af37]"
                   />
                 </div>
 
                 <div className="relative">
-                  <Phone className="absolute right-3 top-3.5 w-4 h-4 text-gray-400" />
+                  <Phone className="absolute right-3 top-3.5 w-4 h-4 text-[#8c6239]" />
                   <input 
                     type="tel" 
                     placeholder="رقم الهاتف / الجوال *" 
                     value={customerPhone}
                     onChange={(e) => setCustomerPhone(e.target.value)}
                     required
-                    className="w-full bg-black border border-[#D4AF37]/20 rounded-xl py-3 pr-10 pl-4 text-sm text-white outline-none focus:border-[#D4AF37]"
+                    className="w-full bg-[#f5f1ea] border border-[#d4af37]/20 rounded-xl py-3 pr-10 pl-4 text-sm text-[#2c1e14] outline-none focus:border-[#d4af37]"
                   />
                 </div>
 
                 <div className="relative">
-                  <MapPin className="absolute right-3 top-3.5 w-4 h-4 text-gray-400" />
+                  <MapPin className="absolute right-3 top-3.5 w-4 h-4 text-[#8c6239]" />
                   <input 
                     type="text" 
                     placeholder="عنوان التوصيل بالتفصيل (المدينة، الحي، الشارع)" 
                     value={customerAddress}
                     onChange={(e) => setCustomerAddress(e.target.value)}
-                    className="w-full bg-black border border-[#D4AF37]/20 rounded-xl py-3 pr-10 pl-4 text-sm text-white outline-none focus:border-[#D4AF37]"
+                    className="w-full bg-[#f5f1ea] border border-[#d4af37]/20 rounded-xl py-3 pr-10 pl-4 text-sm text-[#2c1e14] outline-none focus:border-[#d4af37]"
                   />
                 </div>
 
                 <div className="relative">
-                  <FileText className="absolute right-3 top-3.5 w-4 h-4 text-gray-400" />
+                  <FileText className="absolute right-3 top-3.5 w-4 h-4 text-[#8c6239]" />
                   <textarea 
                     placeholder="ملاحظات إضافية للطلب (اختياري)..." 
                     value={orderNotes}
                     onChange={(e) => setOrderNotes(e.target.value)}
-                    className="w-full bg-black border border-[#D4AF37]/20 rounded-xl py-3 pr-10 pl-4 text-sm text-white h-20 outline-none focus:border-[#D4AF37]"
+                    className="w-full bg-[#f5f1ea] border border-[#d4af37]/20 rounded-xl py-3 pr-10 pl-4 text-sm text-[#2c1e14] h-20 outline-none focus:border-[#d4af37]"
                   ></textarea>
                 </div>
               </div>
@@ -203,23 +203,23 @@ export default function Cart({ cartItems, removeFromCart, navigateTo, clearCart 
 
           {/* ملخص الطلب الجانبي */}
           <div className="space-y-6">
-            <div className="bg-[#181513] border border-[#D4AF37]/40 rounded-3xl p-6 space-y-6 shadow-2xl sticky top-6">
-              <h3 className="text-base font-bold text-[#D4AF37] border-b border-[#D4AF37]/20 pb-3">ملخص الفاتورة</h3>
+            <div className="bg-white border border-[#d4af37]/40 rounded-3xl p-6 space-y-6 shadow-md sticky top-6">
+              <h3 className="text-base font-bold text-[#8c6239] border-b border-[#d4af37]/20 pb-3">ملخص الفاتورة</h3>
               
-              <div className="space-y-2 text-sm text-gray-300">
+              <div className="space-y-2 text-sm text-[#6b5344]">
                 <div className="flex justify-between">
                   <span>قيمة الأطباق:</span>
-                  <span className="font-sans">{totalPrice} ريال</span>
+                  <span className="font-sans font-semibold text-[#2c1e14]">{totalPrice} ريال</span>
                 </div>
                 <div className="flex justify-between">
                   <span>رسوم التوصيل:</span>
-                  <span className="text-green-400 font-sans">مجاني</span>
+                  <span className="text-green-600 font-sans font-semibold">مجاني</span>
                 </div>
               </div>
 
-              <div className="flex items-center justify-between text-lg font-bold border-t border-[#D4AF37]/20 pt-4">
-                <span className="text-gray-200">الإجمالي الكلي:</span>
-                <span className="text-[#D4AF37] text-xl font-sans">{totalPrice} ريال</span>
+              <div className="flex items-center justify-between text-lg font-bold border-t border-[#d4af37]/20 pt-4">
+                <span className="text-[#2c1e14]">الإجمالي الكلي:</span>
+                <span className="text-[#8c6239] text-xl font-sans">{totalPrice} ريال</span>
               </div>
 
               <div className="space-y-3">
@@ -227,7 +227,7 @@ export default function Cart({ cartItems, removeFromCart, navigateTo, clearCart 
                   type="submit"
                   form="checkout-form"
                   disabled={loading}
-                  className="w-full bg-gradient-to-r from-amber-500 to-amber-600 hover:opacity-90 text-black font-bold py-3.5 rounded-2xl text-xs transition-all flex items-center justify-center gap-2 shadow-[0_0_20px_rgba(212,175,55,0.4)]"
+                  className="w-full bg-[#d4af37] hover:bg-[#c49f27] text-white font-bold py-3.5 rounded-2xl text-xs transition-all flex items-center justify-center gap-2 shadow-sm"
                 >
                   {loading ? 'جاري إرسال الطلب...' : 'تأكيد وإرسال الطلب للسيستم'}
                 </button>
@@ -235,7 +235,7 @@ export default function Cart({ cartItems, removeFromCart, navigateTo, clearCart 
                 <button 
                   type="button"
                   onClick={clearCart}
-                  className="w-full border border-red-500/40 text-red-400 hover:bg-red-500/10 py-2.5 rounded-2xl text-xs font-bold transition-all"
+                  className="w-full border border-red-500/40 text-red-500 hover:bg-red-50 py-2.5 rounded-2xl text-xs font-bold transition-all"
                 >
                   إفراغ السلة
                 </button>
