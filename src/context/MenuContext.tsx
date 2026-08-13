@@ -1,6 +1,6 @@
 import React, { createContext, useContext, useState, useEffect } from 'react';
 import { supabase } from '../supabaseClient';
-import type { Dish } from '../data/menuData';
+import { menuDishes, type Dish } from '../data/menuData';
 
 interface MenuContextType {
   dailyMenu: any[];
@@ -21,28 +21,28 @@ const MenuContext = createContext<MenuContextType | undefined>(undefined);
 export function MenuProvider({ children }: { children: React.ReactNode }) {
   const [dailyMenu, setDailyMenu] = useState<any[]>([]);
   const [weddingMenu, setWeddingMenu] = useState<any[]>([]);
-  const [dishes, setDishes] = useState<Dish[]>([]);
-  const [loading, setLoading] = useState<boolean>(true);
+  // ابدأ بالداتا المحلية فوراً عشان المنيو يظهر على طول
+  const [dishes, setDishes] = useState<Dish[]>(menuDishes);
+  const [loading, setLoading] = useState<boolean>(false);
 
-  // جلب الأطباق من Supabase عند التحميل
+  // جلب الأطباق من Supabase في الخلفية (اختياري لو الجدول جاهز)
   useEffect(() => {
     fetchDishes();
   }, []);
 
   const fetchDishes = async () => {
     try {
-      setLoading(true);
       const { data, error } = await supabase.from('dishes').select('*');
       if (error) throw error;
-      if (data) setDishes(data);
+      // لو فيه داتا جاية من Supabase ابدلها، لو مفيش أو حصل خطأ هيفضل شغال بالداتا المحلية
+      if (data && data.length > 0) {
+        setDishes(data);
+      }
     } catch (err) {
-      console.error('Error fetching dishes from Supabase:', err);
-    } finally {
-      setLoading(false);
+      console.error('Notice: Using local menuData as fallback', err);
     }
   };
 
-  // إضافة طبق جديد لقاعدة البيانات
   const addDish = async (newDish: any) => {
     try {
       const { data, error } = await supabase.from('dishes').insert([newDish]).select();
@@ -56,7 +56,6 @@ export function MenuProvider({ children }: { children: React.ReactNode }) {
     }
   };
 
-  // تحديث طبق موجود في قاعدة البيانات
   const updateDish = async (id: string, updatedFields: any) => {
     try {
       const { error } = await supabase.from('dishes').update(updatedFields).eq('id', id);
@@ -68,7 +67,6 @@ export function MenuProvider({ children }: { children: React.ReactNode }) {
     }
   };
 
-  // حذف طبق من قاعدة البيانات
   const deleteDish = async (id: string) => {
     try {
       const { error } = await supabase.from('dishes').delete().eq('id', id);
@@ -80,7 +78,6 @@ export function MenuProvider({ children }: { children: React.ReactNode }) {
     }
   };
 
-  // دوال إدارة القوائم المحلية (اليومية والأفراح)
   const addMenuItem = (sectionIndex: number, item: any, type: 'daily' | 'wedding') => {
     if (type === 'daily') {
       const updated = [...dailyMenu];

@@ -12,8 +12,10 @@ export default function Header({ navigateTo, cartItemsCount }: HeaderProps) {
 
   const navLinks = [
     { name: 'الرئيسية', path: 'home' },
-    { name: 'قائمة الطعام', path: 'daily' },
+    { name: 'المنيو الرئيسي', path: 'main-menu' }, // تم الربط بالمسار الصحيح
+    { name: 'التعتيمة والإفطار', path: 'breakfast' },
     { name: 'منيو الأفراح', path: 'events' },
+    { name: 'باقات البوفيه', path: 'buffet' },
     { name: 'عن المطعم', path: 'about' },
     { name: 'اتصل بنا', path: 'contact' },
   ];
@@ -34,12 +36,12 @@ export default function Header({ navigateTo, cartItemsCount }: HeaderProps) {
           </div>
 
           {/* الروابط (للشاشات الكبيرة) */}
-          <div className="hidden md:flex items-center gap-8">
+          <div className="hidden md:flex items-center gap-5 lg:gap-7">
             {navLinks.map((link) => (
               <button
                 key={link.path}
                 onClick={() => navigateTo(link.path)}
-                className="text-[#4a3525] hover:text-[#8c6239] font-bold transition-colors text-sm tracking-wide"
+                className="text-[#4a3525] hover:text-[#8c6239] font-bold transition-colors text-xs lg:text-sm tracking-wide"
               >
                 {link.name}
               </button>
@@ -67,7 +69,7 @@ export default function Header({ navigateTo, cartItemsCount }: HeaderProps) {
             </button>
           </div>
 
-          {/* أزرار الموبايل (السلة والقائمة) */}
+          {/* أزرار الموبايل */}
           <div className="flex md:hidden items-center gap-3">
             <button 
               onClick={() => navigateTo('cart')}
@@ -107,7 +109,7 @@ export default function Header({ navigateTo, cartItemsCount }: HeaderProps) {
               onClick={() => { navigateTo('cart'); setIsOpen(false); }}
               className="w-full bg-[#d4af37] text-white py-3 rounded-xl font-bold text-sm text-center shadow-md"
             >
-              سلة المشتريات والطلب ({cartItemsCount})
+              سلة المشتريات ({cartItemsCount})
             </button>
           </div>
         </div>

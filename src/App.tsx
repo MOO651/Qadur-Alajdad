@@ -1,13 +1,25 @@
 import { useState, useEffect } from 'react';
 import Header from './components/Header';
 import Footer from './components/Footer';
-import { DailyMenu } from './pages/DailyMenu';
 import Home from './pages/Home';
 import Cart from './pages/Cart';
 import Admin from './pages/Admin';
 import EventsMenu from './pages/EventsMenu';
-import type { Dish } from './data/menuData';
+import BuffetPackages from './pages/BuffetPackages';
+import BreakfastMenu from './pages/BreakfastMenu';
+import MainMenu from './pages/MainMenu';
 import { MenuProvider } from './context/MenuContext';
+
+// تعريف نوع البيانات محلياً لتفادي أي أخطاء استيراد
+interface Dish {
+  id: string;
+  name: string;
+  price: number;
+  description: string;
+  category: string;
+  subCategory: string;
+  image: string;
+}
 
 function AppContent() {
   const [cart, setCart] = useState<Dish[]>([]);
@@ -66,10 +78,14 @@ function AppContent() {
       case 'home':
       case '':
         return <Home navigateTo={navigateTo} addToCart={addToCart} />;
-      case 'daily':
-        return <DailyMenu onAddToCart={addToCart} />;
+      case 'main-menu':
+        return <MainMenu addToCart={addToCart} />;
       case 'events':
         return <EventsMenu addToCart={addToCart} />;
+      case 'breakfast':
+        return <BreakfastMenu addToCart={addToCart} />;
+      case 'buffet':
+        return <BuffetPackages />;
       case 'cart':
         return (
           <Cart 
