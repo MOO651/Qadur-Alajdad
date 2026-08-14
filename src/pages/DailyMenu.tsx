@@ -40,9 +40,10 @@ export const DailyMenu: React.FC<DailyMenuProps> = ({ onAddToCart }) => {
   const filteredDishes = dishes.filter((dish: Dish) => {
     const matchesMain = !selectedMainCat || dish.category === selectedMainCat;
     
+    // تصحيح منطق الفلترة الفرعية ليتطابق مع أول عنصر (الكل) أو المعرّف الخاص به
     const currentSubCats = subCategoriesMap[selectedMainCat] || [];
-    const isAllSub = selectedSubCat === 'all' || currentSubCats[0]?.id === selectedSubCat;
-    const matchesSub = isAllSub || dish.subCategory === selectedSubCat;
+    const isFirstSubAll = currentSubCats.length > 0 && currentSubCats[0].id === selectedSubCat;
+    const matchesSub = isFirstSubAll || selectedSubCat === 'all' || dish.subCategory === selectedSubCat;
     
     const matchesSearch = searchQuery.trim() === '' || 
                           dish.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
