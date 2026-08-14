@@ -8,8 +8,13 @@ import {
   Layers, 
   Wheat, 
   Fish, 
-  ChefHat 
+  ChefHat,
+  Plus 
 } from 'lucide-react';
+
+interface EventsMenuProps {
+  addToCart: (item: any) => void;
+}
 
 interface MenuCategory {
   title: string;
@@ -136,7 +141,7 @@ const menuCategories: MenuCategory[] = [
   }
 ];
 
-export default function EventsMenu() {
+export default function EventsMenu({ addToCart }: EventsMenuProps) {
   const [activeCategory, setActiveCategory] = useState<number>(0);
 
   return (
@@ -191,15 +196,38 @@ export default function EventsMenu() {
           </div>
 
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
-            {menuCategories[activeCategory].items.map((item, idx) => (
-              <div 
-                key={idx}
-                className="bg-[#f5f1ea]/60 border border-[#d4af37]/20 rounded-xl p-3.5 text-[#4a3525] font-sans text-sm flex items-center gap-2.5 transition-all hover:border-[#d4af37] hover:bg-[#f5f1ea]"
-              >
-                <span className="w-2 h-2 rounded-full bg-[#d4af37] shrink-0"></span>
-                <span className="leading-relaxed">{item}</span>
-              </div>
-            ))}
+            {menuCategories[activeCategory].items.map((dishName, idx) => {
+              const dishItem = {
+                id: `events-${activeCategory}-${idx}`,
+                name: dishName,
+                price: 150, // سعر افتراضي لأطباق الحفلات
+                description: `طبق فاخر مخصص للحفلات والولائم من قدور الأجداد.`,
+                image: ''
+              };
+
+              return (
+                <div 
+                  key={idx}
+                  className="bg-[#f5f1ea]/60 border border-[#d4af37]/20 rounded-xl p-4 text-[#4a3525] font-sans text-sm flex flex-col justify-between transition-all hover:border-[#d4af37] hover:bg-[#f5f1ea] shadow-sm"
+                >
+                  <div className="flex items-center gap-2.5 mb-3">
+                    <span className="w-2 h-2 rounded-full bg-[#d4af37] shrink-0"></span>
+                    <span className="leading-relaxed font-bold text-[#2c1e14]">{dishName}</span>
+                  </div>
+
+                  <div className="pt-3 border-t border-[#d4af37]/15 flex items-center justify-between">
+                    <span className="text-xs font-bold text-[#8c6239]">حسب الطلب</span>
+                    <button
+                      onClick={() => addToCart(dishItem)}
+                      className="bg-[#d4af37] hover:bg-[#c49f27] text-white px-3 py-1.5 rounded-lg font-bold transition flex items-center gap-1 text-xs shadow-sm"
+                    >
+                      <Plus className="w-3.5 h-3.5" />
+                      إضافة
+                    </button>
+                  </div>
+                </div>
+              );
+            })}
           </div>
         </div>
 
