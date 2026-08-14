@@ -30,8 +30,8 @@ export default function Header({ navigateTo, cartItemsCount }: HeaderProps) {
           
           {/* الشعار */}
           <div className="flex items-center gap-3 cursor-pointer group" onClick={() => navigateTo('home')}>
-            <div className="w-12 h-12 rounded-full border-2 border-[#d4af37] bg-white overflow-hidden flex items-center justify-center shadow-md group-hover:scale-105 transition-transform">
-              <img src="/logo.png" alt="Logo" className="w-full h-full object-cover" />
+            <div className="w-16 h-16 rounded-full border-2 border-[#d4af37] bg-white overflow-hidden flex items-center justify-center shadow-md group-hover:scale-105 transition-transform">
+              <img src="/logo.png" alt="Logo" className="w-full h-full object-contain p-1" />
             </div>
             <span className="text-[#2c1e14] font-extrabold text-lg sm:text-xl tracking-tight group-hover:text-[#8c6239] transition-colors">
               {lang === 'ar' ? 'قُدُور الأَجْدَاد' : 'Godoor Al-Ajdad'}
