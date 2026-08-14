@@ -46,7 +46,13 @@ export default function Footer({ navigateTo }: FooterProps) {
               <button onClick={() => navigateTo('daily')} className="text-[#4a3525] hover:text-[#8c6239] transition-colors font-semibold">المنيو اليومي</button>
             </li>
             <li>
+              <button onClick={() => navigateTo('breakfast')} className="text-[#4a3525] hover:text-[#8c6239] transition-colors font-semibold">منيو التعتيمة والإفطار</button>
+            </li>
+            <li>
               <button onClick={() => navigateTo('events')} className="text-[#4a3525] hover:text-[#8c6239] transition-colors font-semibold">منيو الأفراح والولائم</button>
+            </li>
+            <li>
+              <button onClick={() => navigateTo('buffet')} className="text-[#4a3525] hover:text-[#8c6239] transition-colors font-semibold">ضوابط وباقات البوفيه</button>
             </li>
             <li>
               <button onClick={() => navigateTo('cart')} className="text-[#4a3525] hover:text-[#8c6239] transition-colors font-semibold">سلة المشتريات</button>
@@ -64,7 +70,7 @@ export default function Footer({ navigateTo }: FooterProps) {
             </li>
             <li className="flex items-center gap-2.5">
               <Phone className="w-4 h-4 text-[#8c6239] flex-shrink-0" />
-              <span dir="ltr" className="font-sans font-semibold">+966 50 000 0000</span>
+              <span dir="ltr" className="font-sans font-semibold">+966 53 319 0997</span>
             </li>
             <li className="flex items-center gap-2.5">
               <Clock className="w-4 h-4 text-[#8c6239] flex-shrink-0" />

@@ -6,6 +6,8 @@ import Home from './pages/Home';
 import Cart from './pages/Cart';
 import Admin from './pages/Admin';
 import EventsMenu from './pages/EventsMenu';
+import BuffetPackages from './pages/BuffetPackages';
+import BreakfastMenu from './pages/BreakfastMenu'; // 1. استيراد صفحة الإفطار والتعتيمة
 import type { Dish } from './data/menuData';
 import { MenuProvider } from './context/MenuContext';
 
@@ -70,6 +72,10 @@ function AppContent() {
         return <DailyMenu onAddToCart={addToCart} />;
       case 'events':
         return <EventsMenu addToCart={addToCart} />;
+      case 'breakfast':
+        return <BreakfastMenu addToCart={addToCart} />; // 2. ربط مسار الإفطار والتعتيمة
+      case 'buffet':
+        return <BuffetPackages />;
       case 'cart':
         return (
           <Cart 

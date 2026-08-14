@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { Utensils, CalendarHeart, Sparkles, ChefHat, Award, HeartHandshake, ArrowLeft, Star } from 'lucide-react';
+import { Utensils, CalendarHeart, Sparkles, ChefHat, Award, HeartHandshake, ArrowLeft, Star, Coffee } from 'lucide-react';
 import { type Dish } from '../data/menuData';
 import { useMenu } from '../context/MenuContext';
 
@@ -39,7 +39,6 @@ export default function Home({ navigateTo, addToCart }: HomeProps) {
       {/* Hero Section */}
       <section className="relative min-h-[90vh] flex items-center justify-center text-center px-4 overflow-hidden">
         <div className="absolute inset-0 z-0">
-          {/* تعديل طبقة التعتيم لزيادة تباين ووضوح النصوص فوق الصور */}
           <div className="absolute inset-0 bg-gradient-to-b from-black/70 via-black/50 to-[#f5f1ea] z-10"></div>
           {heroImages.map((img, index) => (
             <div
@@ -53,7 +52,6 @@ export default function Home({ navigateTo, addToCart }: HomeProps) {
         </div>
 
         <div className="relative z-20 max-w-4xl mx-auto space-y-6 pt-10">
-          {/* تم تكبير اللوجو ليكون بارزاً ومناسباً لشاشات اللابتوب والكبيره */}
           <div className="mx-auto w-40 h-40 sm:w-56 sm:h-56 rounded-full border-4 border-[#d4af37] bg-white overflow-hidden shadow-2xl flex items-center justify-center p-2 transform hover:scale-105 transition-transform">
             <img src="/logo.png" alt="Logo" className="w-full h-full object-contain" />
           </div>
@@ -63,7 +61,6 @@ export default function Home({ navigateTo, addToCart }: HomeProps) {
             <span>عراقة المذاق وأصالة الضيافة السعودية</span>
           </div>
 
-          {/* تحسين وضوح النصوص عبر استخدام اللون الأبيض والظلال العميقة */}
           <h1 className="text-4xl sm:text-6xl font-extrabold text-white tracking-tight leading-tight drop-shadow-[0_4px_10px_rgba(0,0,0,0.9)]">
             أصالة الطبخ السعودي <br />
             <span className="text-[#f3e5ab] drop-shadow-[0_2px_8px_rgba(212,175,55,0.6)]">
@@ -75,20 +72,38 @@ export default function Home({ navigateTo, addToCart }: HomeProps) {
             نحن في مطعم "قُدُور الأَجْدَاد" نأخذك في رحلة فريدة لاستعادة طعم الأكل الأصيل المحضر على أصوله القديمة وبأعلى معايير الجودة الفاخرة لتشريف مناسباتكم.
           </p>
 
-          <div className="flex flex-col sm:flex-row items-center justify-center gap-4 pt-4">
+          <div className="flex flex-wrap items-center justify-center gap-4 pt-4">
             <button 
               onClick={() => navigateTo('daily')}
-              className="w-full sm:w-auto bg-[#d4af37] text-white px-8 py-4 rounded-2xl font-bold text-sm tracking-wider shadow-xl hover:bg-[#c49f27] hover:scale-105 transition-all flex items-center justify-center gap-3"
+              className="w-full sm:w-auto bg-[#d4af37] text-white px-7 py-3.5 rounded-2xl font-bold text-sm tracking-wider shadow-xl hover:bg-[#c49f27] hover:scale-105 transition-all flex items-center justify-center gap-2.5"
             >
-              <Utensils className="w-5 h-5" />
+              <Utensils className="w-4 h-4" />
               <span>تصفح المنيو اليومي</span>
             </button>
+            
+            {/* زر منيو الإفطار والتعتيمة الجديد */}
+            <button 
+              onClick={() => navigateTo('breakfast')}
+              className="w-full sm:w-auto bg-black/50 backdrop-blur-md border border-[#d4af37]/60 text-white px-7 py-3.5 rounded-2xl font-bold text-sm tracking-wider hover:bg-black/70 hover:border-[#d4af37] hover:scale-105 transition-all flex items-center justify-center gap-2.5 shadow-xl"
+            >
+              <Coffee className="w-4 h-4 text-[#f3e5ab]" />
+              <span>منيو التعتيمة والإفطار</span>
+            </button>
+
             <button 
               onClick={() => navigateTo('events')}
-              className="w-full sm:w-auto bg-black/50 backdrop-blur-md border border-[#d4af37]/60 text-white px-8 py-4 rounded-2xl font-bold text-sm tracking-wider hover:bg-black/70 hover:border-[#d4af37] hover:scale-105 transition-all flex items-center justify-center gap-3 shadow-xl"
+              className="w-full sm:w-auto bg-black/50 backdrop-blur-md border border-[#d4af37]/60 text-white px-7 py-3.5 rounded-2xl font-bold text-sm tracking-wider hover:bg-black/70 hover:border-[#d4af37] hover:scale-105 transition-all flex items-center justify-center gap-2.5 shadow-xl"
             >
-              <CalendarHeart className="w-5 h-5 text-[#f3e5ab]" />
+              <CalendarHeart className="w-4 h-4 text-[#f3e5ab]" />
               <span>منيو الأفراح والولائم</span>
+            </button>
+
+            <button 
+              onClick={() => navigateTo('buffet')}
+              className="w-full sm:w-auto bg-black/50 backdrop-blur-md border border-[#d4af37]/60 text-white px-7 py-3.5 rounded-2xl font-bold text-sm tracking-wider hover:bg-black/70 hover:border-[#d4af37] hover:scale-105 transition-all flex items-center justify-center gap-2.5 shadow-xl"
+            >
+              <Sparkles className="w-4 h-4 text-[#f3e5ab]" />
+              <span>باقات وبوفيهات الضيافة</span>
             </button>
           </div>
         </div>
