@@ -1,15 +1,57 @@
 import { useState } from 'react';
-import { menuDishes, subCategoriesMap, type Dish } from '../data/menuData';
+import { menuDishes, subCategoriesMap, allergenLabels, type Dish } from '../data/menuData';
+import { useLanguage } from '../context/LanguageContext';
 
 interface MenuSectionProps {
   selectedMainCat?: string;
   onAddToCart: (dish: Dish) => void;
 }
 
+// مكون فرعي لعرض أيقونات مسببات الحساسية مع تلميحات الأسماء
+const AllergenIcons = ({ allergens }: { allergens?: string[] }) => {
+  if (!allergens || allergens.length === 0) return null;
+  return (
+    <div className="flex flex-wrap gap-1 mb-2" title="مسببات الحساسية">
+      {allergens.map((key) => {
+        const allergen = allergenLabels[key];
+        return allergen ? (
+          <span 
+            key={key} 
+            title={allergen.name} 
+            className="cursor-help text-sm bg-[#f5f1ea] px-2 py-0.5 rounded-lg border border-[#d4af37]/20"
+          >
+            {allergen.icon}
+          </span>
+        ) : null;
+      })}
+    </div>
+  );
+};
+
 export default function MenuSection({ selectedMainCat = 'najd', onAddToCart }: MenuSectionProps) {
+  const { lang } = useLanguage();
   const [selectedSubCat, setSelectedSubCat] = useState('all-najd');
   const [addedId, setAddedId] = useState<string | null>(null);
 
+  // نصوص الترجمة الخاصة بالقسم
+  const t = {
+    ar: {
+      taxIncluded: "السعر شامل الضريبة",
+      currency: "ر.س",
+      addBtn: "إضافة للطلب +",
+      addedBtn: "✓ تمت الإضافة",
+      noDishes: "عذراً، لا توجد أطباق متاحة في هذا القسم حالياً."
+    },
+    en: {
+      taxIncluded: "Tax included",
+      currency: "SAR",
+      addBtn: "Add to Order +",
+      addedBtn: "✓ Added",
+      noDishes: "Sorry, no dishes available in this section currently."
+    }
+  };
+
+  const currentT = t[lang];
   const subCategories = subCategoriesMap[selectedMainCat] || [];
   
   const filteredDishes = menuDishes.filter(dish => {
@@ -25,7 +67,7 @@ export default function MenuSection({ selectedMainCat = 'najd', onAddToCart }: M
   };
 
   return (
-    <div className="space-y-10" dir="rtl">
+    <div className="space-y-10" dir={lang === 'ar' ? 'rtl' : 'ltr'}>
       
       {/* تبويبات الأقسام الفرعية */}
       <div className="flex flex-wrap justify-center gap-2.5 bg-white p-2.5 rounded-2xl border border-[#d4af37]/30 max-w-2xl mx-auto shadow-md">
@@ -64,28 +106,37 @@ export default function MenuSection({ selectedMainCat = 'najd', onAddToCart }: M
                     <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent"></div>
                     
                     {dish.badge && (
-                      <span className="absolute top-4 right-4 bg-white/90 backdrop-blur-md text-[#8c6239] border border-[#d4af37]/50 px-3.5 py-1 rounded-full text-[11px] font-extrabold shadow-sm">
+                      <span className={`absolute top-4 ${lang === 'ar' ? 'right-4' : 'left-4'} bg-white/90 backdrop-blur-md text-[#8c6239] border border-[#d4af37]/50 px-3.5 py-1 rounded-full text-[11px] font-extrabold shadow-sm`}>
                         {dish.badge}
                       </span>
                     )}
 
                     {dish.calories && (
-                      <span className="absolute bottom-4 left-4 bg-black/60 backdrop-blur-md text-stone-200 px-3 py-1 rounded-xl text-[10px] font-medium border border-white/20">
+                      <span className={`absolute bottom-4 ${lang === 'ar' ? 'left-4' : 'right-4'} bg-black/60 backdrop-blur-md text-stone-200 px-3 py-1 rounded-xl text-[10px] font-medium border border-white/20`}>
                         ⚡ {dish.calories}
                       </span>
                     )}
                   </div>
 
                   <div className="p-6">
-                    <h3 className="text-lg font-bold text-[#2c1e14] mb-2 group-hover:text-[#8c6239] transition-colors">{dish.name}</h3>
-                    <p className="text-[#6b5344] text-xs md:text-sm leading-relaxed mb-6 font-light">{dish.description}</p>
+                    <h3 className="text-lg font-bold text-[#2c1e14] mb-2 group-hover:text-[#8c6239] transition-colors">
+                      {dish.name}
+                    </h3>
+                    <p className="text-[#6b5344] text-xs md:text-sm leading-relaxed mb-3 font-light">
+                      {dish.description}
+                    </p>
+                    
+                    {/* عرض أيقونات مسببات الحساسية تحت الوصف */}
+                    <AllergenIcons allergens={dish.allergens} />
                   </div>
                 </div>
 
                 <div className="px-6 pb-6 pt-0 flex items-center justify-between border-t border-[#d4af37]/15 pt-4 mt-auto">
                   <div>
-                    <span className="text-[10px] text-[#8c6239] block">السعر شامل الضريبة</span>
-                    <span className="text-xl font-black text-[#2c1e14]">{dish.price} <span className="text-xs font-normal text-[#6b5344]">ر.س</span></span>
+                    <span className="text-[10px] text-[#8c6239] block">{currentT.taxIncluded}</span>
+                    <span className="text-xl font-black text-[#2c1e14]">
+                      {dish.price} <span className="text-xs font-normal text-[#6b5344]">{currentT.currency}</span>
+                    </span>
                   </div>
                   <button 
                     onClick={() => handleAddClick(dish)}
@@ -95,7 +146,7 @@ export default function MenuSection({ selectedMainCat = 'najd', onAddToCart }: M
                         : 'bg-[#d4af37] text-white hover:scale-105 hover:bg-[#c49f27] border-[#d4af37]/40 shadow-sm'
                     }`}
                   >
-                    {isAdded ? '✓ تمت الإضافة' : 'إضافة للطلب +'}
+                    {isAdded ? currentT.addedBtn : currentT.addBtn}
                   </button>
                 </div>
               </div>
@@ -103,7 +154,7 @@ export default function MenuSection({ selectedMainCat = 'najd', onAddToCart }: M
           })
         ) : (
           <div className="col-span-full py-20 text-center text-[#6b5344] bg-white rounded-3xl border border-[#d4af37]/30 shadow-sm">
-            <p className="text-lg font-medium">عذراً، لا توجد أطباق متاحة في هذا القسم حالياً.</p>
+            <p className="text-lg font-medium">{currentT.noDishes}</p>
           </div>
         )}
       </div>

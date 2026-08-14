@@ -10,8 +10,10 @@ import BuffetPackages from './pages/BuffetPackages';
 import BreakfastMenu from './pages/BreakfastMenu';
 import type { Dish } from './data/menuData';
 import { MenuProvider } from './context/MenuContext';
+import { LanguageProvider, useLanguage } from './context/LanguageContext';
 
-function AppContent() {
+function MainLayout() {
+  const { lang } = useLanguage(); // جلب اللغة الحالية لتطبيق الاتجاه العام للموقع
   const [cart, setCart] = useState<Dish[]>([]);
   
   const [currentPage, setCurrentPage] = useState(() => {
@@ -71,7 +73,7 @@ function AppContent() {
       case 'daily':
         return <DailyMenu onAddToCart={addToCart} />;
       case 'events':
-        return <EventsMenu addToCart={addToCart} />; // تم تمرير الـ addToCart هنا بنجاح
+        return <EventsMenu addToCart={addToCart} />;
       case 'breakfast':
         return <BreakfastMenu addToCart={addToCart} />;
       case 'buffet':
@@ -93,7 +95,8 @@ function AppContent() {
   };
 
   return (
-    <div className="min-h-screen bg-[#f5f1ea] text-[#2c1e14] flex flex-col font-sans" dir="rtl">
+    // ربط اتجاه الموقع تلقائياً بناءً على اللغة المتاحة (RTL للعربي، LTR للإنجليزي)
+    <div className="min-h-screen bg-[#f5f1ea] text-[#2c1e14] flex flex-col font-sans" dir={lang === 'ar' ? 'rtl' : 'ltr'}>
       <Header 
         routePath={currentPage} 
         navigateTo={navigateTo} 
@@ -111,8 +114,10 @@ function AppContent() {
 
 export default function App() {
   return (
-    <MenuProvider>
-      <AppContent />
-    </MenuProvider>
+    <LanguageProvider>
+      <MenuProvider>
+        <MainLayout />
+      </MenuProvider>
+    </LanguageProvider>
   );
 }

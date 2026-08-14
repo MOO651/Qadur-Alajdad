@@ -6,68 +6,137 @@ import {
   Cake, 
   Plus 
 } from 'lucide-react';
+import { useLanguage } from '../context/LanguageContext';
 
 interface BreakfastMenuProps {
   addToCart: (item: any) => void;
 }
 
 interface MenuCategory {
-  title: string;
+  id: string;
+  titleAr: string;
+  titleEn: string;
   icon: any;
-  items: string[];
+  items: { ar: string; en: string }[];
 }
 
 const menuCategories: MenuCategory[] = [
   {
-    title: 'الأطباق الساخنة',
+    id: 'hot',
+    titleAr: 'الأطباق الساخنة',
+    titleEn: 'Hot Dishes',
     icon: Flame,
     items: [
-      'كبدة غنم', 'مقلقل غنمي', 'فول بالطريقة السعودية', 'فول قلابة سعودي',
-      'بيض مسلوق', 'شكشوكة قدور الأجداد', 'کباب ميرو', 'حمسة باذنجان مع الأجبان',
-      'حمسة بليلة', 'مرق طماطم نجدية', 'فتة فول أخضر', 'لحسة قدور الأجداد'
+      { ar: 'كبدة غنم', en: 'Mutton Liver' },
+      { ar: 'مقلقل غنمي', en: 'Mutton Magqlqel' },
+      { ar: 'فول بالطريقة السعودية', en: 'Saudi Style Ful' },
+      { ar: 'فول قلابة سعودي', en: 'Saudi Qallaba Ful' },
+      { ar: 'بيض مسلوق', en: 'Boiled Eggs' },
+      { ar: 'شكشوكة قدور الأجداد', en: 'Grandparents Pots Shakshouka' },
+      { ar: 'کباب ميرو', en: 'Miro Kebab' },
+      { ar: 'حمسة باذنجان مع الأجبان', en: 'Eggplant & Cheese Hamsa' },
+      { ar: 'حمسة بليلة', en: 'Balila Hamsa' },
+      { ar: 'مرق طماطم نجدية', en: 'Najdi Tomato Broth' },
+      { ar: 'فتة فول أخضر', en: 'Green Bean Fatteh' },
+      { ar: 'لحسة قدور الأجداد', en: 'Grandparents Pots Lahsa' }
     ]
   },
   {
-    title: 'الأجبان والمخللات والمقبلات',
+    id: 'appetizers',
+    titleAr: 'الأجبان والمخللات والمقبلات',
+    titleEn: 'Cheeses, Pickles & Appetizers',
     icon: Utensils,
     items: [
-      'أجبان مشكلة', 'زيتون بنكهات مختلفة', 'مخللات حجازية', 'مربيات بنكهات مختلفة',
-      'حلاوة طحينية مشكلة', 'حلاوة اللدو واللبنة والهريسة مشكلة', 'لبنة قدور الأجداد',
-      'مش حجازي', 'كبيبة حائل', 'أشار'
+      { ar: 'أجبان مشكلة', en: 'Assorted Cheeses' },
+      { ar: 'زيتون بنكهات مختلفة', en: 'Flavored Olives' },
+      { ar: 'مخللات حجازية', en: 'Hijazi Pickles' },
+      { ar: 'مربيات بنكهات مختلفة', en: 'Assorted Jams' },
+      { ar: 'حلاوة طحينية مشكلة', en: 'Assorted Halva' },
+      { ar: 'حلاوة اللدو واللبنة والهريسة مشكلة', en: 'Ladoo, Labneh & Harissa Sweets' },
+      { ar: 'لبنة قدور الأجداد', en: 'Grandparents Pots Labneh' },
+      { ar: 'مش حجازي', en: 'Hijazi Mish' },
+      { ar: 'كبيبة حائل', en: 'Hail Kubeba' },
+      { ar: 'أشار', en: 'Achar' }
     ]
   },
   {
-    title: 'المعجنات والمخبوزات',
+    id: 'bakery',
+    titleAr: 'المعجنات والمخبوزات',
+    titleEn: 'Bakery & Pastries',
     icon: Wheat,
     items: [
-      'مطبق حلو ومالح', 'يغمش', 'منتو', 'فرموزة', 'عيش أبو اللحم', 'بف حجازي',
-      'خلية النحل', 'قاضي القضاة المديني', 'كبة جبن', 'كبة حساوية', 'كبة شمندر',
-      'بسطيلة (مستحدثة)', 'سمبوسك مشكلة'
+      { ar: 'مطبق حلو ومالح', en: 'Sweet & Savory Mutabbaq' },
+      { ar: 'يغمش', en: 'Yammash' },
+      { ar: 'منتو', en: 'Mantu' },
+      { ar: 'فرموزة', en: 'Formoza' },
+      { ar: 'عيش أبو اللحم', en: 'Aish Abu Al-Lahem' },
+      { ar: 'بف حجازي', en: 'Hijazi Puff' },
+      { ar: 'خلية النحل', en: 'Beehive Pastry' },
+      { ar: 'قاضي القضاة المديني', en: 'Madani Qadi Al-Qudat' },
+      { ar: 'كبة جبن', en: 'Cheese Kibbeh' },
+      { ar: 'كبة حساوية', en: 'Hasaawi Kibbeh' },
+      { ar: 'كبة شمندر', en: 'Beetroot Kibbeh' },
+      { ar: 'بسطيلة (مستحدثة)', en: 'Modern Bastilla' },
+      { ar: 'سمبوسك مشكلة', en: 'Assorted Samosa' }
     ]
   },
   {
-    title: 'الحلويات',
+    id: 'sweets',
+    titleAr: 'الحلويات',
+    titleEn: 'Sweets',
     icon: Cake,
     items: [
-      'عريكة', 'معصوب'
+      { ar: 'عريكة', en: 'Areika' },
+      { ar: 'معصوب', en: 'Masoub' }
     ]
   }
 ];
 
 export default function BreakfastMenu({ addToCart }: BreakfastMenuProps) {
+  const { lang } = useLanguage();
   const [activeCategory, setActiveCategory] = useState<number>(0);
+  const [addedId, setAddedId] = useState<string | null>(null);
+
+  const t = {
+    ar: {
+      badge: "قائمة التعتيمة والإفطار",
+      title: "🍳 تعتيمة قدور الأجداد الأصيلة",
+      subtitle: "أشهى أطباق الإفطار والتعتيمة الحجازية والنجدية التقليدية",
+      desc: "يُقدم طازجاً وساخناً بأجود المكونات الشعبية الأصيلة.",
+      priceLabel: "45 ر.س",
+      addBtn: "إضافة للطلب",
+      addedBtn: "✓ تمت الإضافة"
+    },
+    en: {
+      badge: "Breakfast & Tatimah Menu",
+      title: "🍳 Authentic Grandparents Pots Breakfast",
+      subtitle: "Delicious traditional Hijazi and Najdi breakfast and tatimah dishes",
+      desc: "Served fresh and hot with the finest authentic traditional ingredients.",
+      priceLabel: "45 SAR",
+      addBtn: "Add to Order",
+      addedBtn: "✓ Added"
+    }
+  };
+
+  const currentT = t[lang];
+
+  const handleAddClick = (dishItem: any) => {
+    addToCart(dishItem);
+    setAddedId(dishItem.id);
+    setTimeout(() => setAddedId(null), 1200);
+  };
 
   return (
-    <div className="min-h-screen bg-[#f5f1ea] text-[#2c1e14] p-6" dir="rtl">
+    <div className="min-h-screen bg-[#f5f1ea] text-[#2c1e14] p-6" dir={lang === 'ar' ? 'rtl' : 'ltr'}>
       <div className="max-w-6xl mx-auto space-y-8">
         
         {/* Header */}
         <header className="text-center mb-8 bg-white py-10 px-4 rounded-3xl border border-[#d4af37]/30 shadow-sm">
           <span className="text-[#8c6239] text-xs font-bold tracking-widest uppercase mb-2 block bg-[#d4af37]/10 w-fit mx-auto px-4 py-1.5 rounded-full border border-[#d4af37]/30">
-            قائمة التعتيمة والإفطار
+            {currentT.badge}
           </span>
-          <h1 className="text-3xl font-extrabold text-[#2c1e14] mb-2">🍳 تعتيمة قدور الأجداد الأصيلة</h1>
-          <p className="text-[#6b5344] text-sm">أشهى أطباق الإفطار والتعتيمة الحجازية والنجدية التقليدية</p>
+          <h1 className="text-3xl font-extrabold text-[#2c1e14] mb-2">{currentT.title}</h1>
+          <p className="text-[#6b5344] text-sm">{currentT.subtitle}</p>
         </header>
 
         {/* Category Navigation Tabs */}
@@ -86,7 +155,7 @@ export default function BreakfastMenu({ addToCart }: BreakfastMenuProps) {
                 }`}
               >
                 <IconComponent className="w-4 h-4" />
-                <span>{cat.title}</span>
+                <span>{lang === 'ar' ? cat.titleAr : cat.titleEn}</span>
               </button>
             );
           })}
@@ -100,19 +169,22 @@ export default function BreakfastMenu({ addToCart }: BreakfastMenuProps) {
               return <ActiveIcon className="w-7 h-7 text-[#d4af37]" />;
             })()}
             <h3 className="text-2xl font-bold text-[#8c6239]">
-              {menuCategories[activeCategory].title}
+              {lang === 'ar' ? menuCategories[activeCategory].titleAr : menuCategories[activeCategory].titleEn}
             </h3>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-            {menuCategories[activeCategory].items.map((dishName, idx) => {
+            {menuCategories[activeCategory].items.map((itemObj, idx) => {
+              const dishName = lang === 'ar' ? itemObj.ar : itemObj.en;
               const dishItem = {
                 id: `bf-${activeCategory}-${idx}`,
                 name: dishName,
                 price: 45,
-                description: `صنف إفطار وتعتيمة فاخر من مطاعم قدور الأجداد.`,
+                description: currentT.desc,
                 image: ''
               };
+
+              const isAdded = addedId === dishItem.id;
 
               return (
                 <div 
@@ -122,18 +194,22 @@ export default function BreakfastMenu({ addToCart }: BreakfastMenuProps) {
                   <div>
                     <h4 className="text-lg font-bold text-[#2c1e14] mb-2">{dishName}</h4>
                     <p className="text-[#6b5344] text-xs mb-4 leading-relaxed">
-                      يُقدم طازجاً وساخناً بأجود المكونات الشعبية الأصيلة.
+                      {currentT.desc}
                     </p>
                   </div>
                   
                   <div className="mt-2 flex items-center justify-between pt-3 border-t border-[#d4af37]/15">
-                    <span className="text-sm font-bold text-[#8c6239] font-sans">حسب الطلب</span>
+                    <span className="text-sm font-bold text-[#8c6239] font-sans">{currentT.priceLabel}</span>
                     <button 
-                      onClick={() => addToCart(dishItem)}
-                      className="bg-[#d4af37] hover:bg-[#c49f27] text-white px-3.5 py-2 rounded-xl font-bold transition flex items-center gap-1.5 text-xs shadow-sm"
+                      onClick={() => handleAddClick(dishItem)}
+                      className={`px-3.5 py-2 rounded-xl font-bold transition flex items-center gap-1.5 text-xs shadow-sm border ${
+                        isAdded
+                          ? 'bg-green-600 text-white border-green-500 scale-95'
+                          : 'bg-[#d4af37] text-white hover:bg-[#c49f27] border-[#d4af37]/40'
+                      }`}
                     >
                       <Plus className="w-4 h-4" />
-                      إضافة للطلب
+                      {isAdded ? currentT.addedBtn : currentT.addBtn}
                     </button>
                   </div>
                 </div>

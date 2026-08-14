@@ -52,7 +52,19 @@ export function MenuProvider({ children }: { children: React.ReactNode }) {
   };
 
   const addDish = async (dish: any) => {
-    const { data, error } = await supabase.from('dishes').insert([dish]).select();
+    // التأكد من دعم الحقول المزدوجة (عربي وإنجليزي) عند الإضافة
+    const formattedDish = {
+      name: dish.name,
+      name_en: dish.nameEn || dish.name,
+      description: dish.description,
+      description_en: dish.descriptionEn || dish.description,
+      price: dish.price,
+      category: dish.category,
+      image: dish.image,
+      ...dish
+    };
+
+    const { data, error } = await supabase.from('dishes').insert([formattedDish]).select();
     
     if (error) {
       console.error('Error adding dish to Supabase:', error);
@@ -64,9 +76,15 @@ export function MenuProvider({ children }: { children: React.ReactNode }) {
   };
 
   const updateDish = async (id: string, updatedData: any) => {
+    const formattedUpdate = {
+      ...updatedData,
+      ...(updatedData.nameEn && { name_en: updatedData.nameEn }),
+      ...(updatedData.descriptionEn && { description_en: updatedData.descriptionEn })
+    };
+
     const { error } = await supabase
       .from('dishes')
-      .update(updatedData)
+      .update(formattedUpdate)
       .eq('id', id);
 
     if (error) {

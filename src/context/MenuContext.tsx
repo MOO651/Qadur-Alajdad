@@ -1,6 +1,7 @@
 import React, { createContext, useContext, useState, useEffect } from 'react';
 import { supabase } from '../supabaseClient';
 import type { Dish } from '../data/menuData';
+import { useLanguage } from './LanguageContext'; // استيراد سياق اللغة
 
 interface MenuContextType {
   dailyMenu: any[];
@@ -14,11 +15,13 @@ interface MenuContextType {
   updateMenuItem: (sectionIndex: number, itemIndex: number, updatedItem: any, type: 'daily' | 'wedding') => void;
   deleteMenuItem: (sectionIndex: number, itemIndex: number, type: 'daily' | 'wedding') => void;
   refreshDishes: () => Promise<void>;
+  formatText: (arText: string, enText: string) => string; // دالة مساعدة لترجمة النصوص الطائرة
 }
 
 const MenuContext = createContext<MenuContextType | undefined>(undefined);
 
 export function MenuProvider({ children }: { children: React.ReactNode }) {
+  const { lang } = useLanguage(); // جلب اللغة الحالية (ar أو en)
   const [dailyMenu, setDailyMenu] = useState<any[]>([]);
   const [weddingMenu, setWeddingMenu] = useState<any[]>([]);
   const [dishes, setDishes] = useState<Dish[]>([]);
@@ -129,6 +132,11 @@ export function MenuProvider({ children }: { children: React.ReactNode }) {
     }
   };
 
+  // دالة مساعدة لارجاع النص المناسب حسب اللغة الحالية للموقع
+  const formatText = (arText: string, enText: string) => {
+    return lang === 'en' ? (enText || arText) : arText;
+  };
+
   return (
     <MenuContext.Provider
       value={{
@@ -143,6 +151,7 @@ export function MenuProvider({ children }: { children: React.ReactNode }) {
         updateMenuItem,
         deleteMenuItem,
         refreshDishes: fetchDishes,
+        formatText,
       }}
     >
       {children}
