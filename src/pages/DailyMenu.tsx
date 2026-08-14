@@ -2,16 +2,17 @@ import React, { useState } from 'react';
 import type { Dish } from '../data/menuData';
 import { 
   mainCategories, 
-  subCategoriesMap 
+  subCategoriesMap,
+  menuDishes,
+  allergenLabels // استيراد خريطة مسببات الحساسية والأيقونات
 } from '../data/menuData';
-import { useMenu } from '../context/MenuContext';
 
 interface DailyMenuProps {
   onAddToCart?: (dish: Dish) => void;
 }
 
 export const DailyMenu: React.FC<DailyMenuProps> = ({ onAddToCart }) => {
-  const { dishes } = useMenu();
+  const dishes = menuDishes;
 
   const [selectedMainCat, setSelectedMainCat] = useState<string>(mainCategories[0]?.id || 'general');
   const [selectedSubCat, setSelectedSubCat] = useState<string>(subCategoriesMap[mainCategories[0]?.id || 'general']?.[0]?.id || 'all');
@@ -40,7 +41,6 @@ export const DailyMenu: React.FC<DailyMenuProps> = ({ onAddToCart }) => {
   const filteredDishes = dishes.filter((dish: Dish) => {
     const matchesMain = !selectedMainCat || dish.category === selectedMainCat;
     
-    // تصحيح منطق الفلترة الفرعية ليتطابق مع أول عنصر (الكل) أو المعرّف الخاص به
     const currentSubCats = subCategoriesMap[selectedMainCat] || [];
     const isFirstSubAll = currentSubCats.length > 0 && currentSubCats[0].id === selectedSubCat;
     const matchesSub = isFirstSubAll || selectedSubCat === 'all' || dish.subCategory === selectedSubCat;
@@ -156,12 +156,25 @@ export const DailyMenu: React.FC<DailyMenuProps> = ({ onAddToCart }) => {
                       <h3 className="text-xl font-bold text-[#2c1e14]">{dish.name}</h3>
                       <p className="text-[#6b5344] text-sm leading-relaxed">{dish.description}</p>
                       
-                      {/* مسببات الحساسية */}
-                      {dish.allergens && String(dish.allergens).trim() !== '' && (
+                      {/* مسببات الحساسية بتصميم الأيقونات الجديد */}
+                      {dish.allergens && Array.isArray(dish.allergens) && dish.allergens.length > 0 && (
                         <div className="pt-2">
-                          <span className="inline-flex items-center gap-1.5 bg-amber-50 border border-amber-200 text-amber-800 text-xs px-3 py-1 rounded-lg font-medium">
-                            ⚠️ مسببات الحساسية: {dish.allergens}
-                          </span>
+                          <span className="text-[11px] font-semibold text-[#8c6239] block mb-1.5">مسببات الحساسية:</span>
+                          <div className="flex flex-wrap gap-1.5">
+                            {dish.allergens.map((allergenKey) => {
+                              const allergen = allergenLabels[allergenKey];
+                              return allergen ? (
+                                <div
+                                  key={allergenKey}
+                                  title={allergen.name}
+                                  className="flex items-center gap-1.5 bg-amber-50/90 border border-amber-200/80 px-2.5 py-1 rounded-lg shadow-2xs"
+                                >
+                                  <span className="text-sm">{allergen.icon}</span>
+                                  <span className="text-[11px] font-medium text-amber-900">{allergen.name}</span>
+                                </div>
+                              ) : null;
+                            })}
+                          </div>
                         </div>
                       )}
                     </div>
