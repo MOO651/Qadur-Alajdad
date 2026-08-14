@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800;900&display=swap');
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -13,7 +15,13 @@
     background-color: #f5f1ea;
     color: #2c1e14;
     margin: 0;
-    font-family: system-ui, -apple-system, sans-serif;
+    font-family: 'Cairo', system-ui, -apple-system, sans-serif; /* تطبيق الخط الفخم على الموقع بالكامل */
+  }
+
+  /* جعل العناوين أكثر سمكاً وبروزاً وفخامة */
+  h1, h2, h3, h4, h5, h6 {
+    font-family: 'Cairo', system-ui, -apple-system, sans-serif;
+    font-weight: 800;
   }
 }
 

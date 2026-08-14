@@ -5,9 +5,16 @@ import { useMenu } from '../context/MenuContext';
 import { useLanguage } from '../context/LanguageContext';
 
 const heroImages = [
-  '/png (3).jpeg',
-  '/png.jpeg',
-  '/png (2).jpeg'
+  '/bg1.jpeg',
+  '/bg2.jpeg',
+  '/bg3.jpeg',
+  '/bg4.jpeg',
+  '/bg5.jpeg',
+  '/bg6.jpeg',
+  '/bg7.jpeg',
+  '/bg8.jpeg',
+  '/bg9.jpeg',
+  '/bg10.jpeg'
 ];
 
 interface HomeProps {
@@ -41,7 +48,7 @@ export default function Home({ navigateTo, addToCart }: HomeProps) {
       badge: "عراقة المذاق وأصالة الضيافة السعودية",
       title1: "أصالة الطبخ السعودي",
       title2: "ومن قدورنا تفوح أصالتنا",
-      description: "نحن في مطعم \"قُدُور الأَجْدَاد\" نأخذك في رحلة فريدة لاستعادة طعم الأكل الأصيل المحضر على أصوله القديمة وبأعلى معايير الجودة الفاخرة لتشريف مناسباتكم.",
+      description: "نغوص بك في أعماق التراث السعودي، لنقدم لك في 'قُدُور الأَجْدَاد' تجربة استثنائية تعيد إحياء ذكريات الطعم الأصيل بلمسة فاخرة تليق بضيوفكم.",
       dailyMenu: "تصفح المنيو اليومي",
       breakfastMenu: "منيو التعتيمة والإفطار",
       eventsMenu: "منيو الأفراح والولائم",
@@ -68,7 +75,7 @@ export default function Home({ navigateTo, addToCart }: HomeProps) {
       badge: "The Elegance of Taste & Authentic Saudi Hospitality",
       title1: "The Authenticity of Saudi Cooking",
       title2: "From Our Pots Rises Our Heritage",
-      description: "At \"Ancestors Pot\" restaurant, we take you on a unique journey to restore the taste of authentic food prepared in its old traditions with the highest standards of luxury quality to honor your occasions.",
+      description: "We immerse you in the depths of Saudi heritage, offering you at 'Ancestors Pot' an exceptional experience that revives the memories of authentic taste with a luxurious touch worthy of your guests.",
       dailyMenu: "Browse Daily Menu",
       breakfastMenu: "Breakfast & Tatima Menu",
       eventsMenu: "Events & Banquets Menu",
@@ -98,7 +105,7 @@ export default function Home({ navigateTo, addToCart }: HomeProps) {
   return (
     <div className="space-y-20 pb-20 bg-[#f5f1ea] text-[#2c1e14] min-h-screen" dir={lang === 'ar' ? 'rtl' : 'ltr'}>
       
-      {/* زر التبديل بين اللغات في الهوم */}
+      {/* زر التبديل بين اللغات */}
       <div className="max-w-7xl mx-auto px-4 pt-6 flex justify-end">
         <button 
           onClick={toggleLang}
