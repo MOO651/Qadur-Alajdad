@@ -4,7 +4,7 @@ import {
   mainCategories, 
   subCategoriesMap,
   menuDishes,
-  allergenLabels // استيراد خريطة مسببات الحساسية والأيقونات
+  allergenLabels 
 } from '../data/menuData';
 
 interface DailyMenuProps {
