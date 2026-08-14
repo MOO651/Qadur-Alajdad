@@ -43,19 +43,36 @@ footer {
   background: #c49f27;
 }
 
-/* إصلاح وضوح اللوجو بالكامل */
-img[alt="Logo"], 
-img[src*="logo"] {
+/* 1. تصغير وتعديل لوجو الهيدر (الذي في الأعلى) ليصبح مناسباً وأنيقاً */
+header img[alt="Logo"], 
+header img[src*="logo"] {
   object-fit: contain !important;
-  padding: 10px !important; /* مسافة أكبر ليتنفس الشعار */
+  padding: 2px !important;
   width: 100% !important;
   height: 100% !important;
 }
 
-/* تكبير حاوية اللوجو لضمان وضوح النص الإنجليزي الصغير */
-/* نستخدم div:has(> img...) لاستهداف الحاوية التي تحتوي على اللوجو مباشرة */
-div:has(> img[alt="Logo"]) {
-  width: 160px !important;  /* حجم أكبر لضمان وضوح التفاصيل */
+header div:has(> img[alt="Logo"]) {
+  width: 50px !important;  /* حجم مناسب وصغير للهيدر */
+  height: 50px !important;
+  min-width: 50px !important;
+  min-height: 50px !important;
+}
+
+/* 2. تكبير ووضوح لوجو الواجهة الرئيسية (الذي في المنتصف بالأسفل) */
+section img[alt="Logo"], 
+section img[src*="logo"],
+main img[alt="Logo"],
+main img[src*="logo"] {
+  object-fit: contain !important;
+  padding: 8px !important;
+  width: 100% !important;
+  height: 100% !important;
+}
+
+section div:has(> img[alt="Logo"]),
+main div:has(> img[alt="Logo"]) {
+  width: 160px !important;  /* حجم كبير وواضح للنص الإنجليزي بالأسفل */
   height: 160px !important;
   min-width: 160px !important;
   min-height: 160px !important;
