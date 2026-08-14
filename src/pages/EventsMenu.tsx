@@ -6,7 +6,6 @@ import {
   Cake, 
   Flame, 
   Layers, 
-  Coffee, 
   Wheat, 
   Fish, 
   ChefHat 

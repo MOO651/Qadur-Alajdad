@@ -1,6 +1,5 @@
 import { useState } from 'react';
 import { 
-  Coffee, 
   Utensils, 
   Flame, 
   Wheat, 
@@ -110,7 +109,7 @@ export default function BreakfastMenu({ addToCart }: BreakfastMenuProps) {
               const dishItem = {
                 id: `bf-${activeCategory}-${idx}`,
                 name: dishName,
-                price: 45, // سعر افتراضي قابل للتعديل
+                price: 45,
                 description: `صنف إفطار وتعتيمة فاخر من مطاعم قدور الأجداد.`,
                 image: ''
               };
