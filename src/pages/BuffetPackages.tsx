@@ -258,7 +258,7 @@ export default function BuffetPackages({ navigateTo, selectPackage }: BuffetPack
               className="flex items-center justify-center gap-3 p-4 rounded-xl border border-[#d4af37]/30 bg-[#f5f1ea] hover:bg-[#d4af37] hover:text-white transition-all text-[#2c1e14] font-bold"
             >
               <PartyPopper className="w-5 h-5" />
-              <span>{lang === 'ar' ? 'باقات الأفراح' : 'Events Packages'}</span>
+              <span>{lang === 'ar' ? 'منيو الحفلات والمناسبات' : 'Events Menu'}</span>
             </button>
 
             <button 

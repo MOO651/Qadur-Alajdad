@@ -341,7 +341,6 @@ const menuCategories: MenuCategory[] = [
 
 export default function EventsMenu({ addToCart }: EventsMenuProps) {
   const { lang: contextLang } = useLanguage() || { lang: 'ar' };
-  // Fallback support if context returns something unexpected
   const lang = contextLang === 'en' ? 'en' : 'ar';
   
   const [activeCategory, setActiveCategory] = useState<number>(0);
@@ -368,24 +367,24 @@ export default function EventsMenu({ addToCart }: EventsMenuProps) {
   const currentT = t[lang];
 
   return (
-    <section className="py-16 px-4 bg-[#f5f1ea] text-[#2c1e14] min-h-screen" dir={lang === 'ar' ? 'rtl' : 'ltr'}>
-      <div className="max-w-6xl mx-auto">
+    <section className="py-12 px-4 bg-[#f5f1ea] text-[#2c1e14] min-h-screen font-sans" dir={lang === 'ar' ? 'rtl' : 'ltr'}>
+      <div className="max-w-6xl mx-auto space-y-8">
         
         {/* Header Title */}
-        <div className="text-center mb-12">
-          <span className="text-[#8c6239] text-xs font-sans tracking-[0.3em] uppercase bg-[#d4af37]/10 px-4 py-1.5 rounded-full border border-[#d4af37]/30 inline-block mb-3">
+        <div className="text-center space-y-3">
+          <span className="text-[#8c6239] text-xs font-bold tracking-[0.3em] uppercase bg-white px-4 py-1.5 rounded-full border border-[#d4af37]/30 inline-block shadow-sm">
             {currentT.badge}
           </span>
-          <h2 className="text-3xl md:text-4xl font-bold text-[#2c1e14] mb-3 flex items-center justify-center gap-2">
+          <h2 className="text-3xl md:text-4xl font-bold text-[#2c1e14] flex items-center justify-center gap-2">
             <Utensils className="w-8 h-8 text-[#d4af37]" /> {currentT.title}
           </h2>
-          <p className="text-[#6b5344] max-w-xl mx-auto text-sm md:text-base font-sans">
+          <p className="text-gray-600 max-w-xl mx-auto text-sm md:text-base font-normal">
             {currentT.description}
           </p>
         </div>
 
         {/* Category Navigation Tabs */}
-        <div className="flex flex-wrap justify-center gap-2 mb-10">
+        <div className="flex flex-wrap justify-center gap-2">
           {menuCategories.map((cat, index) => {
             const IconComponent = cat.icon;
             const isActive = activeCategory === index;
@@ -393,10 +392,10 @@ export default function EventsMenu({ addToCart }: EventsMenuProps) {
               <button
                 key={index}
                 onClick={() => setActiveCategory(index)}
-                className={`flex items-center gap-2 px-4 py-2.5 rounded-xl font-bold text-sm transition-all duration-300 shadow-sm border ${
+                className={`flex items-center gap-2 px-4 py-2.5 rounded-xl font-bold text-xs md:text-sm transition-all duration-300 shadow-sm border ${
                   isActive
                     ? 'bg-[#d4af37] text-white border-[#d4af37] scale-105 shadow-md'
-                    : 'bg-white text-[#4a3525] border-[#d4af37]/30 hover:border-[#d4af37]'
+                    : 'bg-white text-[#2c1e14] border-[#d4af37]/30 hover:border-[#d4af37]'
                 }`}
               >
                 <IconComponent className="w-4 h-4" />
@@ -407,8 +406,8 @@ export default function EventsMenu({ addToCart }: EventsMenuProps) {
         </div>
 
         {/* Active Category Items Grid */}
-        <div className="bg-white rounded-3xl p-6 md:p-10 border-2 border-[#d4af37]/30 shadow-lg">
-          <div className="flex items-center gap-3 mb-6 pb-4 border-b border-[#d4af37]/20">
+        <div className="bg-white rounded-3xl p-6 md:p-10 border border-[#d4af37]/30 shadow-xl space-y-6">
+          <div className="flex items-center gap-3 border-b border-[#d4af37]/20 pb-4">
             {(() => {
               const ActiveIcon = menuCategories[activeCategory].icon;
               return <ActiveIcon className="w-7 h-7 text-[#d4af37]" />;
@@ -432,7 +431,7 @@ export default function EventsMenu({ addToCart }: EventsMenuProps) {
               return (
                 <div 
                   key={idx}
-                  className="bg-white border-2 border-[#d4af37]/20 rounded-2xl overflow-hidden flex flex-col justify-between transition-all hover:border-[#d4af37] shadow-sm hover:shadow-md"
+                  className="bg-[#f5f1ea] border border-[#d4af37]/20 rounded-2xl overflow-hidden flex flex-col justify-between transition-all hover:border-[#d4af37] shadow-sm hover:shadow-md"
                 >
                   {/* Image Placeholder Box */}
                   <div className="w-full h-36 bg-[#e8e2d5] flex items-center justify-center relative border-b border-[#d4af37]/20">
@@ -440,14 +439,14 @@ export default function EventsMenu({ addToCart }: EventsMenuProps) {
                       <img src={dish.image} alt={dishName} className="w-full h-full object-cover" />
                     ) : (
                       <div className="flex flex-col items-center gap-1 text-[#8c6239]/60">
-                        <ImageIcon className="w-8 h-8" />
-                        <span className="text-[11px] font-medium">{lang === 'ar' ? 'صورة الطبق قريباً' : 'Image Soon'}</span>
+                        <ImageIcon className="w-7 h-7" />
+                        <span className="text-[11px] font-bold">{lang === 'ar' ? 'صورة الطبق قريباً' : 'Image Soon'}</span>
                       </div>
                     )}
                   </div>
 
-                  <div className="p-4 flex flex-col justify-between flex-grow">
-                    <div className="flex items-start gap-2 mb-4">
+                  <div className="p-4 flex flex-col justify-between flex-grow space-y-4">
+                    <div className="flex items-start gap-2">
                       <span className="w-2 h-2 rounded-full bg-[#d4af37] shrink-0 mt-1.5"></span>
                       <span className="leading-relaxed font-bold text-[#2c1e14] text-sm">{dishName}</span>
                     </div>
@@ -456,7 +455,7 @@ export default function EventsMenu({ addToCart }: EventsMenuProps) {
                       <span className="text-xs font-bold text-[#8c6239]">{currentT.customOrder}</span>
                       <button
                         onClick={() => addToCart(dishItem)}
-                        className="bg-[#d4af37] hover:bg-[#c49f27] text-white px-3 py-1.5 rounded-lg font-bold transition flex items-center gap-1 text-xs shadow-sm"
+                        className="bg-[#d4af37] hover:bg-[#c49f27] text-white px-3 py-1.5 rounded-xl font-bold transition flex items-center gap-1 text-xs shadow-sm"
                       >
                         <Plus className="w-3.5 h-3.5" />
                         {currentT.addButton}
@@ -470,8 +469,8 @@ export default function EventsMenu({ addToCart }: EventsMenuProps) {
         </div>
 
         {/* Footer Note */}
-        <div className="mt-10 bg-white border border-[#d4af37]/30 rounded-2xl p-4 text-center text-xs text-[#6b5344] shadow-sm font-sans">
-          <p>{currentT.footerNote}</p>
+        <div className="bg-white border border-[#d4af37]/30 rounded-2xl p-4 text-center text-xs text-gray-600 shadow-sm">
+          <p className="font-medium">{currentT.footerNote}</p>
         </div>
 
       </div>
