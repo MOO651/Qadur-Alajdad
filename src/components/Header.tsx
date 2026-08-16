@@ -9,16 +9,16 @@ interface HeaderProps {
 }
 
 export default function Header({ navigateTo, cartItemsCount }: HeaderProps) {
-  const { lang, toggleLang } = useLanguage();
+  const { lang, toggleLang, t } = useLanguage();
   const [isOpen, setIsOpen] = useState(false);
 
   // روابط القائمة ديناميكية حسب اللغة المختارة
   const navLinks = [
-    { name: lang === 'ar' ? 'الرئيسية' : 'Home', path: 'home' },
-    { name: lang === 'ar' ? 'قائمة الطعام' : 'Menu', path: 'daily' },
-    { name: lang === 'ar' ? 'التعتيمة والإفطار' : 'Breakfast', path: 'breakfast' },
-    { name: lang === 'ar' ? 'منيو الأفراح' : 'Events', path: 'events' },
-    { name: lang === 'ar' ? 'باقات البوفيه' : 'Buffet', path: 'buffet' },
+    { name: t('home'), path: 'home' },
+    { name: t('menu'), path: 'daily' },
+    { name: t('cat_breakfast'), path: 'breakfast' },
+    { name: t('cat_events'), path: 'events' },
+    { name: t('cat_buffet'), path: 'buffet' },
     { name: lang === 'ar' ? 'عن المطعم' : 'About Us', path: 'about' },
     { name: lang === 'ar' ? 'اتصل بنا' : 'Contact Us', path: 'contact' },
   ];
