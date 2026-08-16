@@ -13,8 +13,26 @@ import { MenuProvider } from './context/MenuContext';
 import { LanguageProvider, useLanguage } from './context/LanguageContext';
 
 function MainLayout() {
-  const { lang } = useLanguage(); // جلب اللغة الحالية لتطبيق الاتجاه العام للموقع
-  const [cart, setCart] = useState<Dish[]>([]);
+  const { lang } = useLanguage(); 
+  
+  // تهيئة السلة بقراءة البيانات المحفوظة محلياً إن وجدت لضمان عدم ضياع المنتجات عند التنقل أو التحديث
+  const [cart, setCart] = useState<Dish[]>(() => {
+    try {
+      const saved = localStorage.getItem('restaurant_cart');
+      return saved ? JSON.parse(saved) : [];
+    } catch {
+      return [];
+    }
+  });
+
+  // مزامنة السلة تلقائياً مع LocalStorage في كل تحديث
+  useEffect(() => {
+    try {
+      localStorage.setItem('restaurant_cart', JSON.stringify(cart));
+    } catch (e) {
+      console.error("Failed to save cart to localStorage", e);
+    }
+  }, [cart]);
   
   const [currentPage, setCurrentPage] = useState(() => {
     const path = window.location.pathname.replace('/', '');
@@ -42,20 +60,19 @@ function MainLayout() {
         subCategory: '',
         image: ''
       };
-      setCart([...cart, newDish]);
+      setCart(prev => [...prev, newDish]);
     } else {
-      setCart([...cart, item]);
+      setCart(prev => [...prev, item]);
     }
   };
 
   const removeFromCart = (index: number) => {
-    const updatedCart = [...cart];
-    updatedCart.splice(index, 1);
-    setCart(updatedCart);
+    setCart(prev => prev.filter((_, i) => i !== index));
   };
 
   const clearCart = () => {
     setCart([]);
+    localStorage.removeItem('restaurant_cart');
   };
 
   const navigateTo = (page: string) => {
@@ -77,7 +94,7 @@ function MainLayout() {
       case 'breakfast':
         return <BreakfastMenu addToCart={addToCart} />;
       case 'buffet':
-        return <BuffetPackages navigateTo={navigateTo} />; // تم التعديل هنا لتمرير دالة التنقل
+        return <BuffetPackages navigateTo={navigateTo} />;
       case 'cart':
         return (
           <Cart 
@@ -95,7 +112,6 @@ function MainLayout() {
   };
 
   return (
-    // ربط اتجاه الموقع تلقائياً بناءً على اللغة المتاحة (RTL للعربي، LTR للإنجليزي)
     <div className="min-h-screen bg-[#f5f1ea] text-[#2c1e14] flex flex-col font-sans" dir={lang === 'ar' ? 'rtl' : 'ltr'}>
       <Header 
         routePath={currentPage} 

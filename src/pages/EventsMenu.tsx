@@ -340,7 +340,10 @@ const menuCategories: MenuCategory[] = [
 ];
 
 export default function EventsMenu({ addToCart }: EventsMenuProps) {
-  const { lang } = useLanguage();
+  const { lang: contextLang } = useLanguage() || { lang: 'ar' };
+  // Fallback support if context returns something unexpected
+  const lang = contextLang === 'en' ? 'en' : 'ar';
+  
   const [activeCategory, setActiveCategory] = useState<number>(0);
 
   const t = {

@@ -1,7 +1,7 @@
 import React, { createContext, useContext, useState, useEffect } from 'react';
 import { supabase } from '../supabaseClient';
 import type { Dish } from '../data/menuData';
-import { useLanguage } from './LanguageContext'; // استيراد سياق اللغة
+import { useLanguage } from './LanguageContext';
 
 interface MenuContextType {
   dailyMenu: any[];
@@ -15,13 +15,13 @@ interface MenuContextType {
   updateMenuItem: (sectionIndex: number, itemIndex: number, updatedItem: any, type: 'daily' | 'wedding') => void;
   deleteMenuItem: (sectionIndex: number, itemIndex: number, type: 'daily' | 'wedding') => void;
   refreshDishes: () => Promise<void>;
-  formatText: (arText: string, enText: string) => string; // دالة مساعدة لترجمة النصوص الطائرة
+  formatText: (arText: string, enText: string) => string;
 }
 
 const MenuContext = createContext<MenuContextType | undefined>(undefined);
 
 export function MenuProvider({ children }: { children: React.ReactNode }) {
-  const { lang } = useLanguage(); // جلب اللغة الحالية (ar أو en)
+  const { lang } = useLanguage();
   const [dailyMenu, setDailyMenu] = useState<any[]>([]);
   const [weddingMenu, setWeddingMenu] = useState<any[]>([]);
   const [dishes, setDishes] = useState<Dish[]>([]);

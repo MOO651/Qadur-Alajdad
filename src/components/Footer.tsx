@@ -9,20 +9,20 @@ export default function Footer({ navigateTo }: FooterProps) {
   const { lang, toggleLang, t } = useLanguage();
 
   return (
-    <footer className="bg-[#f5f1ea] border-t border-[#d4af37]/30 pt-16 pb-12 text-[#4a3525] font-sans shadow-inner">
+    <footer className="bg-white border-t border-[#d4af37]/30 pt-16 pb-12 text-[#4a3525] shadow-inner">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 grid grid-cols-1 md:grid-cols-4 gap-10 mb-12">
         
         {/* العمود الأول: عن المطعم */}
         <div className="space-y-4 md:col-span-1">
           <div className="flex items-center gap-2 cursor-pointer group" onClick={() => navigateTo('home')}>
-            <div className="w-10 h-10 rounded-full border border-[#d4af37] bg-white flex items-center justify-center shadow-sm group-hover:scale-105 transition-transform">
+            <div className="w-10 h-10 rounded-full border border-[#d4af37] bg-[#f5f1ea] flex items-center justify-center shadow-sm group-hover:scale-105 transition-transform">
               <ChefHat className="text-[#d4af37] w-6 h-6" />
             </div>
             <span className="text-[#2c1e14] font-extrabold text-lg tracking-wide">
               {lang === 'ar' ? 'قدور الأجداد' : 'Qodoor Al-Ajdad'}
             </span>
           </div>
-          <p className="text-xs leading-relaxed text-[#6b5344] font-sans">
+          <p className="text-xs leading-relaxed text-[#6b5344]">
             {lang === 'ar' 
               ? "نقدم أصالة الطبخ السعودي العريق وولائم الأفراح بأعلى معايير الجودة والضيافة الملكية الأصيلة."
               : "Offering the authenticity of traditional Saudi cuisine and wedding banquets with the highest standards of quality and royal hospitality."}
@@ -33,15 +33,15 @@ export default function Footer({ navigateTo }: FooterProps) {
             <div 
               onClick={toggleLang}
               title="Change Language / تغيير اللغة"
-              className="h-8 px-3 rounded-lg bg-white border border-[#d4af37]/30 flex items-center justify-center text-[#8c6239] hover:bg-[#d4af37] hover:text-white transition-all cursor-pointer shadow-sm text-xs font-bold gap-1"
+              className="h-8 px-3 rounded-lg bg-[#f5f1ea] border border-[#d4af37]/30 flex items-center justify-center text-[#8c6239] hover:bg-[#d4af37] hover:text-white transition-all cursor-pointer shadow-sm text-xs font-bold gap-1"
             >
               <Globe className="w-3.5 h-3.5" />
               <span>{lang === 'ar' ? 'English 🇬🇧' : 'العربية 🇸🇦'}</span>
             </div>
-            <div className="w-8 h-8 rounded-lg bg-white border border-[#d4af37]/30 flex items-center justify-center text-[#d4af37] hover:bg-[#d4af37] hover:text-white transition-all cursor-pointer shadow-sm">
+            <div className="w-8 h-8 rounded-lg bg-[#f5f1ea] border border-[#d4af37]/30 flex items-center justify-center text-[#d4af37] hover:bg-[#d4af37] hover:text-white transition-all cursor-pointer shadow-sm">
               <Share2 className="w-4 h-4" />
             </div>
-            <div className="w-8 h-8 rounded-lg bg-white border border-[#d4af37]/30 flex items-center justify-center text-[#d4af37] hover:bg-[#d4af37] hover:text-white transition-all cursor-pointer shadow-sm">
+            <div className="w-8 h-8 rounded-lg bg-[#f5f1ea] border border-[#d4af37]/30 flex items-center justify-center text-[#d4af37] hover:bg-[#d4af37] hover:text-white transition-all cursor-pointer shadow-sm">
               <MessageCircle className="w-4 h-4" />
             </div>
           </div>
@@ -86,11 +86,11 @@ export default function Footer({ navigateTo }: FooterProps) {
             </li>
             <li className="flex items-center gap-2.5">
               <Phone className="w-4 h-4 text-[#8c6239] flex-shrink-0" />
-              <span dir="ltr" className="font-sans font-semibold">+966 53 319 0997</span>
+              <span dir="ltr" className="font-semibold">+966 53 319 0997</span>
             </li>
             <li className="flex items-center gap-2.5">
               <Clock className="w-4 h-4 text-[#8c6239] flex-shrink-0" />
-              <span className="font-sans leading-relaxed">
+              <span className="leading-relaxed">
                 {lang === 'ar' ? 'يومياً من 11:00 صباحاً حتى 12:00 منتصف الليل' : 'Daily from 11:00 AM to 12:00 Midnight'}
               </span>
             </li>
@@ -105,7 +105,7 @@ export default function Footer({ navigateTo }: FooterProps) {
           <p className="text-xs text-[#6b5344]">
             {lang === 'ar' ? 'استمتع بتجربة طلب أسرع ومتابعة حية لطلباتك عبر تطبيقنا الرسمي.' : 'Enjoy a faster ordering experience and live tracking of your orders through our official app.'}
           </p>
-          <div className="inline-block bg-white border border-[#d4af37]/40 px-4 py-2.5 rounded-xl text-center text-xs text-[#8c6239] font-bold tracking-wide shadow-sm">
+          <div className="inline-block bg-[#f5f1ea] border border-[#d4af37]/40 px-4 py-2.5 rounded-xl text-center text-xs text-[#8c6239] font-bold tracking-wide shadow-sm">
             {lang === 'ar' ? 'قريباً على Google Play & App Store' : 'Coming soon on Google Play & App Store'}
           </div>
         </div>

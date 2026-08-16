@@ -3,6 +3,7 @@ import { Users, CheckCircle, XCircle, Utensils, Image as ImageIcon, PartyPopper 
 import { useLanguage } from '../context/LanguageContext';
 
 interface BuffetPackage {
+  id: string;
   nameAr: string;
   nameEn: string;
   color: string;
@@ -26,44 +27,47 @@ const buffetData: Record<number, GroupData> = {
   30: {
     count: 30,
     packages: [
-      { nameAr: 'الباقة الفضية', nameEn: 'Silver Package', color: 'border-slate-300', badgeColor: 'bg-slate-100 text-slate-800', image: '', items: { appetizers: 3, pastries: 2, popular: 2, main: 3, desserts: 3 } },
-      { nameAr: 'الباقة الذهبية', nameEn: 'Gold Package', color: 'border-[#d4af37]', badgeColor: 'bg-amber-50 text-[#8c6239]', image: '', items: { appetizers: 3, pastries: 2, popular: 3, main: 3, desserts: 3 } },
-      { nameAr: 'الباقة الماسية', nameEn: 'Diamond Package', color: 'border-cyan-500', badgeColor: 'bg-cyan-50 text-cyan-800', image: '', items: { appetizers: 4, pastries: 3, popular: 3, main: 3, desserts: 3 } },
+      { id: 'silver-30', nameAr: 'الباقة الفضية', nameEn: 'Silver Package', color: 'border-slate-300', badgeColor: 'bg-slate-100 text-slate-800', image: '', items: { appetizers: 3, pastries: 2, popular: 2, main: 3, desserts: 3 } },
+      { id: 'gold-30', nameAr: 'الباقة الذهبية', nameEn: 'Gold Package', color: 'border-[#d4af37]', badgeColor: 'bg-amber-50 text-[#8c6239]', image: '', items: { appetizers: 3, pastries: 2, popular: 3, main: 3, desserts: 3 } },
+      { id: 'diamond-30', nameAr: 'الباقة الماسية', nameEn: 'Diamond Package', color: 'border-cyan-500', badgeColor: 'bg-cyan-50 text-cyan-800', image: '', items: { appetizers: 4, pastries: 3, popular: 3, main: 3, desserts: 3 } },
     ]
   },
   75: {
     count: 75,
     packages: [
-      { nameAr: 'الباقة الفضية', nameEn: 'Silver Package', color: 'border-slate-300', badgeColor: 'bg-slate-100 text-slate-800', image: '', items: { appetizers: 8, pastries: 6, popular: 5, main: 5, desserts: 6 } },
-      { nameAr: 'الباقة الذهبية', nameEn: 'Gold Package', color: 'border-[#d4af37]', badgeColor: 'bg-amber-50 text-[#8c6239]', image: '', items: { appetizers: 8, pastries: 6, popular: 6, main: 6, desserts: 5 } },
-      { nameAr: 'الباقة الماسية', nameEn: 'Diamond Package', color: 'border-cyan-500', badgeColor: 'bg-cyan-50 text-cyan-800', image: '', items: { appetizers: 9, pastries: 7, popular: 6, main: 6, desserts: 7 } },
+      { id: 'silver-75', nameAr: 'الباقة الفضية', nameEn: 'Silver Package', color: 'border-slate-300', badgeColor: 'bg-slate-100 text-slate-800', image: '', items: { appetizers: 8, pastries: 6, popular: 5, main: 5, desserts: 6 } },
+      { id: 'gold-75', nameAr: 'الباقة الذهبية', nameEn: 'Gold Package', color: 'border-[#d4af37]', badgeColor: 'bg-amber-50 text-[#8c6239]', image: '', items: { appetizers: 8, pastries: 6, popular: 6, main: 6, desserts: 5 } },
+      { id: 'diamond-75', nameAr: 'الباقة الماسية', nameEn: 'Diamond Package', color: 'border-cyan-500', badgeColor: 'bg-cyan-50 text-cyan-800', image: '', items: { appetizers: 9, pastries: 7, popular: 6, main: 6, desserts: 7 } },
     ]
   },
   100: {
     count: 100,
     packages: [
-      { nameAr: 'الباقة الفضية', nameEn: 'Silver Package', color: 'border-slate-300', badgeColor: 'bg-slate-100 text-slate-800', image: '', items: { appetizers: 10, pastries: 6, popular: 6, main: 6, desserts: 7 } },
-      { nameAr: 'الباقة الذهبية', nameEn: 'Gold Package', color: 'border-[#d4af37]', badgeColor: 'bg-amber-50 text-[#8c6239]', image: '', items: { appetizers: 10, pastries: 6, popular: 7, main: 7, desserts: 5 } },
-      { nameAr: 'الباقة الماسية', nameEn: 'Diamond Package', color: 'border-cyan-500', badgeColor: 'bg-cyan-50 text-cyan-800', image: '', items: { appetizers: 11, pastries: 8, popular: 7, main: 7, desserts: 7 } },
+      { id: 'silver-100', nameAr: 'الباقة الفضية', nameEn: 'Silver Package', color: 'border-slate-300', badgeColor: 'bg-slate-100 text-slate-800', image: '', items: { appetizers: 10, pastries: 6, popular: 6, main: 6, desserts: 7 } },
+      { id: 'gold-100', nameAr: 'الباقة الذهبية', nameEn: 'Gold Package', color: 'border-[#d4af37]', badgeColor: 'bg-amber-50 text-[#8c6239]', image: '', items: { appetizers: 10, pastries: 6, popular: 7, main: 7, desserts: 5 } },
+      { id: 'diamond-100', nameAr: 'الباقة الماسية', nameEn: 'Diamond Package', color: 'border-cyan-500', badgeColor: 'bg-cyan-50 text-cyan-800', image: '', items: { appetizers: 11, pastries: 8, popular: 7, main: 7, desserts: 7 } },
     ]
   },
   150: {
     count: 150,
     packages: [
-      { nameAr: 'الباقة الفضية', nameEn: 'Silver Package', color: 'border-slate-300', badgeColor: 'bg-slate-100 text-slate-800', image: '', items: { appetizers: 12, pastries: 7, popular: 7, main: 7, desserts: 7 } },
-      { nameAr: 'الباقة الذهبية', nameEn: 'Gold Package', color: 'border-[#d4af37]', badgeColor: 'bg-amber-50 text-[#8c6239]', image: '', items: { appetizers: 13, pastries: 8, popular: 8, main: 8, desserts: 8 } },
-      { nameAr: 'الباقة الماسية', nameEn: 'Diamond Package', color: 'border-cyan-500', badgeColor: 'bg-cyan-50 text-cyan-800', image: '', items: { appetizers: 14, pastries: 8, popular: 8, main: 9, desserts: 8 } },
+      { id: 'silver-150', nameAr: 'الباقة الفضية', nameEn: 'Silver Package', color: 'border-slate-300', badgeColor: 'bg-slate-100 text-slate-800', image: '', items: { appetizers: 12, pastries: 7, popular: 7, main: 7, desserts: 7 } },
+      { id: 'gold-150', nameAr: 'الباقة الذهبية', nameEn: 'Gold Package', color: 'border-[#d4af37]', badgeColor: 'bg-amber-50 text-[#8c6239]', image: '', items: { appetizers: 13, pastries: 8, popular: 8, main: 8, desserts: 8 } },
+      { id: 'diamond-150', nameAr: 'الباقة الماسية', nameEn: 'Diamond Package', color: 'border-cyan-500', badgeColor: 'bg-cyan-50 text-cyan-800', image: '', items: { appetizers: 14, pastries: 8, popular: 8, main: 9, desserts: 8 } },
     ]
   }
 };
 
 interface BuffetPackagesProps {
   navigateTo?: (page: string) => void;
+  selectPackage?: (pkg: any, guestCount: number) => void;
 }
 
-export default function BuffetPackages({ navigateTo }: BuffetPackagesProps) {
+export default function BuffetPackages({ navigateTo, selectPackage }: BuffetPackagesProps) {
   const { lang } = useLanguage();
   const [selectedCount, setSelectedCount] = useState<number>(30);
+  const [selectedPackageId, setSelectedPackageId] = useState<string | null>(null);
+  
   const currentGroup = buffetData[selectedCount];
 
   const t = {
@@ -82,7 +86,9 @@ export default function BuffetPackages({ navigateTo }: BuffetPackagesProps) {
       },
       includes: "يشمل المشروبات الغازية، المياه المعدنية، وأدوات الطعام.",
       excludes: "لا يشمل الطاولات، الكراسي، أو خدمة التقديم.",
-      note: "📌 ملاحظات تنظيمية: تحتسب المقبلات والسلطات فئة موحدة ضمن عدد الاختيارات المحددة لكل باقة."
+      note: "📌 ملاحظات تنظيمية: تحتسب المقبلات والسلطات فئة موحدة ضمن عدد الاختيارات المحددة لكل باقة.",
+      chooseBtn: "اختيار الباقة",
+      chosenBtn: "✓ تم اختيار الباقة"
     },
     en: {
       badge: "Luxury Hospitality Packages",
@@ -99,11 +105,20 @@ export default function BuffetPackages({ navigateTo }: BuffetPackagesProps) {
       },
       includes: "Includes soft drinks, bottled water, and cutlery.",
       excludes: "Does not include tables, chairs, or catering staff.",
-      note: "📌 Note: Appetizers and salads are counted together within the specified selections."
+      note: "📌 Note: Appetizers and salads are counted together within the specified selections.",
+      chooseBtn: "Choose Package",
+      chosenBtn: "✓ Package Selected"
     }
   };
 
   const currentT = t[lang];
+
+  const handleSelectPackage = (pkg: BuffetPackage) => {
+    setSelectedPackageId(pkg.id);
+    if (selectPackage) {
+      selectPackage({ ...pkg, guestCount: selectedCount }, selectedCount);
+    }
+  };
 
   return (
     <section className="py-16 px-4 bg-[#f5f1ea] text-[#2c1e14] min-h-screen" dir={lang === 'ar' ? 'rtl' : 'ltr'}>
@@ -127,7 +142,10 @@ export default function BuffetPackages({ navigateTo }: BuffetPackagesProps) {
           {[30, 75, 100, 150].map((count) => (
             <button
               key={count}
-              onClick={() => setSelectedCount(count)}
+              onClick={() => {
+                setSelectedCount(count);
+                setSelectedPackageId(null);
+              }}
               className={`flex items-center gap-2 px-6 py-3 rounded-xl font-bold transition-all duration-300 shadow-sm border ${
                 selectedCount === count
                   ? 'bg-[#d4af37] text-white border-[#d4af37] scale-105 shadow-md'
@@ -142,67 +160,85 @@ export default function BuffetPackages({ navigateTo }: BuffetPackagesProps) {
 
         {/* Packages Cards Grid */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-          {currentGroup.packages.map((pkg, idx) => (
-            <div 
-              key={idx}
-              className={`bg-white rounded-3xl border-2 ${pkg.color} flex flex-col justify-between shadow-lg relative overflow-hidden transition-transform hover:-translate-y-1`}
-            >
-              <div className="w-full h-44 bg-[#e8e2d5] flex items-center justify-center relative border-b border-[#d4af37]/20">
-                {pkg.image ? (
-                  <img src={pkg.image} alt={lang === 'ar' ? pkg.nameAr : pkg.nameEn} className="w-full h-full object-cover" />
-                ) : (
-                  <div className="flex flex-col items-center gap-1.5 text-[#8c6239]/60">
-                    <ImageIcon className="w-9 h-9" />
-                    <span className="text-xs font-medium">صورة الباقة قريباً</span>
+          {currentGroup.packages.map((pkg) => {
+            const isChosen = selectedPackageId === pkg.id;
+            return (
+              <div 
+                key={pkg.id}
+                className={`bg-white rounded-3xl border-2 ${pkg.color} flex flex-col justify-between shadow-lg relative overflow-hidden transition-transform hover:-translate-y-1`}
+              >
+                <div className="w-full h-44 bg-[#e8e2d5] flex items-center justify-center relative border-b border-[#d4af37]/20">
+                  {pkg.image ? (
+                    <img src={pkg.image} alt={lang === 'ar' ? pkg.nameAr : pkg.nameEn} className="w-full h-full object-cover" />
+                  ) : (
+                    <div className="flex flex-col items-center gap-1.5 text-[#8c6239]/60">
+                      <ImageIcon className="w-9 h-9" />
+                      <span className="text-xs font-medium">صورة الباقة قريباً</span>
+                    </div>
+                  )}
+                  <div className="absolute top-3 right-3">
+                    <span className={`px-3 py-1 rounded-full text-xs font-bold shadow-sm ${pkg.badgeColor}`}>
+                      {lang === 'ar' ? pkg.nameAr : pkg.nameEn}
+                    </span>
                   </div>
-                )}
-                <div className="absolute top-3 right-3">
-                  <span className={`px-3 py-1 rounded-full text-xs font-bold shadow-sm ${pkg.badgeColor}`}>
-                    {lang === 'ar' ? pkg.nameAr : pkg.nameEn}
-                  </span>
                 </div>
+
+                <div className="p-6 flex flex-col justify-between flex-grow">
+                  <div>
+                    <div className="space-y-3 text-sm font-sans">
+                      <div className="flex justify-between items-center text-[#4a3525]">
+                        <span>{currentT.itemsLabels.appetizers}</span>
+                        <span className="font-bold text-[#8c6239] bg-[#f5f1ea] px-2.5 py-1 rounded-lg border border-[#d4af37]/20">{pkg.items.appetizers} {currentT.itemsLabels.itemsCount}</span>
+                      </div>
+                      <div className="flex justify-between items-center text-[#4a3525]">
+                        <span>{currentT.itemsLabels.pastries}</span>
+                        <span className="font-bold text-[#8c6239] bg-[#f5f1ea] px-2.5 py-1 rounded-lg border border-[#d4af37]/20">{pkg.items.pastries} {currentT.itemsLabels.itemsCount}</span>
+                      </div>
+                      <div className="flex justify-between items-center text-[#4a3525]">
+                        <span>{currentT.itemsLabels.popular}</span>
+                        <span className="font-bold text-[#8c6239] bg-[#f5f1ea] px-2.5 py-1 rounded-lg border border-[#d4af37]/20">{pkg.items.popular} {currentT.itemsLabels.itemsCount}</span>
+                      </div>
+                      <div className="flex justify-between items-center text-[#4a3525]">
+                        <span>{currentT.itemsLabels.main}</span>
+                        <span className="font-bold text-[#8c6239] bg-[#f5f1ea] px-2.5 py-1 rounded-lg border border-[#d4af37]/20">{pkg.items.main} {currentT.itemsLabels.itemsCount}</span>
+                      </div>
+                      <div className="flex justify-between items-center text-[#4a3525]">
+                        <span>{currentT.itemsLabels.desserts}</span>
+                        <span className="font-bold text-[#8c6239] bg-[#f5f1ea] px-2.5 py-1 rounded-lg border border-[#d4af37]/20">{pkg.items.desserts} {currentT.itemsLabels.itemsCount}</span>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div className="mt-6 pt-4 border-t border-[#d4af37]/20 space-y-4 font-sans">
+                    <div className="space-y-2 text-xs">
+                      <div className="flex items-start gap-2 text-emerald-700">
+                        <CheckCircle className="w-4 h-4 shrink-0 mt-0.5 text-emerald-600" />
+                        <span>{currentT.includes}</span>
+                      </div>
+                      <div className="flex items-start gap-2 text-rose-700">
+                        <XCircle className="w-4 h-4 shrink-0 mt-0.5 text-rose-600" />
+                        <span>{currentT.excludes}</span>
+                      </div>
+                    </div>
+
+                    {/* زر اختيار الباقة */}
+                    <button
+                      onClick={() => handleSelectPackage(pkg)}
+                      className={`w-full py-3 rounded-xl font-bold transition text-xs shadow-sm border flex items-center justify-center gap-2 ${
+                        isChosen
+                          ? 'bg-green-600 text-white border-green-500 scale-[0.98]'
+                          : 'bg-[#d4af37] text-white hover:bg-[#c49f27] border-[#d4af37]/40'
+                      }`}
+                    >
+                      {isChosen ? <CheckCircle className="w-4 h-4" /> : null}
+                      {isChosen ? currentT.chosenBtn : currentT.chooseBtn}
+                    </button>
+                  </div>
+                </div>
+
               </div>
-
-              <div className="p-6 flex flex-col justify-between flex-grow">
-                <div>
-                  <div className="space-y-3 text-sm font-sans">
-                    <div className="flex justify-between items-center text-[#4a3525]">
-                      <span>{currentT.itemsLabels.appetizers}</span>
-                      <span className="font-bold text-[#8c6239] bg-[#f5f1ea] px-2.5 py-1 rounded-lg border border-[#d4af37]/20">{pkg.items.appetizers} {currentT.itemsLabels.itemsCount}</span>
-                    </div>
-                    <div className="flex justify-between items-center text-[#4a3525]">
-                      <span>{currentT.itemsLabels.pastries}</span>
-                      <span className="font-bold text-[#8c6239] bg-[#f5f1ea] px-2.5 py-1 rounded-lg border border-[#d4af37]/20">{pkg.items.pastries} {currentT.itemsLabels.itemsCount}</span>
-                    </div>
-                    <div className="flex justify-between items-center text-[#4a3525]">
-                      <span>{currentT.itemsLabels.popular}</span>
-                      <span className="font-bold text-[#8c6239] bg-[#f5f1ea] px-2.5 py-1 rounded-lg border border-[#d4af37]/20">{pkg.items.popular} {currentT.itemsLabels.itemsCount}</span>
-                    </div>
-                    <div className="flex justify-between items-center text-[#4a3525]">
-                      <span>{currentT.itemsLabels.main}</span>
-                      <span className="font-bold text-[#8c6239] bg-[#f5f1ea] px-2.5 py-1 rounded-lg border border-[#d4af37]/20">{pkg.items.main} {currentT.itemsLabels.itemsCount}</span>
-                    </div>
-                    <div className="flex justify-between items-center text-[#4a3525]">
-                      <span>{currentT.itemsLabels.desserts}</span>
-                      <span className="font-bold text-[#8c6239] bg-[#f5f1ea] px-2.5 py-1 rounded-lg border border-[#d4af37]/20">{pkg.items.desserts} {currentT.itemsLabels.itemsCount}</span>
-                    </div>
-                  </div>
-                </div>
-
-                <div className="mt-6 pt-4 border-t border-[#d4af37]/20 space-y-2 text-xs font-sans">
-                  <div className="flex items-start gap-2 text-emerald-700">
-                    <CheckCircle className="w-4 h-4 shrink-0 mt-0.5 text-emerald-600" />
-                    <span>{currentT.includes}</span>
-                  </div>
-                  <div className="flex items-start gap-2 text-rose-700">
-                    <XCircle className="w-4 h-4 shrink-0 mt-0.5 text-rose-600" />
-                    <span>{currentT.excludes}</span>
-                  </div>
-                </div>
-              </div>
-
-            </div>
-          ))}
+            );
+          })}
         </div>
 
         {/* Notes Footer */}
@@ -217,7 +253,6 @@ export default function BuffetPackages({ navigateTo }: BuffetPackagesProps) {
           </h3>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4 max-w-2xl mx-auto">
             
-            {/* زر الانتقال لباقات الأفراح */}
             <button 
               onClick={() => navigateTo && navigateTo('events')}
               className="flex items-center justify-center gap-3 p-4 rounded-xl border border-[#d4af37]/30 bg-[#f5f1ea] hover:bg-[#d4af37] hover:text-white transition-all text-[#2c1e14] font-bold"
@@ -226,7 +261,6 @@ export default function BuffetPackages({ navigateTo }: BuffetPackagesProps) {
               <span>{lang === 'ar' ? 'باقات الأفراح' : 'Events Packages'}</span>
             </button>
 
-            {/* زر الانتقال لمنيو التعتيمة */}
             <button 
               onClick={() => navigateTo && navigateTo('breakfast')}
               className="flex items-center justify-center gap-3 p-4 rounded-xl border border-[#d4af37]/30 bg-[#f5f1ea] hover:bg-[#d4af37] hover:text-white transition-all text-[#2c1e14] font-bold"

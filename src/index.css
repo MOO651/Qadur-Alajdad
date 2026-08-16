@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800;900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Amiri:ital,wght@0,400;0,700;1,400&family=Cairo:wght@400;600;700;800;900&display=swap');
 
 @tailwind base;
 @tailwind components;
@@ -7,7 +7,7 @@
 @layer base {
   html {
     scroll-behavior: smooth;
-    background-color: #f5f1ea; /* الثيم الفاتح الفخم */
+    background-color: #f5f1ea; /* الثيم الفاتح الفخم للمطعم */
     color: #2c1e14;            /* النص التراثي الداكن */
   }
 
@@ -15,24 +15,25 @@
     background-color: #f5f1ea;
     color: #2c1e14;
     margin: 0;
-    font-family: 'Cairo', system-ui, -apple-system, sans-serif; /* تطبيق الخط الفخم على الموقع بالكامل */
+    /* تطبيق الخط التراثي الأصيل Amiri كخيار أول، يليه Cairo للأوزان الحديثة */
+    font-family: 'Amiri', 'Cairo', system-ui, -apple-system, sans-serif;
   }
 
-  /* جعل العناوين أكثر سمكاً وبروزاً وفخامة */
+  /* جعل العناوين أكثر سمكاً وبروزاً وفخامة بطابع تاريخي */
   h1, h2, h3, h4, h5, h6 {
-    font-family: 'Cairo', system-ui, -apple-system, sans-serif;
-    font-weight: 800;
+    font-family: 'Amiri', 'Cairo', system-ui, -apple-system, sans-serif;
+    font-weight: 700;
   }
 }
 
 /* تنسيق موحد للفوتر ليكون منسجماً مع الهوية البصرية الفاتحة والفخمة */
 footer {
-  background-color: #ffffff !important; /* خلفية بيضاء نقية للفوتر */
+  background-color: #ffffff !important; 
   border-top: 1px solid rgba(212, 175, 55, 0.3); /* حدود ذهبية ناعمة */
-  color: #6b5344 !important; /* نصوص هادئة ومتناسقة */
+  color: #6b5344 !important; 
 }
 
-/* تخصيص مظهر شريط التمرير (Scrollbar) */
+/* تخصيص مظهر شريط التمرير (Scrollbar) ليتناسب مع ألوان الذهب والمطعم */
 ::-webkit-scrollbar {
   width: 8px;
   height: 8px;
@@ -43,7 +44,7 @@ footer {
 }
 
 ::-webkit-scrollbar-thumb {
-  background: #d4af37; /* الذهب الملكي */
+  background: #d4af37; /* لون الذهب الملكي */
   border-radius: 4px;
 }
 
@@ -51,7 +52,7 @@ footer {
   background: #c49f27;
 }
 
-/* 1. تصغير وتعديل لوجو الهيدر (الذي في الأعلى) ليصبح مناسباً وأنيقاً */
+/* 1. ضبط وتصغير لوجو الهيدر (في الأعلى) ليصبح مرتباً وغير مزعج */
 header img[alt="Logo"], 
 header img[src*="logo"] {
   object-fit: contain !important;
@@ -61,13 +62,13 @@ header img[src*="logo"] {
 }
 
 header div:has(> img[alt="Logo"]) {
-  width: 50px !important;  /* حجم مناسب وصغير للهيدر */
+  width: 50px !important;  
   height: 50px !important;
   min-width: 50px !important;
   min-height: 50px !important;
 }
 
-/* 2. تكبير ووضوح لوجو الواجهة الرئيسية (الذي في المنتصف بالأسفل) */
+/* 2. ضبط وتكبير لوجو الواجهة الرئيسية (في المنتصف) ليكون واضحاً وبارزاً */
 section img[alt="Logo"], 
 section img[src*="logo"],
 main img[alt="Logo"],
@@ -80,7 +81,7 @@ main img[src*="logo"] {
 
 section div:has(> img[alt="Logo"]),
 main div:has(> img[alt="Logo"]) {
-  width: 160px !important;  /* حجم كبير وواضح للنص الإنجليزي بالأسفل */
+  width: 160px !important;  
   height: 160px !important;
   min-width: 160px !important;
   min-height: 160px !important;

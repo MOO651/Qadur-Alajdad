@@ -82,7 +82,7 @@ export const LanguageProvider: React.FC<{ children: React.ReactNode }> = ({ chil
 
   return (
     <LanguageContext.Provider value={{ lang, toggleLang, t }}>
-      <div dir={lang === 'ar' ? 'rtl' : 'ltr'} className="font-sans">
+      <div dir={lang === 'ar' ? 'rtl' : 'ltr'}>
         {children}
       </div>
     </LanguageContext.Provider>
