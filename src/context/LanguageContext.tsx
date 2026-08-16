@@ -1,14 +1,8 @@
-import React, { createContext, useContext, useState } from 'react';
+import React, { createContext, useContext, useState, useEffect } from 'react';
 
 type Language = 'ar' | 'en';
 
-interface LanguageContextType {
-  lang: Language;
-  toggleLang: () => void;
-  t: (key: string) => string;
-}
-
-const translations: Record<Language, Record<string, string>> = {
+const translations = {
   ar: {
     // الأقسام والواجهة العامة
     heroBadge: "المنيو اليومي الأصيل",
@@ -35,7 +29,7 @@ const translations: Record<Language, Record<string, string>> = {
   en: {
     // General UI & Hero
     heroBadge: "Authentic Daily Menu",
-    heroTitle: "Godoor Al-Ajdad Specialties",
+    heroTitle: "Qodoor Al-Ajdad Specialties",
     heroSubtitle: "Fresh daily selections prepared with the finest local ingredients",
     searchPlaceholder: "Search for your favorite dish (e.g., Marqooq, Saleeq)...",
     addToCart: "Add to Cart",
@@ -57,22 +51,38 @@ const translations: Record<Language, Record<string, string>> = {
   }
 };
 
+type TranslationKey = keyof typeof translations['ar'];
+
+interface LanguageContextType {
+  lang: Language;
+  toggleLang: () => void;
+  t: (key: TranslationKey) => string;
+}
+
 const LanguageContext = createContext<LanguageContextType | undefined>(undefined);
 
 export const LanguageProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
-  const [lang, setLang] = useState<Language>('ar');
+  const [lang, setLang] = useState<Language>(() => {
+    const savedLang = localStorage.getItem('app_lang') as Language;
+    return (savedLang === 'ar' || savedLang === 'en') ? savedLang : 'ar';
+  });
+
+  useEffect(() => {
+    localStorage.setItem('app_lang', lang);
+    document.documentElement.lang = lang;
+  }, [lang]);
 
   const toggleLang = () => {
     setLang(prev => (prev === 'ar' ? 'en' : 'ar'));
   };
 
-  const t = (key: string): string => {
+  const t = (key: TranslationKey): string => {
     return translations[lang][key] || key;
   };
 
   return (
     <LanguageContext.Provider value={{ lang, toggleLang, t }}>
-      <div dir={lang === 'ar' ? 'rtl' : 'ltr'} className={lang === 'en' ? 'font-sans' : 'font-sans'}>
+      <div dir={lang === 'ar' ? 'rtl' : 'ltr'} className="font-sans">
         {children}
       </div>
     </LanguageContext.Provider>

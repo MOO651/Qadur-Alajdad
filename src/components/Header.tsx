@@ -34,7 +34,7 @@ export default function Header({ navigateTo, cartItemsCount }: HeaderProps) {
               <img src="/logo.png" alt="Logo" className="w-full h-full object-contain p-1" />
             </div>
             <span className="text-[#2c1e14] font-extrabold text-lg sm:text-xl tracking-tight group-hover:text-[#8c6239] transition-colors">
-              {lang === 'ar' ? 'قُدُور الأَجْدَاد' : 'Godoor Al-Ajdad'}
+              {lang === 'ar' ? 'قُدُور الأَجْدَاد' : 'Qodoor Al-Ajdad'}
             </span>
           </div>
 

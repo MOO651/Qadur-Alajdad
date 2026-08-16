@@ -77,7 +77,7 @@ function MainLayout() {
       case 'breakfast':
         return <BreakfastMenu addToCart={addToCart} />;
       case 'buffet':
-        return <BuffetPackages />;
+        return <BuffetPackages navigateTo={navigateTo} />; // تم التعديل هنا لتمرير دالة التنقل
       case 'cart':
         return (
           <Cart 

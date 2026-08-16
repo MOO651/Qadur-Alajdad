@@ -4,7 +4,8 @@ import {
   Flame, 
   Wheat, 
   Cake, 
-  Plus 
+  Plus,
+  Image as ImageIcon 
 } from 'lucide-react';
 import { useLanguage } from '../context/LanguageContext';
 
@@ -17,7 +18,7 @@ interface MenuCategory {
   titleAr: string;
   titleEn: string;
   icon: any;
-  items: { ar: string; en: string }[];
+  items: { ar: string; en: string; image?: string }[];
 }
 
 const menuCategories: MenuCategory[] = [
@@ -27,18 +28,18 @@ const menuCategories: MenuCategory[] = [
     titleEn: 'Hot Dishes',
     icon: Flame,
     items: [
-      { ar: 'كبدة غنم', en: 'Mutton Liver' },
-      { ar: 'مقلقل غنمي', en: 'Mutton Magqlqel' },
-      { ar: 'فول بالطريقة السعودية', en: 'Saudi Style Ful' },
-      { ar: 'فول قلابة سعودي', en: 'Saudi Qallaba Ful' },
-      { ar: 'بيض مسلوق', en: 'Boiled Eggs' },
-      { ar: 'شكشوكة قدور الأجداد', en: 'Grandparents Pots Shakshouka' },
-      { ar: 'کباب ميرو', en: 'Miro Kebab' },
-      { ar: 'حمسة باذنجان مع الأجبان', en: 'Eggplant & Cheese Hamsa' },
-      { ar: 'حمسة بليلة', en: 'Balila Hamsa' },
-      { ar: 'مرق طماطم نجدية', en: 'Najdi Tomato Broth' },
-      { ar: 'فتة فول أخضر', en: 'Green Bean Fatteh' },
-      { ar: 'لحسة قدور الأجداد', en: 'Grandparents Pots Lahsa' }
+      { ar: 'كبدة غنم', en: 'Mutton Liver', image: '' },
+      { ar: 'مقلقل غنمي', en: 'Mutton Magqlqel', image: '' },
+      { ar: 'فول بالطريقة السعودية', en: 'Saudi Style Ful', image: '' },
+      { ar: 'فول قلابة سعودي', en: 'Saudi Qallaba Ful', image: '' },
+      { ar: 'بيض مسلوق', en: 'Boiled Eggs', image: '' },
+      { ar: 'شكشوكة قدور الأجداد', en: 'Grandparents Pots Shakshouka', image: '' },
+      { ar: 'کباب ميرو', en: 'Miro Kebab', image: '' },
+      { ar: 'حمسة باذنجان مع الأجبان', en: 'Eggplant & Cheese Hamsa', image: '' },
+      { ar: 'حمسة بليلة', en: 'Balila Hamsa', image: '' },
+      { ar: 'مرق طماطم نجدية', en: 'Najdi Tomato Broth', image: '' },
+      { ar: 'فتة فول أخضر', en: 'Green Bean Fatteh', image: '' },
+      { ar: 'لحسة قدور الأجداد', en: 'Grandparents Pots Lahsa', image: '' }
     ]
   },
   {
@@ -47,16 +48,16 @@ const menuCategories: MenuCategory[] = [
     titleEn: 'Cheeses, Pickles & Appetizers',
     icon: Utensils,
     items: [
-      { ar: 'أجبان مشكلة', en: 'Assorted Cheeses' },
-      { ar: 'زيتون بنكهات مختلفة', en: 'Flavored Olives' },
-      { ar: 'مخللات حجازية', en: 'Hijazi Pickles' },
-      { ar: 'مربيات بنكهات مختلفة', en: 'Assorted Jams' },
-      { ar: 'حلاوة طحينية مشكلة', en: 'Assorted Halva' },
-      { ar: 'حلاوة اللدو واللبنة والهريسة مشكلة', en: 'Ladoo, Labneh & Harissa Sweets' },
-      { ar: 'لبنة قدور الأجداد', en: 'Grandparents Pots Labneh' },
-      { ar: 'مش حجازي', en: 'Hijazi Mish' },
-      { ar: 'كبيبة حائل', en: 'Hail Kubeba' },
-      { ar: 'أشار', en: 'Achar' }
+      { ar: 'أجبان مشكلة', en: 'Assorted Cheeses', image: '' },
+      { ar: 'زيتون بنكهات مختلفة', en: 'Flavored Olives', image: '' },
+      { ar: 'مخللات حجازية', en: 'Hijazi Pickles', image: '' },
+      { ar: 'مربيات بنكهات مختلفة', en: 'Assorted Jams', image: '' },
+      { ar: 'حلاوة طحينية مشكلة', en: 'Assorted Halva', image: '' },
+      { ar: 'حلاوة اللدو واللبنة والهريسة مشكلة', en: 'Ladoo, Labneh & Harissa Sweets', image: '' },
+      { ar: 'لبنة قدور الأجداد', en: 'Grandparents Pots Labneh', image: '' },
+      { ar: 'مش حجازي', en: 'Hijazi Mish', image: '' },
+      { ar: 'كبيبة حائل', en: 'Hail Kubeba', image: '' },
+      { ar: 'أشار', en: 'Achar', image: '' }
     ]
   },
   {
@@ -65,19 +66,19 @@ const menuCategories: MenuCategory[] = [
     titleEn: 'Bakery & Pastries',
     icon: Wheat,
     items: [
-      { ar: 'مطبق حلو ومالح', en: 'Sweet & Savory Mutabbaq' },
-      { ar: 'يغمش', en: 'Yammash' },
-      { ar: 'منتو', en: 'Mantu' },
-      { ar: 'فرموزة', en: 'Formoza' },
-      { ar: 'عيش أبو اللحم', en: 'Aish Abu Al-Lahem' },
-      { ar: 'بف حجازي', en: 'Hijazi Puff' },
-      { ar: 'خلية النحل', en: 'Beehive Pastry' },
-      { ar: 'قاضي القضاة المديني', en: 'Madani Qadi Al-Qudat' },
-      { ar: 'كبة جبن', en: 'Cheese Kibbeh' },
-      { ar: 'كبة حساوية', en: 'Hasaawi Kibbeh' },
-      { ar: 'كبة شمندر', en: 'Beetroot Kibbeh' },
-      { ar: 'بسطيلة (مستحدثة)', en: 'Modern Bastilla' },
-      { ar: 'سمبوسك مشكلة', en: 'Assorted Samosa' }
+      { ar: 'مطبق حلو ومالح', en: 'Sweet & Savory Mutabbaq', image: '' },
+      { ar: 'يغمش', en: 'Yammash', image: '' },
+      { ar: 'منتو', en: 'Mantu', image: '' },
+      { ar: 'فرموزة', en: 'Formoza', image: '' },
+      { ar: 'عيش أبو اللحم', en: 'Aish Abu Al-Lahem', image: '' },
+      { ar: 'بف حجازي', en: 'Hijazi Puff', image: '' },
+      { ar: 'خلية النحل', en: 'Beehive Pastry', image: '' },
+      { ar: 'قاضي القضاة المديني', en: 'Madani Qadi Al-Qudat', image: '' },
+      { ar: 'كبة جبن', en: 'Cheese Kibbeh', image: '' },
+      { ar: 'كبة حساوية', en: 'Hasaawi Kibbeh', image: '' },
+      { ar: 'كبة شمندر', en: 'Beetroot Kibbeh', image: '' },
+      { ar: 'بسطيلة (مستحدثة)', en: 'Modern Bastilla', image: '' },
+      { ar: 'سمبوسك مشكلة', en: 'Assorted Samosa', image: '' }
     ]
   },
   {
@@ -86,8 +87,8 @@ const menuCategories: MenuCategory[] = [
     titleEn: 'Sweets',
     icon: Cake,
     items: [
-      { ar: 'عريكة', en: 'Areika' },
-      { ar: 'معصوب', en: 'Masoub' }
+      { ar: 'عريكة', en: 'Areika', image: '' },
+      { ar: 'معصوب', en: 'Masoub', image: '' }
     ]
   }
 ];
@@ -99,20 +100,18 @@ export default function BreakfastMenu({ addToCart }: BreakfastMenuProps) {
 
   const t = {
     ar: {
-      badge: "قائمة التعتيمة والإفطار",
+      badge: "منيو التعتيمة",
       title: "🍳 تعتيمة قدور الأجداد الأصيلة",
       subtitle: "أشهى أطباق الإفطار والتعتيمة الحجازية والنجدية التقليدية",
       desc: "يُقدم طازجاً وساخناً بأجود المكونات الشعبية الأصيلة.",
-      priceLabel: "45 ر.س",
       addBtn: "إضافة للطلب",
       addedBtn: "✓ تمت الإضافة"
     },
     en: {
-      badge: "Breakfast & Tatimah Menu",
+      badge: "Tatimah Menu",
       title: "🍳 Authentic Grandparents Pots Breakfast",
       subtitle: "Delicious traditional Hijazi and Najdi breakfast and tatimah dishes",
       desc: "Served fresh and hot with the finest authentic traditional ingredients.",
-      priceLabel: "45 SAR",
       addBtn: "Add to Order",
       addedBtn: "✓ Added"
     }
@@ -173,15 +172,15 @@ export default function BreakfastMenu({ addToCart }: BreakfastMenuProps) {
             </h3>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {menuCategories[activeCategory].items.map((itemObj, idx) => {
               const dishName = lang === 'ar' ? itemObj.ar : itemObj.en;
               const dishItem = {
                 id: `bf-${activeCategory}-${idx}`,
                 name: dishName,
-                price: 45,
+                price: 0,
                 description: currentT.desc,
-                image: ''
+                image: itemObj.image || ''
               };
 
               const isAdded = addedId === dishItem.id;
@@ -189,28 +188,41 @@ export default function BreakfastMenu({ addToCart }: BreakfastMenuProps) {
               return (
                 <div 
                   key={dishItem.id} 
-                  className="bg-[#f5f1ea]/40 p-5 rounded-2xl border border-[#d4af37]/20 flex flex-col justify-between shadow-sm hover:border-[#d4af37] hover:bg-[#f5f1ea] transition-all"
+                  className="bg-[#f5f1ea]/40 rounded-2xl border border-[#d4af37]/20 flex flex-col justify-between shadow-sm hover:border-[#d4af37] hover:bg-[#f5f1ea] transition-all overflow-hidden"
                 >
-                  <div>
-                    <h4 className="text-lg font-bold text-[#2c1e14] mb-2">{dishName}</h4>
-                    <p className="text-[#6b5344] text-xs mb-4 leading-relaxed">
-                      {currentT.desc}
-                    </p>
+                  {/* مكان الصورة (Image Container) */}
+                  <div className="w-full h-40 bg-[#e8e2d5] flex items-center justify-center relative border-b border-[#d4af37]/20">
+                    {dishItem.image ? (
+                      <img src={dishItem.image} alt={dishName} className="w-full h-full object-cover" />
+                    ) : (
+                      <div className="flex flex-col items-center gap-1 text-[#8c6239]/60">
+                        <ImageIcon className="w-8 h-8" />
+                        <span className="text-[11px] font-medium">صورة الطبق قريباً</span>
+                      </div>
+                    )}
                   </div>
-                  
-                  <div className="mt-2 flex items-center justify-between pt-3 border-t border-[#d4af37]/15">
-                    <span className="text-sm font-bold text-[#8c6239] font-sans">{currentT.priceLabel}</span>
-                    <button 
-                      onClick={() => handleAddClick(dishItem)}
-                      className={`px-3.5 py-2 rounded-xl font-bold transition flex items-center gap-1.5 text-xs shadow-sm border ${
-                        isAdded
-                          ? 'bg-green-600 text-white border-green-500 scale-95'
-                          : 'bg-[#d4af37] text-white hover:bg-[#c49f27] border-[#d4af37]/40'
-                      }`}
-                    >
-                      <Plus className="w-4 h-4" />
-                      {isAdded ? currentT.addedBtn : currentT.addBtn}
-                    </button>
+
+                  <div className="p-5 flex flex-col justify-between flex-grow">
+                    <div>
+                      <h4 className="text-lg font-bold text-[#2c1e14] mb-2">{dishName}</h4>
+                      <p className="text-[#6b5344] text-xs mb-4 leading-relaxed">
+                        {currentT.desc}
+                      </p>
+                    </div>
+                    
+                    <div className="mt-2 flex items-center justify-end pt-3 border-t border-[#d4af37]/15">
+                      <button 
+                        onClick={() => handleAddClick(dishItem)}
+                        className={`px-4 py-2 rounded-xl font-bold transition flex items-center gap-1.5 text-xs shadow-sm border ${
+                          isAdded
+                            ? 'bg-green-600 text-white border-green-500 scale-95'
+                            : 'bg-[#d4af37] text-white hover:bg-[#c49f27] border-[#d4af37]/40'
+                        }`}
+                      >
+                        <Plus className="w-4 h-4" />
+                        {isAdded ? currentT.addedBtn : currentT.addBtn}
+                      </button>
+                    </div>
                   </div>
                 </div>
               );

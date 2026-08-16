@@ -32,7 +32,6 @@ export const allergenLabels: Record<string, { name: string; icon: string }> = {
 
 export const mainCategories = [
   { id: 'main', name: 'الأطباق الرئيسية والولائم', icon: '🍲', description: 'كبسة، سليق، مشاوي، وألذ الأطباق السعودية.' },
-  { id: 'seafood', name: 'المأكولات البحرية', icon: '🦐', description: 'أسماك طازجة وروبيان مشهي.' },
   { id: 'appetizers', name: 'الشوربات والمقبلات', icon: '🥗', description: 'شوربات دافئة، مقبلات باردة، ومقبلات حارة.' },
   { id: 'traditional', name: 'الشعبيات والأطباق الجانبية', icon: '🥘', description: 'المرقوق، الجريش، القرصان والمقشوش.' },
   { id: 'desserts', name: 'الحلويات', icon: '🍯', description: 'حلا شعبي والكلاسيكي يطيب الخاطر.' },
@@ -45,11 +44,6 @@ export const subCategoriesMap: Record<string, { id: string; name: string }[]> = 
     { id: 'rice-meat', name: 'أطباق الأرز واللحوم والدجاج' },
     { id: 'grills', name: 'المشاوي' },
     { id: 'stews', name: 'الإدامات' },
-  ],
-  seafood: [
-    { id: 'all-seafood', name: 'الكل' },
-    { id: 'fish', name: 'أسماك طازجة' },
-    { id: 'shrimp', name: 'روبيان وصدفيات' },
   ],
   appetizers: [
     { id: 'all-appetizers', name: 'الكل' },
@@ -158,19 +152,6 @@ export const menuDishes: Dish[] = [
     category: 'main', 
     subCategory: 'grills', 
     calories: '750 سعرة' 
-  },
-  { 
-    id: 'm7', 
-    name: 'مشغول روبيان', 
-    name_en: 'Shrimp Mashghool',
-    description: 'روبيان طازج مطهو مع الأرز المشخول والبهارات البحرية.', 
-    description_en: 'Fresh shrimp cooked with mashghool rice and seafood spices.',
-    price: 32, 
-    image: 'https://images.unsplash.com/photo-1544025162-d76694265947?auto=format&fit=crop&w=800&q=80', 
-    category: 'main', 
-    subCategory: 'rice-meat', 
-    calories: '610 سعرة', 
-    allergens: ['crustaceans'] 
   },
   { 
     id: 'm8', 
@@ -287,34 +268,6 @@ export const menuDishes: Dish[] = [
     category: 'main', 
     subCategory: 'stews', 
     calories: '190 سعرة' 
-  },
-
-  // --- المأكولات البحرية ---
-  { 
-    id: 'sea-1', 
-    name: 'سمك سي باس مشوي على الفحم', 
-    name_en: 'Charcoal Grilled Sea Bass',
-    description: 'سمك سي باس طازج مشوي على الفحم بالخلطة الحجازية والأعشاب والليمون.', 
-    description_en: 'Fresh charcoal-grilled sea bass with Hijazi mix, herbs, and lemon.',
-    price: 120, 
-    image: 'https://images.unsplash.com/photo-1519708227418-c8fd9a32b7a2?auto=format&fit=crop&q=80&w=500', 
-    category: 'seafood', 
-    subCategory: 'fish', 
-    calories: '550 سعرة', 
-    allergens: ['seafood'] 
-  },
-  { 
-    id: 'sea-2', 
-    name: 'طواجن ربيان بالجبنة', 
-    name_en: 'Cheesy Shrimp Casserole',
-    description: 'ربيان طازج مطهو في صوص الكريمة الخاص ومغطى بطبقة من الجبن المذاب.', 
-    description_en: 'Fresh shrimp cooked in special cream sauce and covered with melted cheese.',
-    price: 85, 
-    image: 'https://images.unsplash.com/photo-1565557623262-b51c2513a641?auto=format&fit=crop&q=80&w=500', 
-    category: 'seafood', 
-    subCategory: 'shrimp', 
-    calories: '620 سعرة', 
-    allergens: ['crustaceans', 'dairy'] 
   },
 
   // --- الشوربات والمقبلات ---

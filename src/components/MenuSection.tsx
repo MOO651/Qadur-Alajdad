@@ -29,29 +29,10 @@ const AllergenIcons = ({ allergens }: { allergens?: string[] }) => {
 };
 
 export default function MenuSection({ selectedMainCat = 'najd', onAddToCart }: MenuSectionProps) {
-  const { lang } = useLanguage();
+  const { lang, t } = useLanguage();
   const [selectedSubCat, setSelectedSubCat] = useState('all-najd');
   const [addedId, setAddedId] = useState<string | null>(null);
 
-  // نصوص الترجمة الخاصة بالقسم
-  const t = {
-    ar: {
-      taxIncluded: "السعر شامل الضريبة",
-      currency: "ر.س",
-      addBtn: "إضافة للطلب +",
-      addedBtn: "✓ تمت الإضافة",
-      noDishes: "عذراً، لا توجد أطباق متاحة في هذا القسم حالياً."
-    },
-    en: {
-      taxIncluded: "Tax included",
-      currency: "SAR",
-      addBtn: "Add to Order +",
-      addedBtn: "✓ Added",
-      noDishes: "Sorry, no dishes available in this section currently."
-    }
-  };
-
-  const currentT = t[lang];
   const subCategories = subCategoriesMap[selectedMainCat] || [];
   
   const filteredDishes = menuDishes.filter(dish => {
@@ -133,9 +114,11 @@ export default function MenuSection({ selectedMainCat = 'najd', onAddToCart }: M
 
                 <div className="px-6 pb-6 pt-0 flex items-center justify-between border-t border-[#d4af37]/15 pt-4 mt-auto">
                   <div>
-                    <span className="text-[10px] text-[#8c6239] block">{currentT.taxIncluded}</span>
+                    <span className="text-[10px] text-[#8c6239] block">
+                      {lang === 'ar' ? 'السعر شامل الضريبة' : 'Tax included'}
+                    </span>
                     <span className="text-xl font-black text-[#2c1e14]">
-                      {dish.price} <span className="text-xs font-normal text-[#6b5344]">{currentT.currency}</span>
+                      {dish.price} <span className="text-xs font-normal text-[#6b5344]">{t('currency')}</span>
                     </span>
                   </div>
                   <button 
@@ -146,7 +129,7 @@ export default function MenuSection({ selectedMainCat = 'najd', onAddToCart }: M
                         : 'bg-[#d4af37] text-white hover:scale-105 hover:bg-[#c49f27] border-[#d4af37]/40 shadow-sm'
                     }`}
                   >
-                    {isAdded ? currentT.addedBtn : currentT.addBtn}
+                    {isAdded ? t('added') : t('addToCart')}
                   </button>
                 </div>
               </div>
@@ -154,7 +137,7 @@ export default function MenuSection({ selectedMainCat = 'najd', onAddToCart }: M
           })
         ) : (
           <div className="col-span-full py-20 text-center text-[#6b5344] bg-white rounded-3xl border border-[#d4af37]/30 shadow-sm">
-            <p className="text-lg font-medium">{currentT.noDishes}</p>
+            <p className="text-lg font-medium">{t('noResults')}</p>
           </div>
         )}
       </div>
